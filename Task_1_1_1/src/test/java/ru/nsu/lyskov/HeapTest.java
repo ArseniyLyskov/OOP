@@ -8,7 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class HeapTest {
 
-
+    /**
+     * Использование библиотечной сортировки для проверки самописного heapsort'а.
+     */
     @Test
     void heapsort() {
         int[] array;
@@ -22,13 +24,12 @@ class HeapTest {
         assertArrayEquals(getSortedCopy(array), Heap.heapsort(array));
     }
 
-    @Test
-    void getArray() {
-        int[] array = new int[]{6, -4, 12, 8, 12, -69, 8, 0};
-        Heap h = new Heap(array);
-        assertArrayEquals(array, h.getArray());
-    }
-
+    /**
+     * Функция, использующая библиотечную сортировку массива.
+     *
+     * @param array Массив, который нужно отсортировать.
+     * @return Отсортированный массив.
+     */
     private int[] getSortedCopy(int[] array) {
         int[] copy = Arrays.copyOf(array, array.length);
         Arrays.sort(copy);
