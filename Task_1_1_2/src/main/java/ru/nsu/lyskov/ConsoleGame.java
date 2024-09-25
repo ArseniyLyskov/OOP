@@ -1,0 +1,21 @@
+package ru.nsu.lyskov;
+
+import java.util.Scanner;
+
+public class ConsoleGame {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Type \"en\" to choose English language.");
+        System.out.println("Введите \"ru\", чтобы выбрать Русский язык.");
+        String localeName = in.nextLine();
+
+        GameInterface gameInterface = new Blackjack(localeName);
+        gameInterface.gameInit();
+        gameInterface.gameOutput();
+
+        while (true) {
+            gameInterface.gameInput(in.nextLine());
+            gameInterface.gameOutput();
+        }
+    }
+}

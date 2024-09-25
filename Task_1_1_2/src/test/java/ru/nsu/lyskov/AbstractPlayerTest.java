@@ -2,13 +2,13 @@ package ru.nsu.lyskov;
 
 import org.junit.jupiter.api.Test;
 
-class DeckTest {
+class AbstractPlayerTest {
 
     @Test
-    void addFullDeck() {
+    void takeCard() {
     }
 
     @Test
-    void removeCard() {
+    void getScore() {
     }
 }

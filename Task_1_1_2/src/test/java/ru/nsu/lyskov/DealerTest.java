@@ -2,13 +2,13 @@ package ru.nsu.lyskov;
 
 import org.junit.jupiter.api.Test;
 
-class CardTest {
+class DealerTest {
 
     @Test
-    void open() {
+    void openClosedCard() {
     }
 
     @Test
-    void testToString() {
+    void isCardOpened() {
     }
 }
