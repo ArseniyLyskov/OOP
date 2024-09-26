@@ -97,8 +97,8 @@ public class Blackjack implements GameInterface {
 
         gameOutputBuffer += resourceBundle.getString("TheCardsAreDealt") + "\n";
         playersHandsOut();
-        gameOutputBuffer += "\n" + resourceBundle.getString("YourMove") + "\n" +
-                resourceBundle.getString("EnterHint");
+        gameOutputBuffer += "\n" + resourceBundle.getString("YourMove") + "\n"
+                + resourceBundle.getString("EnterHint");
     }
 
     /**
@@ -117,29 +117,32 @@ public class Blackjack implements GameInterface {
               менее 17, дилер берёт по карте.
              */
             case "0":
-                gameOutputBuffer += "\n" + resourceBundle.getString("DealersMove") + "\n" +
-                        resourceBundle.getString("DealerOpenClosedCard") + " ";
+                gameOutputBuffer += "\n" + resourceBundle.getString("DealersMove") + "\n"
+                        + resourceBundle.getString("DealerOpenClosedCard") + " ";
                 Card openedCard = dealer.openClosedCard();
                 gameOutputBuffer += cardToString(openedCard) + "\n";
                 playersHandsOut();
-                if (checkGameOver(false))
+                if (checkGameOver(false)) {
                     break;
+                }
                 while (dealer.getScore() < 17) {
                     gameOutputBuffer += "\n" + resourceBundle.getString("DealerOpenCard") + " ";
                     Card takenCard = deck.removeCard(true);
                     dealer.takeCard(takenCard);
                     gameOutputBuffer += cardToString(takenCard) + "\n";
                     playersHandsOut();
-                    if (checkGameOver(false))
+                    if (checkGameOver(false)) {
                         break outer;
+                    }
                 }
                 /*
                   Когда дилер взял карт суммарно на не менее 17 очков, но не случилось перебора или
                   блэкджека, раунд всё равно необходимо завершить и сделать вывод о победителе
                   на основании того, кто набрал больше очков.
                  */
-                if (checkGameOver(true))
+                if (checkGameOver(true)) {
                     break;
+                }
                 break;
             /*
               Обработка случая, когда пользователь берёт следующую карту.
@@ -147,13 +150,16 @@ public class Blackjack implements GameInterface {
             case "1":
                 Card takenCard = deck.removeCard(true);
                 user.takeCard(takenCard);
-                gameOutputBuffer += resourceBundle.getString("YouOpenedACard") +
-                        " " + cardToString(takenCard) + "\n";
+                gameOutputBuffer += resourceBundle.getString("YouOpenedACard")
+                        + " " + cardToString(takenCard) + "\n";
                 playersHandsOut();
-                if (checkGameOver(false))
+                if (checkGameOver(false)) {
                     break;
+                }
                 gameOutputBuffer += "\n" + resourceBundle.getString("EnterHint");
                 break;
+            default:
+                throw new RuntimeException("Wrong input");
         }
     }
 
@@ -208,8 +214,9 @@ public class Blackjack implements GameInterface {
             gameOutputBuffer += " " + gameScoreToString();
 
             round++;
-            for (AbstractPlayer player : players)
+            for (AbstractPlayer player : players) {
                 player.foldCards();
+            }
             startRound();
 
             return true;
@@ -223,10 +230,11 @@ public class Blackjack implements GameInterface {
      */
     private void playersHandsOut() {
         for (AbstractPlayer player : players) {
-            if (player instanceof User)
+            if (player instanceof User) {
                 gameOutputBuffer += "\t" + resourceBundle.getString("YourCards");
-            else if (player instanceof Dealer)
+            } else if (player instanceof Dealer) {
                 gameOutputBuffer += "\t" + resourceBundle.getString("DealersCards");
+            }
             gameOutputBuffer += " " + handToString(player) + "\n";
         }
     }
@@ -254,13 +262,15 @@ public class Blackjack implements GameInterface {
         String string = "[";
         for (Card card : player.getHand()) {
             string += cardToString(card) + ", ";
-            if (!card.isOpen())
+            if (!card.isOpen()) {
                 hasClosedCard = true;
+            }
         }
         string = string.substring(0, string.length() - 2);
         string += "]";
-        if (!hasClosedCard)
+        if (!hasClosedCard) {
             string += " -> " + player.getScore();
+        }
         return string;
     }
 
@@ -272,12 +282,13 @@ public class Blackjack implements GameInterface {
      */
     private String cardToString(Card card) {
         String string = "";
-        if (card.isOpen())
-            string += cardValues[card.getValue()] + " " +
-                    cardSuits[card.getSuit()] + " (" +
-                    card.getCardScore() + ")";
-        else
+        if (card.isOpen()) {
+            string += cardValues[card.getValue()] + " "
+                    + cardSuits[card.getSuit()] + " ("
+                    + card.getCardScore() + ")";
+        } else {
             string += resourceBundle.getString("ClosedCard");
+        }
         return string;
     }
 
@@ -288,12 +299,13 @@ public class Blackjack implements GameInterface {
      */
     private String gameScoreToString() {
         String string = userScore + ":" + dealerScore + " ";
-        if (userScore > dealerScore)
+        if (userScore > dealerScore) {
             string += resourceBundle.getString("YourFavor");
-        else if (userScore < dealerScore)
+        } else if (userScore < dealerScore) {
             string += resourceBundle.getString("NotYourFavor");
-        else
+        } else {
             string += resourceBundle.getString("DrawFavor");
+        }
         string += "\n\n";
         return string;
     }

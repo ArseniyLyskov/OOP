@@ -1,8 +1,8 @@
 package ru.nsu.lyskov;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
 
 class DealerTest {
     private final Dealer dealer = new Dealer();

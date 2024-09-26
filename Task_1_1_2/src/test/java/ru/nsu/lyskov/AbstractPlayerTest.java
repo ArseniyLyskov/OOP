@@ -1,8 +1,8 @@
 package ru.nsu.lyskov;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 class AbstractPlayerTest {
     private final TestPlayer player = new TestPlayer();

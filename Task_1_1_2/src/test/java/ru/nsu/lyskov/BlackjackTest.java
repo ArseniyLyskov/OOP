@@ -15,10 +15,11 @@ class BlackjackTest {
         for (int i = 0; i < testsCount; i++) {
             int numberOfMoves = random.nextInt(maxNumberOfMoves + 1);
 
-            if (random.nextInt(2) > 0)
+            if (random.nextInt(2) > 0) {
                 blackjack = new Blackjack("ru");
-            else
+            } else {
                 blackjack = new Blackjack("en");
+            }
             blackjack.gameInit();
             blackjack.gameOutput();
 

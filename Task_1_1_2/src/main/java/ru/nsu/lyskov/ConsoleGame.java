@@ -7,6 +7,10 @@ import java.util.Scanner;
  * через консоль для пользователя.
  */
 public class ConsoleGame {
+    /**
+     * Точка входа программы.
+     * @param args Аргументы командной строки
+     */
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         System.out.println("Type \"en\" to choose English language.");

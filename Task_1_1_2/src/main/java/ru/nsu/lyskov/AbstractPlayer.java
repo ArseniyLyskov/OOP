@@ -24,12 +24,13 @@ public abstract class AbstractPlayer {
      */
     public void takeCard(Card card) {
         hand.add(card);
-        if (card.getValue() >= 2 && card.getValue() <= 10)
+        if (card.getValue() >= 2 && card.getValue() <= 10) {
             card.setCardScore(card.getValue());
-        else if (card.getValue() >= 11 && card.getValue() <= 13)
+        } else if (card.getValue() >= 11 && card.getValue() <= 13) {
             card.setCardScore(10);
-        else //if (card.getValue() == 1)
+        } else {    //if (card.getValue() == 1)
             card.setCardScore(score <= 10 ? 11 : 1);
+        }
         updateScore();
     }
 
@@ -65,10 +66,11 @@ public abstract class AbstractPlayer {
      */
     private void updateScore() {
         score = 0;
-        for (Card card : hand)
-            if (card.getValue() >= 2)
-                score += card.getCardScore();
         for (Card card : hand) {
+            if (card.getValue() >= 2) {
+                score += card.getCardScore();
+            }
+        } for (Card card : hand) {
             if (card.getValue() == 1) {
                 int newAceScore = score <= 10 ? 11 : 1;
                 score += newAceScore;

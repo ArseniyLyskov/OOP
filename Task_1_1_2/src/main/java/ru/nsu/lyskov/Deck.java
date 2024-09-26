@@ -41,8 +41,9 @@ public class Deck {
             shuffle();
         }
         Card takenCard = cards.pop();
-        if (open)
+        if (open) {
             takenCard.open();
+        }
         return takenCard;
     }
 
