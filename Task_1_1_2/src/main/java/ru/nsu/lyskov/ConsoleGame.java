@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class ConsoleGame {
     /**
      * Точка входа программы.
+     *
      * @param args Аргументы командной строки
      */
     public static void main(String[] args) {

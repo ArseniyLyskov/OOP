@@ -70,7 +70,8 @@ public abstract class AbstractPlayer {
             if (card.getValue() >= 2) {
                 score += card.getCardScore();
             }
-        } for (Card card : hand) {
+        }
+        for (Card card : hand) {
             if (card.getValue() == 1) {
                 int newAceScore = score <= 10 ? 11 : 1;
                 score += newAceScore;

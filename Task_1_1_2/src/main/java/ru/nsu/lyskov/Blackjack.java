@@ -46,8 +46,7 @@ public class Blackjack implements GameInterface {
         Locale locale = Locale.forLanguageTag(localeName);
         resourceBundle = ResourceBundle.getBundle("localization", locale);
 
-        cardValues = new String[]{
-                "",
+        cardValues = new String[]{ "",
                 resourceBundle.getString("Ace"),
                 resourceBundle.getString("Two"),
                 resourceBundle.getString("Three"),
@@ -63,8 +62,7 @@ public class Blackjack implements GameInterface {
                 resourceBundle.getString("Queen")
         };
 
-        cardSuits = new String[]{
-                "",
+        cardSuits = new String[]{ "",
                 resourceBundle.getString("Clubs"),
                 resourceBundle.getString("Diamonds"),
                 resourceBundle.getString("Hearts"),
@@ -173,8 +171,11 @@ public class Blackjack implements GameInterface {
      * @return Возвращает true, если раунд завершён.
      */
     private boolean checkGameOver(boolean forceStop) {
-        if (user.getScore() >= 21 || (dealer.getScore() >= 21 && dealer.isCardOpened()) || forceStop) {
-            boolean youWon = false, dealerWon = false;
+        if (user.getScore() >= 21
+                || (dealer.getScore() >= 21 && dealer.isCardOpened())
+                || forceStop) {
+            boolean youWon = false;
+            boolean dealerWon = false;
 
             if (user.getScore() == 21 && (!dealer.isCardOpened() || dealer.getScore() != 21)) {
                 youWon = true;
