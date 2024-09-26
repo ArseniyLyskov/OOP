@@ -2,6 +2,10 @@ package ru.nsu.lyskov;
 
 import java.util.Scanner;
 
+/**
+ * Класс с точкой входа - реализация блэкджека
+ * через консоль для пользователя.
+ */
 public class ConsoleGame {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);

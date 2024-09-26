@@ -1,11 +1,26 @@
 package ru.nsu.lyskov;
 
+/**
+ * Класс карты. Поля:
+ * isOpen - видимость пользователю (рубашкой вверх или вниз),
+ * value - ценность карты (туз, двойка, тройка, ..., король),
+ * suit - масть карты (черви, пики, ...),
+ * cardScore - количество очков, которое карта приносит пользователю.
+ * (карты от двойки до десятки приносят соответствующее количество очков,
+ * валет, дама, король - десять очков, туз - может давать как 1 очко, так и 11).
+ */
 public class Card {
     private boolean isOpen;
     private final int value;
     private final int suit;
     private int cardScore = 0;
 
+    /**
+     * Конструктор класса, проверяющий корректность введённых данных.
+     *
+     * @param value Ценность карты
+     * @param suit  Масть карты
+     */
     public Card(int value, int suit) {
         isOpen = false;
         this.value = value;
