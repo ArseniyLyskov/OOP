@@ -10,6 +10,9 @@ public class Card {
         isOpen = false;
         this.value = value;
         this.suit = suit;
+
+        if (value < 1 || value > 13 || suit < 1 || suit > 4)
+            throw new RuntimeException("Card value not in [1..13] or card suit not in [1..4]");
     }
 
     public int getCardScore() {

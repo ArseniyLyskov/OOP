@@ -61,10 +61,10 @@ public class Blackjack implements GameInterface {
     private void startRound() {
         gameOutputBuffer += resourceBundle.getString("Round") + " " + round + "\n";
 
+        user.takeCard(deck.removeCard(true));
         dealer.takeCard(deck.removeCard(true));
+        user.takeCard(deck.removeCard(true));
         dealer.takeCard(deck.removeCard(false));
-        user.takeCard(deck.removeCard(true));
-        user.takeCard(deck.removeCard(true));
 
         gameOutputBuffer += resourceBundle.getString("TheCardsAreDealt") + "\n";
         playersHandsOut();
@@ -114,9 +114,6 @@ public class Blackjack implements GameInterface {
             if (user.getScore() == 21 && (!dealer.isCardOpened() || dealer.getScore() != 21)) {
                 youWon = true;
             } else if (dealer.getScore() == 21 && user.getScore() != 21) {
-                dealerWon = true;
-            } else if (user.getScore() == 21 && dealer.getScore() == 21) {
-                youWon = true;
                 dealerWon = true;
             }
 

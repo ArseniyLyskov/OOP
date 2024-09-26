@@ -19,8 +19,10 @@ public class Deck {
     }
 
     public Card removeCard(boolean open) {
-        if (cards.isEmpty())
-            return null;
+        if (cards.isEmpty()) {
+            addFullDeck();
+            shuffle();
+        }
         Card takenCard = cards.pop();
         if (open)
             takenCard.open();

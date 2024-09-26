@@ -10,10 +10,11 @@ public abstract class AbstractPlayer {
         hand.add(card);
         if (card.getValue() >= 2 && card.getValue() <= 10)
             card.setCardScore(card.getValue());
-        if (card.getValue() >= 11 && card.getValue() <= 13)
+        else if (card.getValue() >= 11 && card.getValue() <= 13)
             card.setCardScore(10);
-        if (card.getValue() == 1)
+        else //if (card.getValue() == 1)
             card.setCardScore(score <= 10 ? 11 : 1);
+        updateScore();
     }
 
     public LinkedList<Card> getHand() {
@@ -21,6 +22,15 @@ public abstract class AbstractPlayer {
     }
 
     public int getScore() {
+        updateScore();
+        return score;
+    }
+
+    public void foldCards() {
+        hand.clear();
+    }
+
+    private void updateScore() {
         score = 0;
         for (Card card : hand)
             if (card.getValue() >= 2)
@@ -32,11 +42,6 @@ public abstract class AbstractPlayer {
                 card.setCardScore(newAceScore);
             }
         }
-        return score;
-    }
-
-    public void foldCards() {
-        hand.clear();
     }
 
 }

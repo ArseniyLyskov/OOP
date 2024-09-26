@@ -8,7 +8,7 @@ public class Dealer extends AbstractPlayer {
                 return card;
             }
         }
-        return null;
+        throw new RuntimeException("Tried to open card, but dealer don't have cards");
     }
 
     public boolean isCardOpened() {
