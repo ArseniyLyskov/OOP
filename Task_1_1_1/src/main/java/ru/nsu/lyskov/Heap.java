@@ -71,8 +71,9 @@ public class Heap {
      * последний элемент в куче.
      */
     private void sort() {
-        for (int i = length / 2 - 1; i >= 0; i--)
+        for (int i = length / 2 - 1; i >= 0; i--) {
             heapify(length, i);
+        }
 
         for (int i = length - 1; i >= 0; i--) {
             int temp = array[0];
