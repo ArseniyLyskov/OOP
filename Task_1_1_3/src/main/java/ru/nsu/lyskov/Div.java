@@ -1,6 +1,8 @@
 package ru.nsu.lyskov;
 
 import java.util.Map;
+import ru.nsu.lyskov.Exceptions.DivisionByZeroException;
+import ru.nsu.lyskov.Exceptions.IncorrectAssignmentException;
 
 public class Div extends Expression {
     private final Expression left, right;
@@ -29,7 +31,12 @@ public class Div extends Expression {
     }
 
     @Override
-    public double eval(Map<String, Double> variables) {
-        return left.eval(variables) / right.eval(variables);
+    public double eval(Map<String, Double> variables) throws DivisionByZeroException, IncorrectAssignmentException {
+        double rightEvaluated = right.eval(variables);
+        if (rightEvaluated != 0) {
+            return left.eval(variables) / right.eval(variables);
+        } else {
+            throw new DivisionByZeroException("Dividing by zero");
+        }
     }
 }

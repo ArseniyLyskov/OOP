@@ -3,21 +3,26 @@ package ru.nsu.lyskov;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
+import ru.nsu.lyskov.Exceptions.DivisionByZeroException;
+import ru.nsu.lyskov.Exceptions.IncorrectAssignmentException;
 
 public abstract class Expression {
     public abstract void print();
 
     public abstract Expression derivative(String variable);
 
-    abstract double eval(Map<String, Double> variables);
+    abstract double eval(Map<String, Double> variables) throws DivisionByZeroException, IncorrectAssignmentException;
 
-    public double eval(String variablesStr) {
+    public double eval(String variablesStr) throws DivisionByZeroException, IncorrectAssignmentException {
         Map<String, Double> variables = parseVariables(variablesStr);
         return eval(variables);
     }
 
-    private Map<String, Double> parseVariables(String variablesStr) {
+    private Map<String, Double> parseVariables(String variablesStr) throws IncorrectAssignmentException {
         Map<String, Double> variables = new HashMap<>();
+        if (variablesStr.isEmpty()) {
+            return variables;
+        }
         String[] assignments = variablesStr.split(";");
         for (String assignment : assignments) {
             String[] parts = assignment.split("=");
@@ -26,18 +31,18 @@ public abstract class Expression {
                 double value = Double.parseDouble(parts[1].trim());
                 variables.put(variable, value);
             } else {
-                throw new IllegalArgumentException("Invalid format: " + assignment);
+                throw new IncorrectAssignmentException("Invalid assignment of variables: " + assignment);
             }
         }
         return variables;
     }
 
-    public static Expression parse(String input) {
+    public static Expression parse(String input) throws IncorrectAssignmentException {
         input = input.replaceAll("\\s", "");
         return parseExpression(input);
     }
 
-    private static Expression parseExpression(String input) {
+    private static Expression parseExpression(String input) throws IncorrectAssignmentException {
         if (input.matches("\\d+(.\\d+)?")) {
             return new Number(Double.parseDouble(input));
         }
@@ -49,10 +54,10 @@ public abstract class Expression {
             return parseComplexExpression(input.substring(1, input.length() - 1));
         }
 
-        throw new IllegalArgumentException("Invalid format: " + input);
+        throw new IncorrectAssignmentException("Invalid format: " + input);
     }
 
-    private static Expression parseComplexExpression(String input) {
+    private static Expression parseComplexExpression(String input) throws IncorrectAssignmentException {
         Stack<Character> brackets = new Stack<>();
         int mainOpPos = -1;
         char mainOp = 0;
@@ -74,7 +79,7 @@ public abstract class Expression {
         }
 
         if (mainOpPos == -1) {
-            throw new IllegalArgumentException("Cannot parse expression: " + input);
+            throw new IncorrectAssignmentException("Cannot parse expression: " + input);
         }
 
         // Разделение выражения на две части по основной операции
@@ -90,7 +95,7 @@ public abstract class Expression {
             case '-' -> new Sub(left, right);
             case '*' -> new Mul(left, right);
             case '/' -> new Div(left, right);
-            default -> throw new IllegalArgumentException("Unknown operation: " + mainOp);
+            default -> throw new IncorrectAssignmentException("Unknown operation: " + mainOp);
         };
     }
 }

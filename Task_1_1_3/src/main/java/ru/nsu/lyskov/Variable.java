@@ -1,6 +1,7 @@
 package ru.nsu.lyskov;
 
 import java.util.Map;
+import ru.nsu.lyskov.Exceptions.IncorrectAssignmentException;
 
 public class Variable extends Expression {
     private final String name;
@@ -23,10 +24,10 @@ public class Variable extends Expression {
     }
 
     @Override
-    public double eval(Map<String, Double> variables) {
+    public double eval(Map<String, Double> variables) throws IncorrectAssignmentException {
         if (variables.containsKey(name)) {
             return variables.get(name);
         }
-        throw new RuntimeException("Variable " + name + " is not defined");
+        throw new IncorrectAssignmentException("Variable " + name + " is not defined");
     }
 }
