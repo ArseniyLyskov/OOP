@@ -9,21 +9,21 @@ public abstract class Expression {
 
     public abstract Expression derivative(String variable);
 
-    abstract int eval(Map<String, Integer> variables);
+    abstract double eval(Map<String, Double> variables);
 
-    public int eval(String variablesStr) {
-        Map<String, Integer> variables = parseVariables(variablesStr);
+    public double eval(String variablesStr) {
+        Map<String, Double> variables = parseVariables(variablesStr);
         return eval(variables);
     }
 
-    private Map<String, Integer> parseVariables(String variablesStr) {
-        Map<String, Integer> variables = new HashMap<>();
+    private Map<String, Double> parseVariables(String variablesStr) {
+        Map<String, Double> variables = new HashMap<>();
         String[] assignments = variablesStr.split(";");
         for (String assignment : assignments) {
             String[] parts = assignment.split("=");
             if (parts.length == 2) {
                 String variable = parts[0].trim();
-                int value = Integer.parseInt(parts[1].trim());
+                double value = Double.parseDouble(parts[1].trim());
                 variables.put(variable, value);
             } else {
                 throw new IllegalArgumentException("Invalid format: " + assignment);
@@ -33,21 +33,18 @@ public abstract class Expression {
     }
 
     public static Expression parse(String input) {
-        input = input.replaceAll("\\s", ""); // Удаление всех пробелов
+        input = input.replaceAll("\\s", "");
         return parseExpression(input);
     }
 
     private static Expression parseExpression(String input) {
-        // Если это число, возвращаем объект Number
-        if (input.matches("\\d+")) {
-            return new Number(Integer.parseInt(input));
+        if (input.matches("\\d+(.\\d+)?")) {
+            return new Number(Double.parseDouble(input));
         }
-        // Если это переменная, возвращаем объект Variable
         if (input.matches("[a-zA-Z]+")) {
             return new Variable(input);
         }
 
-        // Разбор сложных выражений в скобках
         if (input.startsWith("(") && input.endsWith(")")) {
             return parseComplexExpression(input.substring(1, input.length() - 1));
         }

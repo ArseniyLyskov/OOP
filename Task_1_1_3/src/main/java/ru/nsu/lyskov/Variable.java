@@ -23,7 +23,7 @@ public class Variable extends Expression {
     }
 
     @Override
-    public int eval(Map<String, Integer> variables) {
+    public double eval(Map<String, Double> variables) {
         if (variables.containsKey(name)) {
             return variables.get(name);
         }

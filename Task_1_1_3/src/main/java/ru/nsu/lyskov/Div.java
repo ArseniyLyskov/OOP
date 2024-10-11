@@ -29,7 +29,7 @@ public class Div extends Expression {
     }
 
     @Override
-    public int eval(Map<String, Integer> variables) {
+    public double eval(Map<String, Double> variables) {
         return left.eval(variables) / right.eval(variables);
     }
 }

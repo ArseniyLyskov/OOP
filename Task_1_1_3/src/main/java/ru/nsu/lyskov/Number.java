@@ -3,15 +3,18 @@ package ru.nsu.lyskov;
 import java.util.Map;
 
 public class Number extends Expression {
-    private final int value;
+    private final double value;
 
-    public Number(int value) {
+    public Number(double value) {
         this.value = value;
     }
 
     @Override
     public void print() {
-        System.out.print(value);
+        if (value % 1 == 0)
+            System.out.print((long) value);
+        else
+            System.out.print(value);
     }
 
     @Override
@@ -20,7 +23,7 @@ public class Number extends Expression {
     }
 
     @Override
-    public int eval(Map<String, Integer> variables) {
+    public double eval(Map<String, Double> variables) {
         return value;
     }
 }
