@@ -1,5 +1,6 @@
 package ru.nsu.lyskov;
 
+import java.io.PrintStream;
 import java.util.Map;
 import ru.nsu.lyskov.Exceptions.IncorrectAssignmentException;
 
@@ -11,8 +12,8 @@ public class Variable extends Expression {
     }
 
     @Override
-    public void print() {
-        System.out.print(name);
+    public void print(PrintStream out) {
+        out.print(name);
     }
 
     @Override

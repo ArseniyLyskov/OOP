@@ -1,12 +1,14 @@
 package ru.nsu.lyskov;
 
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import ru.nsu.lyskov.Exceptions.DivisionByZeroException;
 import ru.nsu.lyskov.Exceptions.IncorrectAssignmentException;
 
 public class Main {
     public static void main(String[] args) {
         // Парсинг строки и создание объекта выражения
-        String expressionStr = "(3+(2.67*x))";
+        String expressionStr = "((3+(2.67*x))*x)";
         Expression eParsed = null;
         try {
             eParsed = Expression.parse(expressionStr);
@@ -14,18 +16,24 @@ public class Main {
             exception.printStackTrace();
         }
         assert eParsed != null;
-        eParsed.print();
+        PrintStream fileOut = null;
+        try {
+            fileOut = new PrintStream("out.txt");
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        eParsed.print(fileOut);
         System.out.println();
 
         Expression e = new Add(new Number(3.4), new Mul(new Number(2), new Variable("x")));
 
         // Печать выражения
-        e.print();
+        e.print(System.out);
         System.out.println();
 
         // Символьное дифференцирование
-        Expression de = e.derivative("x");
-        de.print();
+        Expression de = eParsed.derivative("x");
+        de.print(System.out);
         System.out.println();
 
         // Вычисление значения выражения при x = 10

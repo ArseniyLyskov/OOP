@@ -1,5 +1,6 @@
 package ru.nsu.lyskov;
 
+import java.io.PrintStream;
 import java.util.Map;
 
 public class Number extends Expression {
@@ -10,11 +11,12 @@ public class Number extends Expression {
     }
 
     @Override
-    public void print() {
-        if (value % 1 == 0)
-            System.out.print((long) value);
-        else
-            System.out.print(value);
+    public void print(PrintStream out) {
+        if (value % 1 == 0) {
+            out.print((long) value);
+        } else {
+            out.print(value);
+        }
     }
 
     @Override

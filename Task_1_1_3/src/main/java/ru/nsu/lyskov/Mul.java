@@ -1,5 +1,6 @@
 package ru.nsu.lyskov;
 
+import java.io.PrintStream;
 import java.util.Map;
 import ru.nsu.lyskov.Exceptions.DivisionByZeroException;
 import ru.nsu.lyskov.Exceptions.IncorrectAssignmentException;
@@ -13,12 +14,12 @@ public class Mul extends Expression {
     }
 
     @Override
-    public void print() {
-        System.out.print("(");
-        left.print();
-        System.out.print("*");
-        right.print();
-        System.out.print(")");
+    public void print(PrintStream out) {
+        out.print("(");
+        left.print(out);
+        out.print("*");
+        right.print(out);
+        out.print(")");
     }
 
     @Override

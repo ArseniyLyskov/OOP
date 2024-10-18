@@ -1,5 +1,6 @@
 package ru.nsu.lyskov;
 
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -7,7 +8,7 @@ import ru.nsu.lyskov.Exceptions.DivisionByZeroException;
 import ru.nsu.lyskov.Exceptions.IncorrectAssignmentException;
 
 public abstract class Expression {
-    public abstract void print();
+    public abstract void print(PrintStream out);
 
     public abstract Expression derivative(String variable);
 
