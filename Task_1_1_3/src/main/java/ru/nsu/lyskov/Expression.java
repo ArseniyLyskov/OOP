@@ -4,9 +4,9 @@ import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
-import ru.nsu.lyskov.Exceptions.DivisionByZeroException;
-import ru.nsu.lyskov.Exceptions.IncorrectAssignmentException;
-import ru.nsu.lyskov.Exceptions.IncorrectExpressionException;
+import ru.nsu.lyskov.exceptions.DivisionByZeroException;
+import ru.nsu.lyskov.exceptions.IncorrectAssignmentException;
+import ru.nsu.lyskov.exceptions.IncorrectExpressionException;
 
 /**
  * Абстрактный класс для математических выражений.

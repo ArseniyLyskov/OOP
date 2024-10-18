@@ -2,14 +2,15 @@ package ru.nsu.lyskov;
 
 import java.io.PrintStream;
 import java.util.Map;
-import ru.nsu.lyskov.Exceptions.DivisionByZeroException;
-import ru.nsu.lyskov.Exceptions.IncorrectAssignmentException;
+import ru.nsu.lyskov.exceptions.DivisionByZeroException;
+import ru.nsu.lyskov.exceptions.IncorrectAssignmentException;
 
 /**
  * Класс для представления операции вычитания одного выражения из другого.
  */
 public class Sub extends Expression {
-    private final Expression left, right;
+    private final Expression left;
+    private final Expression right;
 
     /**
      * Конструктор, принимающий два выражения: уменьшаемое и вычитаемое.
@@ -23,7 +24,7 @@ public class Sub extends Expression {
     }
 
     /**
-     * Печатает выражение вычитания в виде (left - right)
+     * Печатает выражение вычитания в виде (left - right).
      *
      * @param out поток вывода, в который будет напечатано выражение
      */

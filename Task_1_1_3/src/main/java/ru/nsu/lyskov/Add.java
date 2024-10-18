@@ -2,14 +2,15 @@ package ru.nsu.lyskov;
 
 import java.io.PrintStream;
 import java.util.Map;
-import ru.nsu.lyskov.Exceptions.DivisionByZeroException;
-import ru.nsu.lyskov.Exceptions.IncorrectAssignmentException;
+import ru.nsu.lyskov.exceptions.DivisionByZeroException;
+import ru.nsu.lyskov.exceptions.IncorrectAssignmentException;
 
 /**
  * Класс для представления операции сложения двух выражений.
  */
 public class Add extends Expression {
-    private final Expression left, right;
+    private final Expression left;
+    private final Expression right;
 
     /**
      * Конструктор, принимающий два выражения, которые нужно сложить.

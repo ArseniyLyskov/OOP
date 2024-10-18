@@ -2,14 +2,15 @@ package ru.nsu.lyskov;
 
 import java.io.PrintStream;
 import java.util.Map;
-import ru.nsu.lyskov.Exceptions.DivisionByZeroException;
-import ru.nsu.lyskov.Exceptions.IncorrectAssignmentException;
+import ru.nsu.lyskov.exceptions.DivisionByZeroException;
+import ru.nsu.lyskov.exceptions.IncorrectAssignmentException;
 
 /**
  * Класс для представления операции деления одного выражения на другое.
  */
 public class Div extends Expression {
-    private final Expression left, right;
+    private final Expression left;
+    private final Expression right;
 
     /**
      * Конструктор, принимающий два выражения: делимое и делитель.
@@ -23,7 +24,7 @@ public class Div extends Expression {
     }
 
     /**
-     * Печатает выражение деления в виде (left / right)
+     * Печатает выражение деления в виде (left / right).
      *
      * @param out поток вывода, в который будет напечатано выражение
      */
@@ -37,7 +38,7 @@ public class Div extends Expression {
     }
 
     /**
-     * Возвращает производную выражения деления по указанной переменной
+     * Возвращает производную выражения деления по указанной переменной.
      *
      * @param variable переменная, по которой необходимо дифференцировать
      * @return новое выражение, представляющее производную
@@ -60,7 +61,8 @@ public class Div extends Expression {
      * @throws IncorrectAssignmentException если совершено некорректное присваивание переменных
      */
     @Override
-    public double eval(Map<String, Double> variables) throws DivisionByZeroException, IncorrectAssignmentException {
+    public double eval(Map<String, Double> variables)
+            throws DivisionByZeroException, IncorrectAssignmentException {
         double rightEvaluated = right.eval(variables);
         if (rightEvaluated != 0) {
             return left.eval(variables) / right.eval(variables);

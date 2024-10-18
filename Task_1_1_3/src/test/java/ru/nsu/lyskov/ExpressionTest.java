@@ -1,20 +1,21 @@
 package ru.nsu.lyskov;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
-import ru.nsu.lyskov.Exceptions.DivisionByZeroException;
-import ru.nsu.lyskov.Exceptions.IncorrectAssignmentException;
-import ru.nsu.lyskov.Exceptions.IncorrectExpressionException;
+import ru.nsu.lyskov.exceptions.DivisionByZeroException;
+import ru.nsu.lyskov.exceptions.IncorrectAssignmentException;
+import ru.nsu.lyskov.exceptions.IncorrectExpressionException;
 
 class ExpressionTest {
 
     /**
-     * Тест на вычисление простого выражения: 3 + 5
+     * Тест на вычисление простого выражения: 3 + 5.
      */
     @Test
     void testSimpleAdd() throws IncorrectAssignmentException, DivisionByZeroException {
@@ -23,7 +24,7 @@ class ExpressionTest {
     }
 
     /**
-     * Тест на дифференцирование суммы: (x + 5)' = 1
+     * Тест на дифференцирование суммы: (x + 5)' = 1.
      */
     @Test
     void testDerivativeAdd() {
@@ -35,7 +36,7 @@ class ExpressionTest {
     }
 
     /**
-     * Тест на вычисление произведения: 3 * 5
+     * Тест на вычисление произведения: 3 * 5.
      */
     @Test
     void testSimpleMul() throws IncorrectAssignmentException, DivisionByZeroException {
@@ -44,7 +45,7 @@ class ExpressionTest {
     }
 
     /**
-     * Тест на вычисление выражения с переменной: 2 * x при x = 4
+     * Тест на вычисление выражения с переменной: 2 * x при x = 4.
      */
     @Test
     void testVariableEvaluation() throws IncorrectAssignmentException, DivisionByZeroException {
@@ -55,7 +56,7 @@ class ExpressionTest {
     }
 
     /**
-     * Тест на дифференцирование произведения: (2 * x)' = 2
+     * Тест на дифференцирование произведения: (2 * x)' = 2.
      */
     @Test
     void testDerivativeMul() {
@@ -67,7 +68,7 @@ class ExpressionTest {
     }
 
     /**
-     * Тест на вычисление деления: 10 / 2 = 5
+     * Тест на вычисление деления: 10 / 2 = 5.
      */
     @Test
     void testSimpleDiv() throws DivisionByZeroException, IncorrectAssignmentException {
@@ -76,7 +77,7 @@ class ExpressionTest {
     }
 
     /**
-     * Тест на деление на ноль, должно выбросить DivisionByZeroException
+     * Тест на деление на ноль, должно выбросить DivisionByZeroException.
      */
     @Test
     void testDivisionByZero() {
@@ -85,10 +86,11 @@ class ExpressionTest {
     }
 
     /**
-     * Тест на разбор строки и вычисление: (3 + (2 * x)) при x = 5
+     * Тест на разбор строки и вычисление: (3 + (2 * x)) при x = 5.
      */
     @Test
-    void testExpressionParsing() throws IncorrectAssignmentException, DivisionByZeroException, IncorrectExpressionException {
+    void testExpressionParsing() throws
+            IncorrectAssignmentException, DivisionByZeroException, IncorrectExpressionException {
         String input = "(3+(2*x))";
         Expression expr = Expression.parse(input);
         Map<String, Double> variables = new HashMap<>();
@@ -97,7 +99,7 @@ class ExpressionTest {
     }
 
     /**
-     * Тест на парсинг строки с ошибкой в выражении
+     * Тест на парсинг строки с ошибкой в выражении.
      */
     @Test
     void testIncorrectExpressionParsing() {
@@ -106,10 +108,11 @@ class ExpressionTest {
     }
 
     /**
-     * Тест на некорректное присваивание переменных
+     * Тест на некорректное присваивание переменных.
      */
     @Test
-    void testIncorrectAssignmentParsing() throws IncorrectExpressionException, DivisionByZeroException, IncorrectAssignmentException {
+    void testIncorrectAssignmentParsing() throws
+            IncorrectExpressionException, DivisionByZeroException, IncorrectAssignmentException {
         Expression expression = Expression.parse("(1.2+(3.4-(5.6*(7.8/9.0))))");
         Expression derivative = expression.derivative("");
         expression.print(new PrintStream(new ByteArrayOutputStream()));
@@ -121,20 +124,28 @@ class ExpressionTest {
     }
 
     /**
-     * Тест на корректное преобразование переменных из строки и вычисление: 3 + (2.8 * x), при x = 10.2
+     * Тест на корректное преобразование переменных из строки и вычисление:
+     * 3 + (2.8 * x), при x = 10.2.
      */
     @Test
-    void testEvalWithVariablesString() throws DivisionByZeroException, IncorrectAssignmentException {
-        Expression expr = new Add(new Number(3), new Mul(new Number(2.8), new Variable("x")));
+    void testEvalWithVariablesString() throws
+            DivisionByZeroException, IncorrectAssignmentException {
+        Expression expr = new Add(
+                new Number(3),
+                new Mul(new Number(2.8), new Variable("x"))
+        );
         assertEquals(31.56, expr.eval("x = 10.2"), 1e-6);
     }
 
     /**
-     * Тест на печать выражения: (3 + (2 * x))
+     * Тест на печать выражения: (3 + (2 * x)).
      */
     @Test
     void testPrintExpression() {
-        Expression expr = new Add(new Number(3), new Mul(new Number(2), new Variable("x")));
+        Expression expr = new Add(
+                new Number(3),
+                new Mul(new Number(2), new Variable("x"))
+        );
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         expr.print(new PrintStream(out));
         assertEquals("(3+(2*x))", out.toString());

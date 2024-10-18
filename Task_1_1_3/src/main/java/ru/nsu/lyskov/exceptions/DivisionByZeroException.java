@@ -1,4 +1,4 @@
-package ru.nsu.lyskov.Exceptions;
+package ru.nsu.lyskov.exceptions;
 
 /**
  * Исключение, которое выбрасывается при попытке деления на ноль.

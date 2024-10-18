@@ -2,7 +2,7 @@ package ru.nsu.lyskov;
 
 import java.io.PrintStream;
 import java.util.Map;
-import ru.nsu.lyskov.Exceptions.IncorrectAssignmentException;
+import ru.nsu.lyskov.exceptions.IncorrectAssignmentException;
 
 /**
  * Класс для представления переменной в математическом выражении.
