@@ -57,7 +57,8 @@ public class Add extends Expression {
      * @throws IncorrectAssignmentException если совершено некорректное присваивание переменных
      */
     @Override
-    public double eval(Map<String, Double> variables) throws DivisionByZeroException, IncorrectAssignmentException {
+    public double eval(Map<String, Double> variables)
+            throws DivisionByZeroException, IncorrectAssignmentException {
         return left.eval(variables) + right.eval(variables);
     }
 }

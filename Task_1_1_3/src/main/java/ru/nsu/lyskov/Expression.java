@@ -37,7 +37,8 @@ public abstract class Expression {
      * @throws DivisionByZeroException      если в процессе вычисления произошло деление на ноль
      * @throws IncorrectAssignmentException если совершено некорректное присваивание переменных
      */
-    abstract double eval(Map<String, Double> variables) throws DivisionByZeroException, IncorrectAssignmentException;
+    abstract double eval(Map<String, Double> variables)
+            throws DivisionByZeroException, IncorrectAssignmentException;
 
     /**
      * Вычисляет значение выражения на основе строки с присвоениями переменных.
@@ -47,7 +48,8 @@ public abstract class Expression {
      * @throws DivisionByZeroException      если в процессе вычисления произошло деление на ноль
      * @throws IncorrectAssignmentException если совершено некорректное присваивание переменных
      */
-    public double eval(String variablesStr) throws DivisionByZeroException, IncorrectAssignmentException {
+    public double eval(String variablesStr)
+            throws DivisionByZeroException, IncorrectAssignmentException {
         Map<String, Double> variables = parseVariables(variablesStr);
         return eval(variables);
     }
@@ -59,7 +61,8 @@ public abstract class Expression {
      * @return карта, содержащая имена переменных и их значения
      * @throws IncorrectAssignmentException если совершено некорректное присваивание переменных
      */
-    private Map<String, Double> parseVariables(String variablesStr) throws IncorrectAssignmentException {
+    private Map<String, Double> parseVariables(String variablesStr)
+            throws IncorrectAssignmentException {
         Map<String, Double> variables = new HashMap<>();
         if (variablesStr.isEmpty()) {
             return variables;
@@ -72,7 +75,9 @@ public abstract class Expression {
                 double value = Double.parseDouble(parts[1].trim());
                 variables.put(variable, value);
             } else {
-                throw new IncorrectAssignmentException("Invalid assignment of variables: " + assignment);
+                throw new IncorrectAssignmentException(
+                        "Invalid assignment of variables: " + assignment
+                );
             }
         }
         return variables;
@@ -122,7 +127,8 @@ public abstract class Expression {
      * @return объект Expression, представляющий выражение
      * @throws IncorrectExpressionException если формат выражения некорректен
      */
-    private static Expression parseComplexExpression(String input) throws IncorrectExpressionException {
+    private static Expression parseComplexExpression(String input)
+            throws IncorrectExpressionException {
         Stack<Character> brackets = new Stack<>();
         int mainOpPos = -1;
         char mainOp = 0;
@@ -155,12 +161,17 @@ public abstract class Expression {
         Expression left = parseExpression(leftExpr);
         Expression right = parseExpression(rightExpr);
 
-        return switch (mainOp) {
-            case '+' -> new Add(left, right);
-            case '-' -> new Sub(left, right);
-            case '*' -> new Mul(left, right);
-            case '/' -> new Div(left, right);
-            default -> throw new IncorrectExpressionException("Unknown operation: " + mainOp);
-        };
+        switch (mainOp) {
+            case '+':
+                return new Add(left, right);
+            case '-':
+                return new Sub(left, right);
+            case '*':
+                return new Mul(left, right);
+            case '/':
+                return new Div(left, right);
+            default:
+                throw new IncorrectExpressionException("Unknown operation: " + mainOp);
+        }
     }
 }

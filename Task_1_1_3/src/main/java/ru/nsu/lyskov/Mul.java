@@ -24,7 +24,7 @@ public class Mul extends Expression {
     }
 
     /**
-     * Печатает умножение выражения в виде (left * right)
+     * Печатает умножение выражения в виде (left * right).
      *
      * @param out поток вывода, в который будет напечатано выражение
      */
@@ -38,7 +38,7 @@ public class Mul extends Expression {
     }
 
     /**
-     * Возвращает производную выражения умножения по указанной переменной
+     * Возвращает производную выражения умножения по указанной переменной.
      *
      * @param variable переменная, по которой необходимо дифференцировать
      * @return новое выражение, представляющее производную
@@ -58,7 +58,8 @@ public class Mul extends Expression {
      * @throws IncorrectAssignmentException если совершено некорректное присваивание переменных
      */
     @Override
-    public double eval(Map<String, Double> variables) throws DivisionByZeroException, IncorrectAssignmentException {
+    public double eval(Map<String, Double> variables)
+            throws DivisionByZeroException, IncorrectAssignmentException {
         return left.eval(variables) * right.eval(variables);
     }
 }
