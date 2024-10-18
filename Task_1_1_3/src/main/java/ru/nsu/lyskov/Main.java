@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import ru.nsu.lyskov.Exceptions.DivisionByZeroException;
 import ru.nsu.lyskov.Exceptions.IncorrectAssignmentException;
+import ru.nsu.lyskov.Exceptions.IncorrectExpressionException;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,7 +13,7 @@ public class Main {
         Expression eParsed = null;
         try {
             eParsed = Expression.parse(expressionStr);
-        } catch (IncorrectAssignmentException exception) {
+        } catch (IncorrectExpressionException exception) {
             exception.printStackTrace();
         }
         assert eParsed != null;

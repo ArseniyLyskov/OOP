@@ -6,19 +6,59 @@ import java.util.Map;
 import java.util.Stack;
 import ru.nsu.lyskov.Exceptions.DivisionByZeroException;
 import ru.nsu.lyskov.Exceptions.IncorrectAssignmentException;
+import ru.nsu.lyskov.Exceptions.IncorrectExpressionException;
 
+/**
+ * Абстрактный класс для математических выражений.
+ * Определяет интерфейс для операций печати, дифференцирования и вычисления выражений.
+ */
 public abstract class Expression {
+
+    /**
+     * Печатает выражение в указанный поток вывода.
+     *
+     * @param out поток вывода, в который будет напечатано выражение
+     */
     public abstract void print(PrintStream out);
 
+    /**
+     * Возвращает производную выражения по указанной переменной.
+     *
+     * @param variable переменная, по которой необходимо дифференцировать
+     * @return новое выражение, представляющее производную
+     */
     public abstract Expression derivative(String variable);
 
+    /**
+     * Вычисляет значение выражения на основе карты переменных.
+     *
+     * @param variables карта, где ключи — имена переменных, а значения — их числовые значения
+     * @return результат вычисления выражения
+     * @throws DivisionByZeroException      если в процессе вычисления произошло деление на ноль
+     * @throws IncorrectAssignmentException если совершено некорректное присваивание переменных
+     */
     abstract double eval(Map<String, Double> variables) throws DivisionByZeroException, IncorrectAssignmentException;
 
+    /**
+     * Вычисляет значение выражения на основе строки с присвоениями переменных.
+     *
+     * @param variablesStr строка с присвоениями переменных в формате "переменная = значение; ..."
+     * @return результат вычисления выражения
+     * @throws DivisionByZeroException      если в процессе вычисления произошло деление на ноль
+     * @throws IncorrectAssignmentException если совершено некорректное присваивание переменных
+     */
     public double eval(String variablesStr) throws DivisionByZeroException, IncorrectAssignmentException {
         Map<String, Double> variables = parseVariables(variablesStr);
         return eval(variables);
     }
 
+    /**
+     * Разбирает строку с присвоениями переменных и возвращает карту значений переменных.
+     *
+     * @param variablesStr строка с присвоениями переменных в формате "переменная = значение; ..."
+     * @return карта, содержащая имена переменных и их значения
+     * @throws IncorrectAssignmentException если совершено некорректное присваивание переменных
+     */
     private Map<String, Double> parseVariables(String variablesStr) throws IncorrectAssignmentException {
         Map<String, Double> variables = new HashMap<>();
         if (variablesStr.isEmpty()) {
@@ -38,27 +78,51 @@ public abstract class Expression {
         return variables;
     }
 
-    public static Expression parse(String input) throws IncorrectAssignmentException {
-        input = input.replaceAll("\\s", "");
+    /**
+     * Разбирает строку с выражением и создает соответствующий объект Expression.
+     *
+     * @param input строка с выражением
+     * @return объект Expression, представляющий выражение
+     * @throws IncorrectExpressionException если формат выражения некорректен
+     */
+    public static Expression parse(String input) throws IncorrectExpressionException {
+        input = input.replaceAll("\\s", ""); // Удаление всех пробелов
         return parseExpression(input);
     }
 
-    private static Expression parseExpression(String input) throws IncorrectAssignmentException {
-        if (input.matches("\\d+(.\\d+)?")) {
+    /**
+     * Разбирает простое выражение (число или переменная) или вызывает разбор сложного выражения.
+     *
+     * @param input строка с выражением
+     * @return объект Expression, представляющий выражение
+     * @throws IncorrectExpressionException если формат выражения некорректен
+     */
+    private static Expression parseExpression(String input) throws IncorrectExpressionException {
+        // Если это число, возвращаем объект Number
+        if (input.matches("\\d+(\\.\\d+)?")) {
             return new Number(Double.parseDouble(input));
         }
+        // Если это переменная, возвращаем объект Variable
         if (input.matches("[a-zA-Z]+")) {
             return new Variable(input);
         }
 
+        // Если это выражение в скобках
         if (input.startsWith("(") && input.endsWith(")")) {
             return parseComplexExpression(input.substring(1, input.length() - 1));
         }
 
-        throw new IncorrectAssignmentException("Invalid format: " + input);
+        throw new IncorrectExpressionException("Invalid format: " + input);
     }
 
-    private static Expression parseComplexExpression(String input) throws IncorrectAssignmentException {
+    /**
+     * Разбирает сложное выражение в скобках и создает объект соответствующего выражения.
+     *
+     * @param input строка с выражением
+     * @return объект Expression, представляющий выражение
+     * @throws IncorrectExpressionException если формат выражения некорректен
+     */
+    private static Expression parseComplexExpression(String input) throws IncorrectExpressionException {
         Stack<Character> brackets = new Stack<>();
         int mainOpPos = -1;
         char mainOp = 0;
@@ -80,7 +144,7 @@ public abstract class Expression {
         }
 
         if (mainOpPos == -1) {
-            throw new IncorrectAssignmentException("Cannot parse expression: " + input);
+            throw new IncorrectExpressionException("Cannot parse expression: " + input);
         }
 
         // Разделение выражения на две части по основной операции
@@ -96,7 +160,7 @@ public abstract class Expression {
             case '-' -> new Sub(left, right);
             case '*' -> new Mul(left, right);
             case '/' -> new Div(left, right);
-            default -> throw new IncorrectAssignmentException("Unknown operation: " + mainOp);
+            default -> throw new IncorrectExpressionException("Unknown operation: " + mainOp);
         };
     }
 }
