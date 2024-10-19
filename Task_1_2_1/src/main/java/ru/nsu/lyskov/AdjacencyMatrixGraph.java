@@ -117,7 +117,8 @@ public class AdjacencyMatrixGraph implements Graph {
             // Чтение первой строки: количество вершин и рёбер
             String[] firstLine = br.readLine().split(" ");
             numVertices = Integer.parseInt(firstLine[0]);
-            int numEdges = Integer.parseInt(firstLine[1]); // Количество рёбер можно использовать для валидации
+            // Количество рёбер можно использовать для валидации
+            int numEdges = Integer.parseInt(firstLine[1]);
 
             // Инициализируем матрицу смежности
             matrix = new boolean[numVertices][numVertices];
@@ -156,6 +157,7 @@ public class AdjacencyMatrixGraph implements Graph {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("Adjacency Matrix:\n");
         for (int i = 0; i < numVertices; i++) {
             for (int j = 0; j < numVertices; j++) {
                 sb.append(matrix[i][j] ? "1 " : "0 "); // Формируем строку для отображения матрицы

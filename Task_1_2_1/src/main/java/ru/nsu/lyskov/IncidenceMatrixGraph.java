@@ -26,7 +26,7 @@ public class IncidenceMatrixGraph implements Graph {
      * Конструктор, создающий новый граф с заданным количеством вершин и рёбер.
      *
      * @param numVertices количество вершин в графе
-     * @param numEdges количество рёбер в графе
+     * @param numEdges    количество рёбер в графе
      */
     public IncidenceMatrixGraph(int numVertices, int numEdges) {
         this.numVertices = numVertices;

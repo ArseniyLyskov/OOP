@@ -134,7 +134,10 @@ public class AdjacencyListGraph implements Graph {
      */
     @Override
     public String toString() {
-        return adjList.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Adjacency List:\n");
+        sb.append(adjList);
+        return sb.toString();
     }
 
     /**
