@@ -1,9 +1,12 @@
 package ru.nsu.lyskov;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class AdjacencyListGraph implements Graph {
-    private Map<Integer, List<Integer>> adjList;
+    private final Map<Integer, List<Integer>> adjList;
 
     public AdjacencyListGraph() {
         adjList = new HashMap<>();
@@ -16,8 +19,9 @@ public class AdjacencyListGraph implements Graph {
 
     @Override
     public void removeVertex(int v) {
-        adjList.values().forEach(e -> e.remove(Integer.valueOf(v)));
-        adjList.remove(v);
+        adjList.remove(v); // Удаляем вершину из графа
+        // Удаляем из смежных списков других вершин
+        adjList.values().forEach(neighbors -> neighbors.remove(Integer.valueOf(v)));
     }
 
     @Override
@@ -32,13 +36,39 @@ public class AdjacencyListGraph implements Graph {
 
     @Override
     public List<Integer> getNeighbors(int v) {
-        return adjList.getOrDefault(v, new ArrayList<>());
+        return adjList.get(v); // Вернёт null, если вершина отсутствует
     }
 
     @Override
     public void readFromFile(String fileName) {
-        // Чтение из файла
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            // Чтение первой строки: количество вершин и рёбер
+            String[] firstLine = br.readLine().split(" ");
+            int numVertices = Integer.parseInt(firstLine[0]);
+            int numEdges = Integer.parseInt(firstLine[1]);
+
+            // Инициализация списка смежности
+            for (int i = 0; i < numVertices; i++) {
+                addVertex(i); // Добавляем вершины в граф
+            }
+
+            // Чтение следующих строк — это описание рёбер
+            for (int i = 0; i < numEdges; i++) {
+                String[] edge = br.readLine().split(" ");
+                int v1 = Integer.parseInt(edge[0]);  // Первая вершина ребра
+                int v2 = Integer.parseInt(edge[1]);  // Вторая вершина ребра
+
+                // Добавляем рёбра в список смежности
+                adjList.get(v1).add(v2);
+                // Если граф неориентированный, добавляем ребро в обе стороны
+                // adjList.get(v2).add(v1);
+            }
+
+        } catch (IOException e) {
+            System.out.println("Ошибка чтения файла: " + e.getMessage());
+        }
     }
+
 
     @Override
     public boolean equals(Object obj) {
