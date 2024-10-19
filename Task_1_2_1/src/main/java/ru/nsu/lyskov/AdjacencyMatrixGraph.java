@@ -11,9 +11,9 @@ import java.util.Stack;
 /**
  * Класс для представления графа с использованием матрицы смежности.
  * <p>
- * Реализует интерфейс {@link Graph} и поддерживает основные операции над графами,
- * такие как добавление и удаление вершин и рёбер, получение соседей вершин,
- * чтение графа из файла и выполнение топологической сортировки.
+ * Реализует интерфейс {@link Graph} и поддерживает основные операции над графами, такие как
+ * добавление и удаление вершин и рёбер, получение соседей вершин, чтение графа из файла и
+ * выполнение топологической сортировки.
  * </p>
  */
 public class AdjacencyMatrixGraph implements Graph {
@@ -143,8 +143,12 @@ public class AdjacencyMatrixGraph implements Graph {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
         AdjacencyMatrixGraph that = (AdjacencyMatrixGraph) obj;
         return Arrays.deepEquals(matrix, that.matrix); // Сравнение матриц
     }
@@ -194,9 +198,10 @@ public class AdjacencyMatrixGraph implements Graph {
      * Рекурсивный вспомогательный метод для выполнения топологической сортировки графа.
      *
      * @param v       Текущая вершина, которую нужно посетить.
-     * @param visited Набор посещенных вершин, чтобы избежать циклических ссылок и бесконечной рекурсии.
-     * @param stack   Стек, в который добавляются вершины после посещения всех их соседей,
-     *                чтобы получить порядок их обработки в топологической сортировке.
+     * @param visited Набор посещенных вершин, чтобы избежать циклических ссылок и бесконечной
+     *                рекурсии.
+     * @param stack   Стек, в который добавляются вершины после посещения всех их соседей, чтобы
+     *                получить порядок их обработки в топологической сортировке.
      */
     private void topologicalSortUtil(int v, boolean[] visited, Stack<Integer> stack) {
         visited[v] = true;

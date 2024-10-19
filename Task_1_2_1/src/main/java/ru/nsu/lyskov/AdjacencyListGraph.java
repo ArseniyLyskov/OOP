@@ -3,14 +3,21 @@ package ru.nsu.lyskov;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.Stack;
 
 /**
  * Класс для представления графа с использованием списка смежности.
  * <p>
- * Реализует интерфейс {@link Graph} и поддерживает основные операции над графами,
- * такие как добавление и удаление вершин и рёбер, получение соседей вершин,
- * чтение графа из файла и выполнение топологической сортировки.
+ * Реализует интерфейс {@link Graph} и поддерживает основные операции над графами, такие как
+ * добавление и удаление вершин и рёбер, получение соседей вершин, чтение графа из файла и
+ * выполнение топологической сортировки.
  * </p>
  */
 public class AdjacencyListGraph implements Graph {
@@ -121,8 +128,12 @@ public class AdjacencyListGraph implements Graph {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
         AdjacencyListGraph that = (AdjacencyListGraph) obj;
         return Objects.equals(adjList, that.adjList);
     }
@@ -167,9 +178,10 @@ public class AdjacencyListGraph implements Graph {
      * Рекурсивный вспомогательный метод для выполнения топологической сортировки графа.
      *
      * @param v       Текущая вершина, которую нужно посетить.
-     * @param visited Набор посещенных вершин, чтобы избежать циклических ссылок и бесконечной рекурсии.
-     * @param stack   Стек, в который добавляются вершины после посещения всех их соседей,
-     *                чтобы получить порядок их обработки в топологической сортировке.
+     * @param visited Набор посещенных вершин, чтобы избежать циклических ссылок и бесконечной
+     *                рекурсии.
+     * @param stack   Стек, в который добавляются вершины после посещения всех их соседей, чтобы
+     *                получить порядок их обработки в топологической сортировке.
      */
     private void topologicalSortUtil(int v, Set<Integer> visited, Stack<Integer> stack) {
         visited.add(v);
