@@ -8,12 +8,26 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
+/**
+ * Класс для представления графа с использованием матрицы инцидентности.
+ * <p>
+ * Реализует интерфейс {@link Graph} и поддерживает основные операции над графами,
+ * такие как добавление и удаление вершин и рёбер, получение соседей вершин,
+ * чтение графа из файла и выполнение топологической сортировки.
+ * </p>
+ */
 public class IncidenceMatrixGraph implements Graph {
     private boolean[][] incidenceMatrix; // Матрица инцидентности
     private int numVertices; // Количество вершин
     private int numEdges;    // Количество рёбер
     private int edgeCount;   // Текущий индекс для рёбер
 
+    /**
+     * Конструктор, создающий новый граф с заданным количеством вершин и рёбер.
+     *
+     * @param numVertices количество вершин в графе
+     * @param numEdges количество рёбер в графе
+     */
     public IncidenceMatrixGraph(int numVertices, int numEdges) {
         this.numVertices = numVertices;
         this.numEdges = numEdges;
@@ -21,6 +35,11 @@ public class IncidenceMatrixGraph implements Graph {
         this.edgeCount = 0;
     }
 
+    /**
+     * Добавляет новую вершину в граф.
+     *
+     * @param v номер вершины, которую нужно добавить
+     */
     @Override
     public void addVertex(int v) {
         // Добавляем новую вершину, увеличиваем размерность матрицы инцидентности
@@ -34,6 +53,11 @@ public class IncidenceMatrixGraph implements Graph {
         }
     }
 
+    /**
+     * Удаляет вершину из графа.
+     *
+     * @param v номер вершины, которую нужно удалить
+     */
     @Override
     public void removeVertex(int v) {
         if (v >= numVertices) return;
@@ -42,6 +66,12 @@ public class IncidenceMatrixGraph implements Graph {
         }
     }
 
+    /**
+     * Добавляет направленное ребро между двумя вершинами.
+     *
+     * @param v1 номер первой вершины
+     * @param v2 номер второй вершины
+     */
     @Override
     public void addEdge(int v1, int v2) {
         if (v1 >= numVertices || v2 >= numVertices || edgeCount >= numEdges) {
@@ -52,6 +82,12 @@ public class IncidenceMatrixGraph implements Graph {
         edgeCount++;
     }
 
+    /**
+     * Удаляет направленное ребро между двумя вершинами.
+     *
+     * @param v1 номер первой вершины
+     * @param v2 номер второй вершины
+     */
     @Override
     public void removeEdge(int v1, int v2) {
         for (int i = 0; i < numEdges; i++) {
@@ -63,6 +99,12 @@ public class IncidenceMatrixGraph implements Graph {
         }
     }
 
+    /**
+     * Возвращает список соседей заданной вершины.
+     *
+     * @param v номер вершины
+     * @return список соседей указанной вершины, или null, если вершина отсутствует
+     */
     @Override
     public List<Integer> getNeighbors(int v) {
         List<Integer> neighbors = new ArrayList<>();
@@ -81,6 +123,11 @@ public class IncidenceMatrixGraph implements Graph {
         return neighbors;
     }
 
+    /**
+     * Считывает граф из файла.
+     *
+     * @param fileName имя файла, из которого будет прочитан граф
+     */
     @Override
     public void readFromFile(String fileName) {
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
@@ -108,7 +155,12 @@ public class IncidenceMatrixGraph implements Graph {
         }
     }
 
-
+    /**
+     * Сравнивает два графа на равенство.
+     *
+     * @param obj объект для сравнения
+     * @return true, если объекты равны, иначе false
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -119,6 +171,11 @@ public class IncidenceMatrixGraph implements Graph {
                 Arrays.deepEquals(incidenceMatrix, that.incidenceMatrix);
     }
 
+    /**
+     * Возвращает строковое представление графа.
+     *
+     * @return строковое представление графа
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -132,6 +189,11 @@ public class IncidenceMatrixGraph implements Graph {
         return sb.toString();
     }
 
+    /**
+     * Выполняет топологическую сортировку графа.
+     *
+     * @return список вершин в порядке топологической сортировки
+     */
     @Override
     public List<Integer> topologicalSort() {
         Stack<Integer> stack = new Stack<>();
@@ -150,6 +212,14 @@ public class IncidenceMatrixGraph implements Graph {
         return sortedList;
     }
 
+    /**
+     * Рекурсивный вспомогательный метод для выполнения топологической сортировки графа.
+     *
+     * @param v       Текущая вершина, которую нужно посетить.
+     * @param visited Набор посещенных вершин, чтобы избежать циклических ссылок и бесконечной рекурсии.
+     * @param stack   Стек, в который добавляются вершины после посещения всех их соседей,
+     *                чтобы получить порядок их обработки в топологической сортировке.
+     */
     private void topologicalSortUtil(int v, boolean[] visited, Stack<Integer> stack) {
         visited[v] = true;
 

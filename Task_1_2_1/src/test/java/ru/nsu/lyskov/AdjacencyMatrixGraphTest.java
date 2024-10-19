@@ -61,10 +61,10 @@ class AdjacencyMatrixGraphTest {
     @Test
     void testTopologicalSort() {
         graph = new AdjacencyMatrixGraph(3); // Создаем граф с 3 вершинами
-        graph.addEdge(0, 1);
         graph.addEdge(1, 2);
+        graph.addEdge(2, 0);
         List<Integer> sorted = graph.topologicalSort();
-        assertEquals(List.of(0, 1, 2), sorted);
+        assertEquals(List.of(1, 2, 0), sorted);
     }
 
     @Test

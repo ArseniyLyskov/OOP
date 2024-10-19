@@ -8,15 +8,33 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
+/**
+ * Класс для представления графа с использованием матрицы смежности.
+ * <p>
+ * Реализует интерфейс {@link Graph} и поддерживает основные операции над графами,
+ * такие как добавление и удаление вершин и рёбер, получение соседей вершин,
+ * чтение графа из файла и выполнение топологической сортировки.
+ * </p>
+ */
 public class AdjacencyMatrixGraph implements Graph {
-    private boolean[][] matrix;
-    private int numVertices;
+    private boolean[][] matrix;  // Матрица смежности
+    private int numVertices;     // Количество вершин в графе
 
+    /**
+     * Конструктор, создающий новый граф с заданным количеством вершин.
+     *
+     * @param numVertices количество вершин в графе
+     */
     public AdjacencyMatrixGraph(int numVertices) {
         this.numVertices = numVertices;
         matrix = new boolean[numVertices][numVertices];
     }
 
+    /**
+     * Добавляет новую вершину в граф.
+     *
+     * @param v номер вершины, которую нужно добавить
+     */
     @Override
     public void addVertex(int v) {
         if (v >= numVertices) {
@@ -35,7 +53,11 @@ public class AdjacencyMatrixGraph implements Graph {
         }
     }
 
-
+    /**
+     * Удаляет вершину из графа.
+     *
+     * @param v номер вершины, которую нужно удалить
+     */
     @Override
     public void removeVertex(int v) {
         // Удаление вершины путем обнуления строки и столбца
@@ -45,27 +67,50 @@ public class AdjacencyMatrixGraph implements Graph {
         }
     }
 
+    /**
+     * Добавляет направленное ребро между двумя вершинами.
+     *
+     * @param v1 номер первой вершины
+     * @param v2 номер второй вершины
+     */
     @Override
     public void addEdge(int v1, int v2) {
-        matrix[v1][v2] = true;
+        matrix[v1][v2] = true;  // Добавляем ребро между v1 и v2
     }
 
+    /**
+     * Удаляет направленное ребро между двумя вершинами.
+     *
+     * @param v1 номер первой вершины
+     * @param v2 номер второй вершины
+     */
     @Override
     public void removeEdge(int v1, int v2) {
-        matrix[v1][v2] = false;
+        matrix[v1][v2] = false; // Удаляем ребро между v1 и v2
     }
 
+    /**
+     * Возвращает список соседей заданной вершины.
+     *
+     * @param v номер вершины
+     * @return список соседей указанной вершины, или null, если вершина отсутствует
+     */
     @Override
     public List<Integer> getNeighbors(int v) {
         List<Integer> neighbors = new ArrayList<>();
         for (int i = 0; i < numVertices; i++) {
             if (matrix[v][i]) {
-                neighbors.add(i);
+                neighbors.add(i); // Добавляем соседнюю вершину
             }
         }
-        return neighbors;
+        return neighbors; // Возвращаем список соседей
     }
 
+    /**
+     * Считывает граф из файла.
+     *
+     * @param fileName имя файла, из которого будет прочитан граф
+     */
     @Override
     public void readFromFile(String fileName) {
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
@@ -81,7 +126,7 @@ public class AdjacencyMatrixGraph implements Graph {
             for (int i = 0; i < numVertices; i++) {
                 String[] line = br.readLine().split(" ");
                 for (int j = 0; j < numVertices; j++) {
-                    matrix[i][j] = line[j].equals("1");
+                    matrix[i][j] = line[j].equals("1"); // Заполняем матрицу
                 }
             }
         } catch (IOException e) {
@@ -89,27 +134,42 @@ public class AdjacencyMatrixGraph implements Graph {
         }
     }
 
-
+    /**
+     * Сравнивает два графа на равенство.
+     *
+     * @param obj объект для сравнения
+     * @return true, если объекты равны, иначе false
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         AdjacencyMatrixGraph that = (AdjacencyMatrixGraph) obj;
-        return Arrays.deepEquals(matrix, that.matrix);
+        return Arrays.deepEquals(matrix, that.matrix); // Сравнение матриц
     }
 
+    /**
+     * Возвращает строковое представление графа.
+     *
+     * @return строковое представление графа
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < numVertices; i++) {
             for (int j = 0; j < numVertices; j++) {
-                sb.append(matrix[i][j] ? "1 " : "0 ");
+                sb.append(matrix[i][j] ? "1 " : "0 "); // Формируем строку для отображения матрицы
             }
             sb.append("\n");
         }
-        return sb.toString();
+        return sb.toString(); // Возвращаем строковое представление матрицы
     }
 
+    /**
+     * Выполняет топологическую сортировку графа.
+     *
+     * @return список вершин в порядке топологической сортировки
+     */
     @Override
     public List<Integer> topologicalSort() {
         Stack<Integer> stack = new Stack<>();
@@ -117,17 +177,25 @@ public class AdjacencyMatrixGraph implements Graph {
 
         for (int i = 0; i < numVertices; i++) {
             if (!visited[i]) {
-                topologicalSortUtil(i, visited, stack);
+                topologicalSortUtil(i, visited, stack); // Запускаем вспомогательный метод
             }
         }
 
         List<Integer> sortedList = new ArrayList<>();
         while (!stack.isEmpty()) {
-            sortedList.add(stack.pop());
+            sortedList.add(stack.pop()); // Извлекаем вершины в порядке сортировки
         }
-        return sortedList;
+        return sortedList; // Возвращаем отсортированный список
     }
 
+    /**
+     * Рекурсивный вспомогательный метод для выполнения топологической сортировки графа.
+     *
+     * @param v       Текущая вершина, которую нужно посетить.
+     * @param visited Набор посещенных вершин, чтобы избежать циклических ссылок и бесконечной рекурсии.
+     * @param stack   Стек, в который добавляются вершины после посещения всех их соседей,
+     *                чтобы получить порядок их обработки в топологической сортировке.
+     */
     private void topologicalSortUtil(int v, boolean[] visited, Stack<Integer> stack) {
         visited[v] = true;
 

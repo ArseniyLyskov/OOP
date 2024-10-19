@@ -81,11 +81,12 @@ public class IncidenceMatrixGraphTest {
     @Test
     public void testTopologicalSort() {
         graph = new IncidenceMatrixGraph(4, 4);
-        graph.addEdge(0, 1);
-        graph.addEdge(1, 2);
-        graph.addEdge(2, 3);
+        graph.addEdge(3, 2);
+        graph.addEdge(3, 1);
+        graph.addEdge(2, 1);
+        graph.addEdge(0, 3);
         List<Integer> sortedList = graph.topologicalSort();
-        assertEquals(List.of(0, 1, 2, 3), sortedList);
+        assertEquals(List.of(0, 3, 2, 1), sortedList);
     }
 
     @Test
