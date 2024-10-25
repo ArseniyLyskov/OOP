@@ -157,13 +157,17 @@ public class AdjacencyListGraph implements Graph {
      * @return список вершин в порядке топологической сортировки
      */
     @Override
-    public List<Integer> topologicalSort() {
+    public List<Integer> topologicalSort() throws GraphCycleException {
         Stack<Integer> stack = new Stack<>();
         Set<Integer> visited = new HashSet<>();
+        Set<Integer> recStack = new HashSet<>();
 
         for (Integer v : adjList.keySet()) {
             if (!visited.contains(v)) {
-                topologicalSortUtil(v, visited, stack);
+                if (!topologicalSortUtil(v, visited, recStack, stack)) {
+                    throw new GraphCycleException("The graph contains a cycle, topological "
+                                                          + "sorting is not possible");
+                }
             }
         }
 
@@ -183,16 +187,24 @@ public class AdjacencyListGraph implements Graph {
      * @param stack   Стек, в который добавляются вершины после посещения всех их соседей, чтобы
      *                получить порядок их обработки в топологической сортировке.
      */
-    private void topologicalSortUtil(int v, Set<Integer> visited, Stack<Integer> stack) {
+    private boolean topologicalSortUtil(int v, Set<Integer> visited,
+                                     Set<Integer> recStack, Stack<Integer> stack) {
         visited.add(v);
+        recStack.add(v);
 
         for (Integer neighbor : getNeighbors(v)) {
             if (!visited.contains(neighbor)) {
-                topologicalSortUtil(neighbor, visited, stack);
+                if (!topologicalSortUtil(neighbor, visited, recStack, stack)) {
+                    return false;
+                }
+            } else if (recStack.contains(neighbor)) {
+                return false;
             }
         }
 
+        recStack.remove(v);
         stack.push(v);
+        return true;
     }
 
 }

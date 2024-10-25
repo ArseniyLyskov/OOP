@@ -115,7 +115,7 @@ public class IncidenceMatrixGraphTest {
      * отсортированных вершин.
      */
     @Test
-    public void testTopologicalSort() {
+    public void testTopologicalSort() throws GraphCycleException {
         graph = new IncidenceMatrixGraph(4, 4);
         graph.addEdge(3, 2);
         graph.addEdge(3, 1);

@@ -75,5 +75,5 @@ public interface Graph {
      *
      * @return список вершин в порядке топологической сортировки
      */
-    List<Integer> topologicalSort();
+    List<Integer> topologicalSort() throws GraphCycleException;
 }

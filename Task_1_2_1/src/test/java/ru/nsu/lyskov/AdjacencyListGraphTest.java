@@ -100,7 +100,7 @@ class AdjacencyListGraphTest {
      * добавления рёбер.
      */
     @Test
-    void testTopologicalSort() {
+    void testTopologicalSort() throws GraphCycleException {
         graph.addVertex(2);
         graph.addVertex(0);
         graph.addVertex(1);

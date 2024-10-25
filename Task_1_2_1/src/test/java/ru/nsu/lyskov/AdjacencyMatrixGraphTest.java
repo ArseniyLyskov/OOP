@@ -96,7 +96,7 @@ class AdjacencyMatrixGraphTest {
      * добавления рёбер.
      */
     @Test
-    void testTopologicalSort() {
+    void testTopologicalSort() throws GraphCycleException {
         graph = new AdjacencyMatrixGraph(3); // Создаем граф с 3 вершинами
         graph.addEdge(1, 2);
         graph.addEdge(2, 0);

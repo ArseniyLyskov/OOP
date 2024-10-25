@@ -177,42 +177,55 @@ public class AdjacencyMatrixGraph implements Graph {
      * @return список вершин в порядке топологической сортировки
      */
     @Override
-    public List<Integer> topologicalSort() {
+    public List<Integer> topologicalSort() throws GraphCycleException {
         Stack<Integer> stack = new Stack<>();
-        boolean[] visited = new boolean[numVertices];  // Для отслеживания посещённых вершин
+        boolean[] visited = new boolean[numVertices];
+        boolean[] recStack = new boolean[numVertices];
 
         for (int i = 0; i < numVertices; i++) {
             if (!visited[i]) {
-                topologicalSortUtil(i, visited, stack); // Запускаем вспомогательный метод
+                if (!topologicalSortUtil(i, visited, recStack, stack)) {
+                    throw new GraphCycleException("The graph contains a cycle, topological "
+                                                          + "sorting is not possible");
+                }
             }
         }
 
         List<Integer> sortedList = new ArrayList<>();
         while (!stack.isEmpty()) {
-            sortedList.add(stack.pop()); // Извлекаем вершины в порядке сортировки
+            sortedList.add(stack.pop());
         }
-        return sortedList; // Возвращаем отсортированный список
+        return sortedList;
     }
 
     /**
      * Рекурсивный вспомогательный метод для выполнения топологической сортировки графа.
      *
-     * @param v       Текущая вершина, которую нужно посетить.
-     * @param visited Набор посещенных вершин, чтобы избежать циклических ссылок и бесконечной
-     *                рекурсии.
-     * @param stack   Стек, в который добавляются вершины после посещения всех их соседей, чтобы
-     *                получить порядок их обработки в топологической сортировке.
+     * @param v        Текущая вершина, которую нужно посетить.
+     * @param visited  Массив для отслеживания посещенных вершин.
+     * @param recStack Массив для отслеживания текущего пути рекурсии для выявления циклов.
+     * @param stack    Стек, в который добавляются вершины после посещения всех их соседей, чтобы
+     *                 получить порядок их обработки в топологической сортировке.
      */
-    private void topologicalSortUtil(int v, boolean[] visited, Stack<Integer> stack) {
+    private boolean topologicalSortUtil(int v, boolean[] visited, boolean[] recStack,
+                                        Stack<Integer> stack) {
         visited[v] = true;
+        recStack[v] = true;
 
-        // Проходим по строке v и ищем все вершины, в которые есть ребро (v -> i)
         for (int i = 0; i < numVertices; i++) {
-            if (matrix[v][i] && !visited[i]) {
-                topologicalSortUtil(i, visited, stack);
+            if (matrix[v][i]) {
+                if (!visited[i]) {
+                    if (!topologicalSortUtil(i, visited, recStack, stack)) {
+                        return false;
+                    }
+                } else if (recStack[i]) {
+                    return false;
+                }
             }
         }
 
-        stack.push(v);  // Добавляем вершину в стек после всех её соседей
+        recStack[v] = false;
+        stack.push(v);
+        return true;
     }
 }
