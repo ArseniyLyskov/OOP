@@ -3,6 +3,7 @@ package ru.nsu.lyskov;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.FileWriter;
@@ -102,6 +103,19 @@ class AdjacencyMatrixGraphTest {
         graph.addEdge(2, 0);
         List<Integer> sorted = graph.topologicalSort();
         assertEquals(List.of(1, 2, 0), sorted); // Проверяем порядок топологической сортировки
+    }
+
+    /**
+     * Тестирует топологическую сортировку графа, содержащего цикл. Проверяет выбрасывание
+     * исключения.
+     */
+    @Test
+    void testTopologicalSortException() throws GraphCycleException {
+        graph = new AdjacencyMatrixGraph(3); // Создаем граф с 3 вершинами
+        graph.addEdge(1, 2);
+        graph.addEdge(2, 0);
+        graph.addEdge(0, 1);
+        assertThrows(GraphCycleException.class, () -> graph.topologicalSort());
     }
 
     /**

@@ -155,6 +155,8 @@ public class AdjacencyListGraph implements Graph {
      * Выполняет топологическую сортировку графа.
      *
      * @return список вершин в порядке топологической сортировки
+     * @throws GraphCycleException если в графе обнаружен цикл, топологическая сортировка
+     *                             невозможна
      */
     @Override
     public List<Integer> topologicalSort() throws GraphCycleException {
@@ -181,14 +183,14 @@ public class AdjacencyListGraph implements Graph {
     /**
      * Рекурсивный вспомогательный метод для выполнения топологической сортировки графа.
      *
-     * @param v       Текущая вершина, которую нужно посетить.
-     * @param visited Набор посещенных вершин, чтобы избежать циклических ссылок и бесконечной
-     *                рекурсии.
-     * @param stack   Стек, в который добавляются вершины после посещения всех их соседей, чтобы
-     *                получить порядок их обработки в топологической сортировке.
+     * @param v        Текущая вершина, которую нужно посетить.
+     * @param visited  Массив для отслеживания посещенных вершин.
+     * @param recStack Массив для отслеживания текущего пути рекурсии для выявления циклов.
+     * @param stack    Стек, в который добавляются вершины после посещения всех их соседей, чтобы
+     *                 получить порядок их обработки в топологической сортировке.
      */
     private boolean topologicalSortUtil(int v, Set<Integer> visited,
-                                     Set<Integer> recStack, Stack<Integer> stack) {
+                                        Set<Integer> recStack, Stack<Integer> stack) {
         visited.add(v);
         recStack.add(v);
 

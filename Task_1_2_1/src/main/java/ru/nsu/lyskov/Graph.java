@@ -70,10 +70,13 @@ public interface Graph {
      */
     String toString();
 
+
     /**
      * Выполняет топологическую сортировку графа.
      *
      * @return список вершин в порядке топологической сортировки
+     * @throws GraphCycleException если в графе обнаружен цикл, топологическая сортировка
+     *                             невозможна
      */
     List<Integer> topologicalSort() throws GraphCycleException;
 }

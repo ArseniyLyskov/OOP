@@ -3,6 +3,7 @@ package ru.nsu.lyskov;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.FileWriter;
@@ -124,6 +125,22 @@ public class IncidenceMatrixGraphTest {
         List<Integer> sortedList = graph.topologicalSort();
         // Проверяем порядок топологической сортировки
         assertEquals(List.of(0, 3, 2, 1), sortedList);
+    }
+
+    /**
+     * Тестирует топологическую сортировку графа, содержащего цикл. Проверяет выбрасывание
+     * исключения.
+     */
+    @Test
+    public void testTopologicalSortException() throws GraphCycleException {
+        graph = new IncidenceMatrixGraph(4, 4);
+        graph.addEdge(3, 2);
+        graph.addEdge(3, 1);
+        graph.addEdge(2, 1);
+        graph.addEdge(1, 0);
+        graph.addEdge(0, 3);
+        System.out.println(graph.topologicalSort());
+        assertThrows(GraphCycleException.class, () -> graph.topologicalSort());
     }
 
     /**

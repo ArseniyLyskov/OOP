@@ -175,6 +175,8 @@ public class AdjacencyMatrixGraph implements Graph {
      * Выполняет топологическую сортировку графа.
      *
      * @return список вершин в порядке топологической сортировки
+     * @throws GraphCycleException если в графе обнаружен цикл, топологическая сортировка
+     *                             невозможна
      */
     @Override
     public List<Integer> topologicalSort() throws GraphCycleException {
