@@ -131,7 +131,7 @@ public class AdjacencyMatrixGraph implements Graph {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Ошибка чтения файла: " + e.getMessage());
+            System.out.println("File read error: " + e.getMessage());
         }
     }
 

@@ -5,9 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -19,7 +17,7 @@ import java.util.Stack;
  * </p>
  */
 public class IncidenceMatrixGraph implements Graph {
-    private int[][] incidenceMatrix; // Матрица инцидентности
+    private int[][] incidenceMatrix;     // Матрица инцидентности
     private int numVertices;             // Количество вершин
     private int numEdges;                // Количество рёбер
     private int edgeCount;               // Текущий индекс для рёбер
@@ -34,7 +32,6 @@ public class IncidenceMatrixGraph implements Graph {
         this.numVertices = numVertices;
         this.numEdges = numEdges;
         this.incidenceMatrix = new int[numVertices][numEdges];
-        this.edgeDirections = new HashMap<>();
         this.edgeCount = 0;
     }
 
@@ -45,9 +42,8 @@ public class IncidenceMatrixGraph implements Graph {
      */
     @Override
     public void addVertex(int v) {
-        // Добавляем новую вершину, увеличиваем размерность матрицы инцидентности
         if (v >= numVertices) {
-            boolean[][] newMatrix = new boolean[v + 1][numEdges];
+            int[][] newMatrix = new int[v + 1][numEdges];
             for (int i = 0; i < numVertices; i++) {
                 newMatrix[i] = Arrays.copyOf(incidenceMatrix[i], numEdges);
             }
@@ -68,18 +64,18 @@ public class IncidenceMatrixGraph implements Graph {
         }
 
         // Удаляем все рёбра, инцидентные вершине v
-        List<Integer> edgesToRemove = new ArrayList<>();
         for (int i = 0; i < numEdges; i++) {
-            if (incidenceMatrix[v][i]) {
-                edgesToRemove.add(i); // Помечаем для удаления
-                incidenceMatrix[v][i] = false;
-            }
+            incidenceMatrix[v][i] = 0;
         }
 
-        // Удаляем рёбра из edgeDirections
-        for (Integer edge : edgesToRemove) {
-            edgeDirections.remove(edge);
+        // Сдвигаем строки для удаления вершины
+        for (int i = v; i < numVertices - 1; i++) {
+            incidenceMatrix[i] = incidenceMatrix[i + 1];
         }
+
+        // Уменьшаем размерность массива
+        numVertices--;
+        incidenceMatrix = Arrays.copyOf(incidenceMatrix, numVertices);
     }
 
     /**
@@ -93,8 +89,8 @@ public class IncidenceMatrixGraph implements Graph {
         if (v1 >= numVertices || v2 >= numVertices || edgeCount >= numEdges) {
             return;
         }
-        incidenceMatrix[v1][edgeCount] = -1;
-        incidenceMatrix[v2][edgeCount] = 1;
+        incidenceMatrix[v1][edgeCount] = 1;  // Начало направления
+        incidenceMatrix[v2][edgeCount] = -1;   // Конец направления
         edgeCount++;
     }
 
@@ -107,11 +103,11 @@ public class IncidenceMatrixGraph implements Graph {
     @Override
     public void removeEdge(int v1, int v2) {
         for (int i = 0; i < numEdges; i++) {
-            if (incidenceMatrix[v1][i] && incidenceMatrix[v2][i]) {
-                incidenceMatrix[v1][i] = false;
-                incidenceMatrix[v2][i] = false;
-                edgeDirections.remove(i);
-                break; // Удаляем первое найденное ребро между v1 и v2
+            if (incidenceMatrix[v1][i] == 1 && incidenceMatrix[v2][i] == -1) {
+                for (int j = 0; j < numVertices; j++) {
+                    incidenceMatrix[j][i] = 0; // Удаляем ребро
+                }
+                break;
             }
         }
     }
@@ -129,16 +125,26 @@ public class IncidenceMatrixGraph implements Graph {
             return neighbors;
         }
         for (int edge = 0; edge < numEdges; edge++) {
-            if (incidenceMatrix[v][edge]) {
-                Integer[] direction = edgeDirections.get(edge);
-                // Если текущая вершина v является началом ребра, добавляем конечную вершину
-                if (direction != null && direction[0] == v) {
-                    neighbors.add(direction[1]); // Добавляем конечную вершину
+            // Проверка на исходящее ребро
+            if (incidenceMatrix[v][edge] == 1) {
+                for (int i = 0; i < numVertices; i++) {
+                    if (incidenceMatrix[i][edge] == -1 && !neighbors.contains(i)) {
+                        neighbors.add(i); // Добавляем вершину-конец направления
+                    }
+                }
+            }
+            // Проверка на входящее ребро
+            else if (incidenceMatrix[v][edge] == -1) {
+                for (int i = 0; i < numVertices; i++) {
+                    if (incidenceMatrix[i][edge] == 1 && !neighbors.contains(i)) {
+                        neighbors.add(i); // Добавляем вершину-начало направления
+                    }
                 }
             }
         }
         return neighbors;
     }
+
 
     /**
      * Считывает граф из файла.
@@ -154,30 +160,21 @@ public class IncidenceMatrixGraph implements Graph {
             numEdges = Integer.parseInt(firstLine[1]);
 
             // Инициализация матрицы инцидентности и счётчика рёбер
-            incidenceMatrix = new boolean[numVertices][numEdges];
-            edgeDirections.clear();
+            incidenceMatrix = new int[numVertices][numEdges];
             edgeCount = 0;
 
-            // Чтение рёбер
+            // Чтение каждой строки, представляющей одну строку матрицы инцидентности
             for (int i = 0; i < numVertices; i++) {
-                String[] line = br.readLine().split(" ");
+                String[] row = br.readLine().split(" ");
                 for (int j = 0; j < numEdges; j++) {
-                    if (line[j].equals("1")) {
-                        incidenceMatrix[i][j] = true;
-                        if (!edgeDirections.containsKey(j)) {
-                            edgeDirections.put(j,
-                                               new Integer[]{i, -1}
-                            ); // Помечаем начало направления
-                        } else {
-                            edgeDirections.get(j)[1] = i; // Заполняем конец направления
-                        }
-                    }
+                    incidenceMatrix[i][j] = Integer.parseInt(row[j]);
                 }
             }
         } catch (IOException e) {
-            System.out.println("Ошибка чтения файла: " + e.getMessage());
+            System.out.println("File read error: " + e.getMessage());
         }
     }
+
 
     /**
      * Сравнивает два графа на равенство.
@@ -210,7 +207,7 @@ public class IncidenceMatrixGraph implements Graph {
         sb.append("Incidence Matrix:\n");
         for (int i = 0; i < numVertices; i++) {
             for (int j = 0; j < numEdges; j++) {
-                sb.append(incidenceMatrix[i][j] ? "1 " : "0 ");
+                sb.append(incidenceMatrix[i][j]).append(" ");
             }
             sb.append("\n");
         }
@@ -255,14 +252,14 @@ public class IncidenceMatrixGraph implements Graph {
      * @param stack    Стек, в который добавляются вершины после посещения всех их соседей, чтобы
      *                 получить порядок их обработки в топологической сортировке.
      */
-    private boolean topologicalSortUtil(int v, boolean[] visited, boolean[] recStack, Stack<Integer> stack) {
+    private boolean topologicalSortUtil(int v, boolean[] visited, boolean[] recStack,
+                                        Stack<Integer> stack) {
         visited[v] = true;
         recStack[v] = true;
 
-        List<Integer> neighbors = getNeighbors(v); // Получаем соседей текущей вершины
+        List<Integer> neighbors = getOutgoingNeighbors(v); // Используем только исходящие вершины
 
         for (int u : neighbors) {
-            // Если соседняя вершина еще не посещена, продолжаем рекурсивный обход
             if (!visited[u]) {
                 if (!topologicalSortUtil(u, visited, recStack, stack)) {
                     return false; // Цикл обнаружен
@@ -272,8 +269,34 @@ public class IncidenceMatrixGraph implements Graph {
             }
         }
 
-        recStack[v] = false; // Выход из текущей вершины
-        stack.push(v); // Добавляем вершину в стек сортировки
+        recStack[v] = false;
+        stack.push(v);
         return true;
     }
+
+    /**
+     * Возвращает список соседей, к которым можно перейти из указанной вершины.
+     *
+     * @param v номер вершины
+     * @return список соседей указанной вершины, к которым можно перейти из указанной вершины, или
+     * null, если вершина отсутствует
+     */
+    public List<Integer> getOutgoingNeighbors(int v) {
+        List<Integer> outgoingNeighbors = new ArrayList<>();
+        if (v >= numVertices) {
+            return outgoingNeighbors;
+        }
+        for (int edge = 0; edge < numEdges; edge++) {
+            if (incidenceMatrix[v][edge] == 1) { // Если есть исходящее ребро из v
+                for (int i = 0; i < numVertices; i++) {
+                    if (incidenceMatrix[i][edge] == -1) { // Найти конечную вершину для
+                        // исходящего ребра
+                        outgoingNeighbors.add(i);
+                    }
+                }
+            }
+        }
+        return outgoingNeighbors;
+    }
+
 }

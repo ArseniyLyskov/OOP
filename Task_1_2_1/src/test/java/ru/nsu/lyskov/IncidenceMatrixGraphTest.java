@@ -85,7 +85,7 @@ public class IncidenceMatrixGraphTest {
     @Test
     public void testGetNeighbors() {
         graph.addEdge(0, 1);
-        graph.addEdge(0, 2);
+        graph.addEdge(2, 0);
         List<Integer> neighbors = graph.getNeighbors(0);
         assertTrue(neighbors.contains(1)); // Проверяем, что 1 является соседом 0
         assertTrue(neighbors.contains(2)); // Проверяем, что 2 является соседом 0
@@ -99,10 +99,10 @@ public class IncidenceMatrixGraphTest {
     public void testReadFromFile() throws IOException {
         String fileName = "InputGraphIncidenceMatrix.txt";
         try (FileWriter writer = new FileWriter(fileName)) {
-            writer.write("3 3\n"); // 3 вершины и 3 рёбра
-            writer.write("1 0 1\n");
-            writer.write("1 1 0\n");
-            writer.write("0 1 1\n");
+            writer.write("3 2\n"); // 3 вершины и 2 рёбра
+            writer.write("1 -1\n");
+            writer.write("-1 0\n");
+            writer.write("0 1\n");
         }
 
         graph.readFromFile(fileName);
@@ -133,13 +133,12 @@ public class IncidenceMatrixGraphTest {
      */
     @Test
     public void testTopologicalSortException() throws GraphCycleException {
-        graph = new IncidenceMatrixGraph(4, 4);
+        graph = new IncidenceMatrixGraph(4, 5);
         graph.addEdge(3, 2);
         graph.addEdge(3, 1);
         graph.addEdge(2, 1);
         graph.addEdge(1, 0);
         graph.addEdge(0, 3);
-        System.out.println(graph.topologicalSort());
         assertThrows(GraphCycleException.class, () -> graph.topologicalSort());
     }
 
@@ -156,8 +155,8 @@ public class IncidenceMatrixGraphTest {
         String expectedOutput =
                 "Incidence Matrix:\n"
                         + "1 0 0 0 0 \n"
-                        + "1 1 0 0 0 \n"
-                        + "0 1 1 0 0 \n"
+                        + "-1 1 0 0 0 \n"
+                        + "0 -1 -1 0 0 \n"
                         + "0 0 0 0 0 \n"
                         + "0 0 1 0 0";
         assertEquals(expectedOutput, graph.toString().trim()); // Проверяем строковое представление
