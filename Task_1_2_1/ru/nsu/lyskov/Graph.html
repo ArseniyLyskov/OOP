@@ -364,11 +364,15 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockListLast">
 <li class="blockList">
 <h4>topologicalSort</h4>
-<pre class="methodSignature">java.util.List&lt;java.lang.Integer&gt;&nbsp;topologicalSort()</pre>
+<pre class="methodSignature">java.util.List&lt;java.lang.Integer&gt;&nbsp;topologicalSort()
+                                           throws <a href="GraphCycleException.html" title="class in ru.nsu.lyskov">GraphCycleException</a></pre>
 <div class="block">Выполняет топологическую сортировку графа.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>список вершин в порядке топологической сортировки</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code><a href="GraphCycleException.html" title="class in ru.nsu.lyskov">GraphCycleException</a></code> - если в графе обнаружен цикл, топологическая сортировка
+                             невозможна</dd>
 </dl>
 </li>
 </ul>
