@@ -30,7 +30,7 @@ public class ExpressionFormatter {
             if (Character.isLetterOrDigit(ch) || ch == '.') {
                 currentOperand.append(ch);
             } else if (isOperator(ch)) {
-                if (!currentOperand.isEmpty()) {
+                if (currentOperand.length() > 0) {
                     operands.push(currentOperand.toString());
                     currentOperand.setLength(0);
                 }
@@ -43,7 +43,7 @@ public class ExpressionFormatter {
             } else if (ch == '(') {
                 operators.push(ch);
             } else if (ch == ')') {
-                if (!currentOperand.isEmpty()) {
+                if (currentOperand.length() > 0) {
                     operands.push(currentOperand.toString());
                     currentOperand.setLength(0);
                 }
@@ -55,7 +55,7 @@ public class ExpressionFormatter {
             }
         }
 
-        if (!currentOperand.isEmpty()) {
+        if (currentOperand.length() > 0) {
             operands.push(currentOperand.toString());
         }
 
@@ -85,8 +85,12 @@ public class ExpressionFormatter {
      * @return целочисленное значение, отражающее приоритет оператора
      */
     private static int precedence(char operator) {
-        if (operator == '+' || operator == '-') return 1;
-        if (operator == '*' || operator == '/') return 2;
+        if (operator == '+' || operator == '-') {
+            return 1;
+        }
+        if (operator == '*' || operator == '/') {
+            return 2;
+        }
         return 0;
     }
 

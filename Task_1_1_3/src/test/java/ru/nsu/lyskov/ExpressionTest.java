@@ -12,6 +12,9 @@ import ru.nsu.lyskov.exceptions.DivisionByZeroException;
 import ru.nsu.lyskov.exceptions.IncorrectAssignmentException;
 import ru.nsu.lyskov.exceptions.IncorrectExpressionException;
 
+/**
+ * Тестовый класс дополнительного задания к Task_1_1_3.
+ */
 class ExpressionTest {
 
     /**
