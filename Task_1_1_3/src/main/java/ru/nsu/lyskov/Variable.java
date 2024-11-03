@@ -2,6 +2,7 @@ package ru.nsu.lyskov;
 
 import java.io.PrintStream;
 import java.util.Map;
+import java.util.Objects;
 import ru.nsu.lyskov.exceptions.IncorrectAssignmentException;
 
 /**
@@ -30,8 +31,8 @@ public class Variable extends Expression {
     }
 
     /**
-     * Возвращает производную переменной по указанной переменной. Если текущая переменная
-     * совпадает с указанной, производная равна 1, иначе 0.
+     * Возвращает производную переменной по указанной переменной. Если текущая переменная совпадает
+     * с указанной, производная равна 1, иначе 0.
      *
      * @param variable переменная, по которой необходимо дифференцировать
      * @return новое выражение, представляющее производную (1 или 0)
@@ -42,6 +43,17 @@ public class Variable extends Expression {
             return new Number(1);
         }
         return new Number(0);
+    }
+
+    /**
+     * Упрощает текущее выражение, создавая новое (упрощённое) выражение. Для {@link Variable} -
+     * упрощение не нужно.
+     *
+     * @return упрощённое выражение
+     */
+    @Override
+    public Expression simplify() {
+        return this;
     }
 
     /**
@@ -57,5 +69,23 @@ public class Variable extends Expression {
             return variables.get(name);
         }
         throw new IncorrectAssignmentException("Variable " + name + " is not defined");
+    }
+
+    /**
+     * Сравнивает два объекта на равенство.
+     *
+     * @param obj объект для сравнения
+     * @return true, если объекты равны, иначе false
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Variable variable = (Variable) obj;
+        return Objects.equals(name, variable.name);
     }
 }

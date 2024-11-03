@@ -2,6 +2,7 @@ package ru.nsu.lyskov;
 
 import java.io.PrintStream;
 import java.util.Map;
+import java.util.Objects;
 import ru.nsu.lyskov.exceptions.DivisionByZeroException;
 import ru.nsu.lyskov.exceptions.IncorrectAssignmentException;
 
@@ -46,7 +47,42 @@ public class Mul extends Expression {
     @Override
     public Expression derivative(String variable) {
         return new Add(new Mul(left.derivative(variable), right),
-                new Mul(left, right.derivative(variable)));
+                       new Mul(left, right.derivative(variable))
+        );
+    }
+
+    /**
+     * Упрощает текущее выражение, создавая новое (упрощённое) выражение. Для {@link Mul} -
+     * произведение упрощённых подвыражений; 0, если умножение на 0; второй множитель, если
+     * умножение на 1.
+     *
+     * @return упрощённое выражение
+     */
+    @Override
+    public Expression simplify() throws DivisionByZeroException {
+        Expression simplifiedLeft = left.simplify();
+        Expression simplifiedRight = right.simplify();
+
+        if (simplifiedLeft instanceof Number && ((Number) simplifiedLeft).getValue() == 0) {
+            return new Number(0);
+        }
+        if (simplifiedRight instanceof Number && ((Number) simplifiedRight).getValue() == 0) {
+            return new Number(0);
+        }
+        if (simplifiedLeft instanceof Number && ((Number) simplifiedLeft).getValue() == 1) {
+            return simplifiedRight;
+        }
+        if (simplifiedRight instanceof Number && ((Number) simplifiedRight).getValue() == 1) {
+            return simplifiedLeft;
+        }
+
+        // Если оба подвыражения — числа, вычисляем их произведение
+        if (simplifiedLeft instanceof Number && simplifiedRight instanceof Number) {
+            return new Number(
+                    ((Number) simplifiedLeft).getValue() * ((Number) simplifiedRight).getValue());
+        }
+
+        return new Mul(simplifiedLeft, simplifiedRight);
     }
 
     /**
@@ -61,5 +97,23 @@ public class Mul extends Expression {
     public double eval(Map<String, Double> variables)
             throws DivisionByZeroException, IncorrectAssignmentException {
         return left.eval(variables) * right.eval(variables);
+    }
+
+    /**
+     * Сравнивает два объекта на равенство.
+     *
+     * @param obj объект для сравнения
+     * @return true, если объекты равны, иначе false
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Mul mul = (Mul) obj;
+        return Objects.equals(left, mul.left) && Objects.equals(right, mul.right);
     }
 }

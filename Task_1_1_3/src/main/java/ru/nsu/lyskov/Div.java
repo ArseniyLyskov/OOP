@@ -2,6 +2,7 @@ package ru.nsu.lyskov;
 
 import java.io.PrintStream;
 import java.util.Map;
+import java.util.Objects;
 import ru.nsu.lyskov.exceptions.DivisionByZeroException;
 import ru.nsu.lyskov.exceptions.IncorrectAssignmentException;
 
@@ -47,9 +48,31 @@ public class Div extends Expression {
     public Expression derivative(String variable) {
         return new Div(
                 new Sub(new Mul(left.derivative(variable), right),
-                        new Mul(left, right.derivative(variable))),
+                        new Mul(left, right.derivative(variable))
+                ),
                 new Mul(right, right)
         );
+    }
+
+    /**
+     * Упрощает текущее выражение, создавая новое (упрощённое) выражение. Для {@link Div} - частное
+     * упрощённых подвыражений.
+     *
+     * @return упрощённое выражение
+     */
+    @Override
+    public Expression simplify() throws DivisionByZeroException {
+        Expression simplifiedLeft = left.simplify();
+        Expression simplifiedRight = right.simplify();
+
+        if (simplifiedLeft instanceof Number && simplifiedRight instanceof Number) {
+            if (((Number) simplifiedRight).getValue() == 0) {
+                throw new DivisionByZeroException("Dividing by zero");
+            }
+            return new Number(
+                    ((Number) simplifiedLeft).getValue() / ((Number) simplifiedRight).getValue());
+        }
+        return new Div(simplifiedLeft, simplifiedRight);
     }
 
     /**
@@ -69,5 +92,23 @@ public class Div extends Expression {
         } else {
             throw new DivisionByZeroException("Dividing by zero");
         }
+    }
+
+    /**
+     * Сравнивает два объекта на равенство.
+     *
+     * @param obj объект для сравнения
+     * @return true, если объекты равны, иначе false
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Div div = (Div) obj;
+        return Objects.equals(left, div.left) && Objects.equals(right, div.right);
     }
 }

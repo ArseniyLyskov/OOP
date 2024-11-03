@@ -90,7 +90,8 @@ class ExpressionTest {
      */
     @Test
     void testExpressionParsing() throws
-            IncorrectAssignmentException, DivisionByZeroException, IncorrectExpressionException {
+                                 IncorrectAssignmentException, DivisionByZeroException,
+                                 IncorrectExpressionException {
         String input = "(3+(2*x))";
         Expression expr = Expression.parse(input);
         Map<String, Double> variables = new HashMap<>();
@@ -112,24 +113,23 @@ class ExpressionTest {
      */
     @Test
     void testIncorrectAssignmentParsing() throws
-            IncorrectExpressionException, DivisionByZeroException, IncorrectAssignmentException {
+                                          IncorrectExpressionException, DivisionByZeroException,
+                                          IncorrectAssignmentException {
         Expression expression = Expression.parse("(1.2+(3.4-(5.6*(7.8/9.0))))");
         Expression derivative = expression.derivative("");
         expression.print(new PrintStream(new ByteArrayOutputStream()));
         derivative.print(new PrintStream(new ByteArrayOutputStream()));
         assertEquals(-0.253333, expression.eval(""), 1e-6);
-        assertThrows(IncorrectAssignmentException.class, () -> {
-            expression.eval("di8:u2h&3");
-        });
+        assertThrows(IncorrectAssignmentException.class, () -> expression.eval("di8:u2h&3"));
     }
 
     /**
-     * Тест на корректное преобразование переменных из строки и вычисление:
-     * 3 + (2.8 * x), при x = 10.2.
+     * Тест на корректное преобразование переменных из строки и вычисление: 3 + (2.8 * x), при x =
+     * 10.2.
      */
     @Test
     void testEvalWithVariablesString() throws
-            DivisionByZeroException, IncorrectAssignmentException {
+                                       DivisionByZeroException, IncorrectAssignmentException {
         Expression expr = new Add(
                 new Number(3),
                 new Mul(new Number(2.8), new Variable("x"))

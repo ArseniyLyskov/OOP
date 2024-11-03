@@ -2,6 +2,7 @@ package ru.nsu.lyskov;
 
 import java.io.PrintStream;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Класс для представления численного значения в математическом выражении.
@@ -44,6 +45,17 @@ public class Number extends Expression {
     }
 
     /**
+     * Упрощает текущее выражение, создавая новое (упрощённое) выражение. Для {@link Number} -
+     * упрощение не нужно.
+     *
+     * @return упрощённое выражение
+     */
+    @Override
+    public Expression simplify() {
+        return this;
+    }
+
+    /**
      * Возвращает числовое значение выражения.
      *
      * @param variables карта, где ключи — имена переменных, а значения — их числовые значения
@@ -53,5 +65,32 @@ public class Number extends Expression {
     @Override
     public double eval(Map<String, Double> variables) {
         return value;
+    }
+
+    /**
+     * Геттер для значения.
+     *
+     * @return значение
+     */
+    public double getValue() {
+        return value;
+    }
+
+    /**
+     * Сравнивает два объекта на равенство.
+     *
+     * @param obj объект для сравнения
+     * @return true, если объекты равны, иначе false
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Number number = (Number) obj;
+        return Objects.equals(value, number.value);
     }
 }

@@ -9,8 +9,8 @@ import ru.nsu.lyskov.exceptions.IncorrectAssignmentException;
 import ru.nsu.lyskov.exceptions.IncorrectExpressionException;
 
 /**
- * Абстрактный класс для математических выражений.
- * Определяет интерфейс для операций печати, дифференцирования и вычисления выражений.
+ * Абстрактный класс для математических выражений. Определяет интерфейс для операций печати,
+ * дифференцирования и вычисления выражений.
  */
 public abstract class Expression {
 
@@ -28,6 +28,13 @@ public abstract class Expression {
      * @return новое выражение, представляющее производную
      */
     public abstract Expression derivative(String variable);
+
+    /**
+     * Упрощает текущее выражение, создавая новое (упрощённое) выражение.
+     *
+     * @return упрощённое выражение
+     */
+    public abstract Expression simplify() throws DivisionByZeroException;
 
     /**
      * Вычисляет значение выражения на основе карты переменных.
@@ -91,8 +98,13 @@ public abstract class Expression {
      * @throws IncorrectExpressionException если формат выражения некорректен
      */
     public static Expression parse(String input) throws IncorrectExpressionException {
-        input = input.replaceAll("\\s", ""); // Удаление всех пробелов
-        return parseExpression(input);
+        String formattedExpression;
+        try {
+            formattedExpression = ExpressionFormatter.formatExpression(input);
+        } catch (RuntimeException e) {
+            throw new IncorrectExpressionException("Cannot parse expression: " + input);
+        }
+        return parseExpression(formattedExpression);
     }
 
     /**
@@ -174,4 +186,13 @@ public abstract class Expression {
                 throw new IncorrectExpressionException("Unknown operation: " + mainOp);
         }
     }
+
+    /**
+     * Сравнивает два объекта на равенство.
+     *
+     * @param obj объект для сравнения
+     * @return true, если объекты равны, иначе false
+     */
+    @Override
+    public abstract boolean equals(Object obj);
 }
