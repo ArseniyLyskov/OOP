@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -190,17 +190,38 @@ extends <a href="Expression.html" title="class in ru.nsu.lyskov">Expression</a><
 </td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#equals(java.lang.Object)">equals</a></span>&#8203;(java.lang.Object&nbsp;obj)</code></th>
+<td class="colLast">
+<div class="block">Сравнивает два объекта на равенство.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>double</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#eval(java.util.Map)">eval</a></span>&#8203;(java.util.Map&lt;java.lang.String,&#8203;java.lang.Double&gt;&nbsp;variables)</code></th>
 <td class="colLast">
 <div class="block">Возвращает числовое значение выражения.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>double</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getValue()">getValue</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Геттер для значения.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#print(java.io.PrintStream)">print</a></span>&#8203;(java.io.PrintStream&nbsp;out)</code></th>
 <td class="colLast">
 <div class="block">Печатает числовое значение.</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code><a href="Expression.html" title="class in ru.nsu.lyskov">Expression</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#simplify()">simplify</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Упрощает текущее выражение, создавая новое (упрощённое) выражение.</div>
 </td>
 </tr>
 </table>
@@ -216,7 +237,7 @@ extends <a href="Expression.html" title="class in ru.nsu.lyskov">Expression</a><
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+<code>clone, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
 </ul>
 </li>
 </ul>
@@ -292,10 +313,27 @@ extends <a href="Expression.html" title="class in ru.nsu.lyskov">Expression</a><
 </dl>
 </li>
 </ul>
+<a id="simplify()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>simplify</h4>
+<pre class="methodSignature">public&nbsp;<a href="Expression.html" title="class in ru.nsu.lyskov">Expression</a>&nbsp;simplify()</pre>
+<div class="block">Упрощает текущее выражение, создавая новое (упрощённое) выражение. Для <a href="Number.html" title="class in ru.nsu.lyskov"><code>Number</code></a> -
+ упрощение не нужно.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="Expression.html#simplify()">simplify</a></code>&nbsp;in class&nbsp;<code><a href="Expression.html" title="class in ru.nsu.lyskov">Expression</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>упрощённое выражение</dd>
+</dl>
+</li>
+</ul>
 <a id="eval(java.util.Map)">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>eval</h4>
 <pre class="methodSignature">public&nbsp;double&nbsp;eval&#8203;(java.util.Map&lt;java.lang.String,&#8203;java.lang.Double&gt;&nbsp;variables)</pre>
@@ -306,6 +344,38 @@ extends <a href="Expression.html" title="class in ru.nsu.lyskov">Expression</a><
                   (игнорируется для чисел)</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>числовое значение</dd>
+</dl>
+</li>
+</ul>
+<a id="getValue()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getValue</h4>
+<pre class="methodSignature">public&nbsp;double&nbsp;getValue()</pre>
+<div class="block">Геттер для значения.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>значение</dd>
+</dl>
+</li>
+</ul>
+<a id="equals(java.lang.Object)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>equals</h4>
+<pre class="methodSignature">public&nbsp;boolean&nbsp;equals&#8203;(java.lang.Object&nbsp;obj)</pre>
+<div class="block">Сравнивает два объекта на равенство.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="Expression.html#equals(java.lang.Object)">equals</a></code>&nbsp;in class&nbsp;<code><a href="Expression.html" title="class in ru.nsu.lyskov">Expression</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>obj</code> - объект для сравнения</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true, если объекты равны, иначе false</dd>
 </dl>
 </li>
 </ul>
