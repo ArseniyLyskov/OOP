@@ -9,6 +9,9 @@ import ru.nsu.lyskov.exceptions.DivisionByZeroException;
 import ru.nsu.lyskov.exceptions.IncorrectAssignmentException;
 import ru.nsu.lyskov.exceptions.IncorrectExpressionException;
 
+/**
+ * Тестовый класс дополнительного задания к Task_1_1_3.
+ */
 public class AdditionalTaskTest {
 
     /**
@@ -66,7 +69,7 @@ public class AdditionalTaskTest {
      */
     @Test
     void test2d() throws IncorrectExpressionException, DivisionByZeroException {
-        String input = "1 * qwerty - 1 * qwerty";
+        String input = "qwerty * 1 - 1 * qwerty";
         Expression expr = Expression.parse(input);
         Expression expected = new Number(0);
         assertEquals(expected, expr.simplify());

@@ -12,9 +12,6 @@ import ru.nsu.lyskov.exceptions.DivisionByZeroException;
 import ru.nsu.lyskov.exceptions.IncorrectAssignmentException;
 import ru.nsu.lyskov.exceptions.IncorrectExpressionException;
 
-/**
- * Тестовый класс дополнительного задания к Task_1_1_3.
- */
 class ExpressionTest {
 
     /**
@@ -152,5 +149,17 @@ class ExpressionTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         expr.print(new PrintStream(out));
         assertEquals("(3+(2*x))", out.toString());
+    }
+
+    /**
+     * Тест метода equals() в потомках класса {@link Expression}.
+     */
+    @Test
+    void testEquals() throws IncorrectExpressionException {
+        String input1 = "1 - xy * (b /a ) + 2.76";
+        String input2 = "1-xy * (b / a )+2.76000";
+        Expression e1 = Expression.parse(input1);
+        Expression e2 = Expression.parse(input2);
+        assertEquals(e1, e2);
     }
 }
