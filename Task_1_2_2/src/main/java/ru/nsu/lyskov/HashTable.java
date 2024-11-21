@@ -177,7 +177,9 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
             private Iterator<Entry<K, V>> bucketIterator = null;
 
             private void advanceToNextBucket() {
-                while ((bucketIterator == null || !bucketIterator.hasNext()) && bucketIndex < table.length) {
+                while ((bucketIterator == null
+                        || !bucketIterator.hasNext())
+                        && bucketIndex < table.length) {
                     if (table[bucketIndex] != null) {
                         bucketIterator = table[bucketIndex].iterator();
                     }

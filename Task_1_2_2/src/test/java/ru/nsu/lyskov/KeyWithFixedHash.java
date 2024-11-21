@@ -50,9 +50,10 @@ class KeyWithFixedHash {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof KeyWithFixedHash other)) {
+        if (!(obj instanceof KeyWithFixedHash)) {
             return false;
         }
+        KeyWithFixedHash other = (KeyWithFixedHash) obj;
         return Objects.equals(this.key, other.key);
     }
 
