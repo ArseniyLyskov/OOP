@@ -4,14 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ConcurrentModificationException;
 import org.junit.jupiter.api.Test;
 
 /**
- * Тестовый класс для проверки корректности работы хеш-таблицы (HashTable). Включает тесты на
- * добавление, удаление, получение значений, проверку итератора, а также тест на масштабирование
- * таблицы (resize).
+ * Тестовый класс для проверки корректности работы хеш-таблицы (HashTable).
  */
 public class HashTableTest {
 
@@ -159,5 +159,21 @@ public class HashTableTest {
 
         assertFalse(table.toString().isEmpty());
         assertEquals(elementsToAdd, table.toString().split(",").length);
+    }
+
+    /**
+     * Тестирует ошибку при изменении таблицы в процессе итерации.
+     */
+    @Test
+    public void testConcurrentModificationException() {
+        HashTable<String, Integer> table = new HashTable<>();
+        table.put("key1", 1);
+        table.put("key2", 2);
+
+        assertThrows(ConcurrentModificationException.class, () -> {
+            for (HashTable.Entry<String, Integer> entry : table) {
+                table.put("key3", 3);
+            }
+        });
     }
 }
