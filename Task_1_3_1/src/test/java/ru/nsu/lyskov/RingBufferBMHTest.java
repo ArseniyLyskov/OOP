@@ -2,6 +2,7 @@ package ru.nsu.lyskov;
 
 import org.junit.jupiter.api.*;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.*;
 
@@ -11,19 +12,20 @@ class RingBufferBMHTest {
 
     // Вспомогательный метод для создания файла с заданным содержимым
     private static void createTestFile(String fileName, String content) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName), "UTF-8"))) {
+        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName),
+                                                                               StandardCharsets.UTF_8
+        ))) {
             writer.write(content);
         }
     }
 
     @Test
-    @DisplayName("Маленький пример: 'abrakadabra' с шаблоном 'bra'")
     void testSmallExample() throws IOException {
         String fileName = "test1.txt";
-        createTestFile(fileName, "abrakadabra");
+        createTestFile(fileName, "abeccacbadbabbad");
 
-        List<Integer> expected = Arrays.asList(1, 8);
-        List<Integer> actual = RingBufferBMH.find(fileName, "bra");
+        List<Integer> expected = List.of(11);
+        List<Integer> actual = RingBufferBMH.find(fileName, "abbad");
 
         assertEquals(expected, actual);
         Files.deleteIfExists(Path.of(fileName));
@@ -77,5 +79,12 @@ class RingBufferBMHTest {
 
         assertEquals(expected, actual);
         Files.deleteIfExists(Path.of(fileName));
+    }
+
+    @Test
+    void test() {
+        System.out.println(Character.codePointAt(new char[]{'a'}, 0));
+        System.out.println(Character.getNumericValue('a'));
+
     }
 }

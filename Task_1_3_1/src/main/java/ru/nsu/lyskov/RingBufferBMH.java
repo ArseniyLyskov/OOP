@@ -8,8 +8,8 @@ public class RingBufferBMH {
     public static List<Integer> find(String fileName, String target) throws IOException {
         List<Integer> result = new ArrayList<>();
         int targetLength = target.length();
-        int bufferSize = 4096; // Размер буфера
-        char[] ringBuffer = new char[bufferSize]; // Кольцевой буфер
+        final int bufferSize = 1024; // Размер буфера
+        char[] ringBuffer = new char[bufferSize + targetLength]; // Кольцевой буфер
         int[] shiftTable = buildShiftTable(target); // Таблица смещений
         int ringStart = 0, ringEnd = 0; // Границы данных в буфере
         int indexInFile = 0; // Индекс текущего символа в файле
@@ -53,9 +53,9 @@ public class RingBufferBMH {
                 processed++;
             } else {
                 // Используем таблицу смещений для пропуска
-                int shift = shiftTable[ringBuffer[i % bufferSize]];
-                processed += shift; // Увеличиваем обработанные символы
+                int shift = shiftTable[Character.codePointAt(ringBuffer, i % bufferSize)];
                 i = (i + shift) % bufferSize; // Смещаем индекс
+                processed += shift; // Увеличиваем обработанные символы
             }
         }
     }
