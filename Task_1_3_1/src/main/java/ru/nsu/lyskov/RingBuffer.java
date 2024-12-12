@@ -45,12 +45,27 @@ public class RingBuffer<T> {
         return element;
     }
 
+    public T peekAtIndex(int index) {
+        if (index >= unreadElementsCount) {
+            throw new IndexOutOfBoundsException(
+                    "The index being accessed is greater than the number of unread items.");
+        }
+        int peekingIndex = readP.index + index < capacity ?
+                readP.index + index :
+                readP.index + index - capacity;
+        return buffer[peekingIndex];
+    }
+
     public boolean isFull() {
         return unreadElementsCount == capacity;
     }
 
     public boolean isEmpty() {
         return unreadElementsCount == 0;
+    }
+
+    public int getUnreadElementsCount() {
+        return unreadElementsCount;
     }
 
     public static void main(String[] args)
@@ -62,7 +77,9 @@ public class RingBuffer<T> {
         ringBuffer.write(1);
         //ringBuffer.write(3);
 
+        System.out.println("Peeked: " + ringBuffer.peekAtIndex(1));
         System.out.println("Read: " + ringBuffer.read()); // 1
+        System.out.println("Peeked: " + ringBuffer.peekAtIndex(1));
         ringBuffer.write(4);
 
         while (!ringBuffer.isEmpty()) {
