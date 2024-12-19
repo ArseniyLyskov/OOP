@@ -27,13 +27,13 @@ class TextFileReaderRBTest {
 
     @Test
     void testDataLoss() throws IOException {
-        int stringBufferCapacity = 5;
+        int ringBufferCapacity = 5;
         String content = "abeccacbadbabbad";
         StringBuilder readCheck = new StringBuilder();
         Counter bufferReloadingCount = new Counter();
         createTestFile(content);
 
-        FileBufferProcessor fileBufferProcessor =
+        FileBufferProcessor processingFunction =
                 (BufferInterface<Character> buffer) -> {
                     for (int i = 0; i < buffer.getSize(); i++) {
                         readCheck.append(buffer.peek(i));
@@ -43,10 +43,10 @@ class TextFileReaderRBTest {
                     bufferReloadingCount.increment();
                     return buffer.getSize();
                 };
-        TextFileReaderRB.readFile(FILE_NAME, stringBufferCapacity, fileBufferProcessor);
+        TextFileReaderRB.readFile(FILE_NAME, ringBufferCapacity, processingFunction);
 
         assertEquals(content, readCheck.toString());
-        assertEquals(Math.ceil((double) content.length() / stringBufferCapacity),
+        assertEquals(Math.ceil((double) content.length() / ringBufferCapacity),
                      bufferReloadingCount.getI());
     }
 
