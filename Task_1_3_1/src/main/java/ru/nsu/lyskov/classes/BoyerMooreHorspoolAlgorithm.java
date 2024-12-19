@@ -7,20 +7,18 @@ import ru.nsu.lyskov.interfaces.BufferInterface;
 
 public class BoyerMooreHorspoolAlgorithm {
     private final List<Integer> result = new ArrayList<>();
-    private final BufferInterface<Character> buffer;
     private final String target;
     private final int targetLength;
     private final HashMap<Character, Integer> shiftTable = new HashMap<>();
     private int totalShift = 0;
 
-    public BoyerMooreHorspoolAlgorithm(BufferInterface<Character> buffer, String target) {
-        this.buffer = buffer;
+    public BoyerMooreHorspoolAlgorithm(String target) {
         this.target = target;
         targetLength = target.length();
         buildShiftTable();
     }
 
-    public int getStringPatternShift() {
+    public int getStringPatternShift(BufferInterface<Character> buffer) {
         if (buffer.getSize() < targetLength) {
             totalShift += buffer.getSize();
             return buffer.getSize();

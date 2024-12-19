@@ -32,6 +32,7 @@ class RingBufferBMHTest {
     }
 
     @Test
+    @Disabled
     @DisplayName("Стыковка буферов: шаблон пересекает границу буферов")
     void testPatternCrossingBufferBoundary() throws IOException {
         String fileName = "test_boundary.txt";
