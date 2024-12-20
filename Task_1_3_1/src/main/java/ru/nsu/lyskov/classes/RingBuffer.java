@@ -2,7 +2,6 @@ package ru.nsu.lyskov.classes;
 
 import ru.nsu.lyskov.exceptions.DataOverreadingException;
 import ru.nsu.lyskov.exceptions.DataOverwritingException;
-import ru.nsu.lyskov.exceptions.InvalidCapacityException;
 import ru.nsu.lyskov.interfaces.BufferInterface;
 
 public class RingBuffer<T> implements BufferInterface<T> {
@@ -15,7 +14,7 @@ public class RingBuffer<T> implements BufferInterface<T> {
     @SuppressWarnings("unchecked")
     public RingBuffer(int capacity) {
         if (capacity <= 0) {
-            throw new InvalidCapacityException("Capacity must be greater than 0.");
+            throw new IllegalArgumentException("Buffer capacity must be greater than 0.");
         }
         this.capacity = capacity;
         readP = new Pointer();
@@ -71,6 +70,11 @@ public class RingBuffer<T> implements BufferInterface<T> {
     @Override
     public int getSize() {
         return size;
+    }
+
+    @Override
+    public int getCapacity() {
+        return capacity;
     }
 
     private class Pointer {

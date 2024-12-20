@@ -2,41 +2,35 @@ package ru.nsu.lyskov;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static ru.nsu.lyskov.FileGenerator.FILE_NAME;
+import static ru.nsu.lyskov.FileGenerator.deleteFile;
+import static ru.nsu.lyskov.FileGenerator.generateFile;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.lyskov.classes.TextFileReaderRB;
-import ru.nsu.lyskov.exceptions.InvalidBufferProcessorReturn;
+import ru.nsu.lyskov.exceptions.IllegalFunctionReturnException;
 import ru.nsu.lyskov.interfaces.BufferInterface;
 import ru.nsu.lyskov.interfaces.FileBufferProcessor;
 
 class TextFileReaderRBTest {
-    public static final String FILE_NAME = "test.txt";
 
-    public static void createTestFile(String content) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(FILE_NAME), StandardCharsets.UTF_8))) {
-            writer.write(content);
-        }
-    }
-
-    public static void deleteTestFile() throws IOException {
-        Files.deleteIfExists(Path.of(FILE_NAME));
+    @Test
+    void bufferProcessorReturns0Test() throws IOException {
+        generateFile("test");
+        assertThrows(IllegalFunctionReturnException.class, () ->
+                TextFileReaderRB.readFile(FILE_NAME, 5,
+                                          (BufferInterface<Character> buffer) -> 0
+                ));
     }
 
     @Test
-    void invalidBufferProcessorReturnExceptionTest() throws IOException {
-        createTestFile("test");
-        assertThrows(InvalidBufferProcessorReturn.class, () ->
-                TextFileReaderRB.readFile(FILE_NAME, 5,
-                                          (BufferInterface<Character> buffer) -> 0
+    void bufferProcessorReturnsTooMuchTest() throws IOException {
+        generateFile("tes");
+        assertThrows(IllegalFunctionReturnException.class, () ->
+                TextFileReaderRB.readFile(FILE_NAME, 4,
+                                          (BufferInterface<Character> buffer) -> 2
                 ));
     }
 
@@ -47,7 +41,7 @@ class TextFileReaderRBTest {
 
         StringBuilder readCheck = new StringBuilder();
         Counter bufferReloadingCount = new Counter();
-        createTestFile(content);
+        generateFile(content);
 
         FileBufferProcessor processingFunction = (BufferInterface<Character> buffer) -> {
             for (int i = 0; i < buffer.getSize(); i++) {
@@ -69,8 +63,8 @@ class TextFileReaderRBTest {
     }
 
     @AfterEach
-    void closeTestFile() throws IOException {
-        deleteTestFile();
+    void afterEach() throws IOException {
+        deleteFile();
     }
 
     private class Counter {

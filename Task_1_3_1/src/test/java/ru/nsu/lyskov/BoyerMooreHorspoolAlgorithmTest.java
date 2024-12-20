@@ -1,6 +1,7 @@
 package ru.nsu.lyskov;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,31 @@ import ru.nsu.lyskov.classes.BoyerMooreHorspoolAlgorithm;
 import ru.nsu.lyskov.classes.RingBuffer;
 
 class BoyerMooreHorspoolAlgorithmTest {
+
+    @Test
+    void invalidCapacityExceptionTest() {
+        int bufferCapacity = 2;
+        String content = "12345", target = "123";
+        assertThrows(IllegalArgumentException.class,
+                     () -> parameterizedTest(bufferCapacity, content, target)
+        );
+    }
+
+    @Test
+    void emptyContentTest() {
+        int bufferCapacity = 10;
+        String content = "", target = "anything";
+        assertEquals(List.of(), parameterizedTest(bufferCapacity, content, target));
+    }
+
+    @Test
+    void emptyTargetTest() {
+        int bufferCapacity = 10;
+        String content = "something", target = "";
+        assertThrows(IllegalArgumentException.class,
+                     () -> parameterizedTest(bufferCapacity, content, target)
+        );
+    }
 
     @Test
     void smallBufferTest() {
@@ -42,13 +68,14 @@ class BoyerMooreHorspoolAlgorithmTest {
 
         int contentReadingIndex = 0, contentLength = content.length();
         RingBuffer<Character> ringBuffer = new RingBuffer<>(bufferCapacity);
-        BoyerMooreHorspoolAlgorithm algorithm = new BoyerMooreHorspoolAlgorithm(target);
+        BoyerMooreHorspoolAlgorithm algorithm =
+                new BoyerMooreHorspoolAlgorithm(ringBuffer, target);
 
         System.out.println("\nReading a line into a buffer...");
         while (contentReadingIndex < contentLength) {
             ringBuffer.put(content.charAt(contentReadingIndex));
             if (ringBuffer.isFull()) {
-                int charSkipCount = algorithm.getStringPatternShift(ringBuffer);
+                int charSkipCount = algorithm.getStringPatternShift();
                 System.out.print("Skipped " + charSkipCount + " characters: ");
                 for (int i = 0; i < charSkipCount; i++) {
                     System.out.print(ringBuffer.pop() + " ");
@@ -60,7 +87,7 @@ class BoyerMooreHorspoolAlgorithmTest {
 
         System.out.println("\nProcessing the remaining elements in the buffer...");
         while (!ringBuffer.isEmpty()) {
-            int charSkipCount = algorithm.getStringPatternShift(ringBuffer);
+            int charSkipCount = algorithm.getStringPatternShift();
             System.out.print("Skipped " + charSkipCount + " characters: ");
             for (int i = 0; i < charSkipCount; i++) {
                 System.out.print(ringBuffer.pop() + " ");

@@ -9,13 +9,12 @@ import org.junit.jupiter.api.Test;
 import ru.nsu.lyskov.classes.RingBuffer;
 import ru.nsu.lyskov.exceptions.DataOverreadingException;
 import ru.nsu.lyskov.exceptions.DataOverwritingException;
-import ru.nsu.lyskov.exceptions.InvalidCapacityException;
 
 class RingBufferTest {
     @Test
     void invalidCapacityExceptionTest() {
         assertDoesNotThrow(() -> new RingBuffer<>(1));
-        assertThrows(InvalidCapacityException.class, () -> new RingBuffer<>(0));
+        assertThrows(IllegalArgumentException.class, () -> new RingBuffer<>(0));
     }
 
     @Test
@@ -42,7 +41,8 @@ class RingBufferTest {
 
     @Test
     void workTest() {
-        RingBuffer<Integer> rb = new RingBuffer<>(3);
+        int bufferCapacity = 3;
+        RingBuffer<Integer> rb = new RingBuffer<>(bufferCapacity);
 
         assertEquals(rb.getSize(), 0);
         assertTrue(rb.isEmpty());
@@ -57,7 +57,8 @@ class RingBufferTest {
 
         assertEquals(2, rb.peek(1));
         assertEquals(1, rb.pop());
-        assertEquals(rb.getSize(), 2);
+        assertEquals(2, rb.getSize());
+        assertEquals(bufferCapacity, rb.getCapacity());
         assertEquals(3, rb.peek(1));
 
         assertThrows(IndexOutOfBoundsException.class, () -> rb.peek(3));
@@ -67,5 +68,6 @@ class RingBufferTest {
         for (int i = 2; i <= 4; i++) {
             assertEquals(i, rb.pop());
         }
+        assertThrows(DataOverreadingException.class, rb::pop);
     }
 }

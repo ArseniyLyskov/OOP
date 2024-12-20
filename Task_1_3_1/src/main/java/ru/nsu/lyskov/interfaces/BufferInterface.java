@@ -8,4 +8,6 @@ public interface BufferInterface<T> {
     boolean isEmpty();
 
     int getSize();
+
+    int getCapacity();
 }

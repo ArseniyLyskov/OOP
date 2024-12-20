@@ -1,18 +1,46 @@
 package ru.nsu.lyskov;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static ru.nsu.lyskov.TextFileReaderRBTest.FILE_NAME;
-import static ru.nsu.lyskov.TextFileReaderRBTest.createTestFile;
-import static ru.nsu.lyskov.TextFileReaderRBTest.deleteTestFile;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static ru.nsu.lyskov.FileGenerator.FILE_NAME;
+import static ru.nsu.lyskov.FileGenerator.deleteFile;
+import static ru.nsu.lyskov.FileGenerator.generateFile;
 
 import java.io.IOException;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.lyskov.classes.BoyerMooreHorspoolAlgorithm;
+import ru.nsu.lyskov.classes.RingBuffer;
 import ru.nsu.lyskov.classes.TextFileReaderRB;
+import ru.nsu.lyskov.interfaces.BufferInterface;
 
 public class AggregationTest {
+
+    @Test
+    void invalidCapacityExceptionTest() {
+        int bufferCapacity = 2;
+        String content = "12345", target = "123";
+        assertThrows(IllegalArgumentException.class,
+                     () -> parameterizedTest(bufferCapacity, content, target)
+        );
+    }
+
+    @Test
+    void emptyContentTest() throws IOException {
+        int bufferCapacity = 10;
+        String content = "", target = "anything";
+        assertEquals(List.of(), parameterizedTest(bufferCapacity, content, target));
+    }
+
+    @Test
+    void emptyTargetTest() {
+        int bufferCapacity = 10;
+        String content = "something", target = "";
+        assertThrows(IllegalArgumentException.class,
+                     () -> parameterizedTest(bufferCapacity, content, target)
+        );
+    }
 
     @Test
     void smallBufferTest() throws IOException {
@@ -43,16 +71,23 @@ public class AggregationTest {
     }
 
     @AfterEach
-    void closeTestFile() throws IOException {
-        deleteTestFile();
+    void afterEach() throws IOException {
+        deleteFile();
     }
 
     private List<Integer> parameterizedTest(
             int bufferCapacity, String content, String target) throws IOException {
 
-        BoyerMooreHorspoolAlgorithm algorithm = new BoyerMooreHorspoolAlgorithm(target);
-        createTestFile(content);
-        TextFileReaderRB.readFile(FILE_NAME, bufferCapacity, algorithm::getStringPatternShift);
+        RingBuffer<Character> ringBuffer = new RingBuffer<>(bufferCapacity);
+        BoyerMooreHorspoolAlgorithm algorithm =
+                new BoyerMooreHorspoolAlgorithm(ringBuffer, target);
+
+        generateFile(content);
+        TextFileReaderRB.readFile(
+                FILE_NAME, ringBuffer,
+                (BufferInterface<Character> buffer) -> algorithm.getStringPatternShift()
+        );
+
         return algorithm.getResult();
     }
 }
