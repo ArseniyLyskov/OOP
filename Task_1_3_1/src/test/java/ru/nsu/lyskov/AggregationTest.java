@@ -11,9 +11,7 @@ import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import ru.nsu.lyskov.classes.BoyerMooreHorspoolAlgorithm;
-import ru.nsu.lyskov.classes.RingBuffer;
 import ru.nsu.lyskov.classes.TextFileReaderRB;
-import ru.nsu.lyskov.interfaces.BufferInterface;
 
 public class AggregationTest {
 
@@ -78,15 +76,9 @@ public class AggregationTest {
     private List<Integer> parameterizedTest(
             int bufferCapacity, String content, String target) throws IOException {
 
-        RingBuffer<Character> ringBuffer = new RingBuffer<>(bufferCapacity);
-        BoyerMooreHorspoolAlgorithm algorithm =
-                new BoyerMooreHorspoolAlgorithm(ringBuffer, target);
-
+        BoyerMooreHorspoolAlgorithm algorithm = new BoyerMooreHorspoolAlgorithm(target);
         generateFile(content);
-        TextFileReaderRB.readFile(
-                FILE_NAME, ringBuffer,
-                (BufferInterface<Character> buffer) -> algorithm.getStringPatternShift()
-        );
+        TextFileReaderRB.readFile(FILE_NAME, bufferCapacity, algorithm::getStringPatternShift);
 
         return algorithm.getResult();
     }

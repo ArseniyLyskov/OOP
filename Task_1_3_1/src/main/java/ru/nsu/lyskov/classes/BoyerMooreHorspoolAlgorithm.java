@@ -7,28 +7,26 @@ import ru.nsu.lyskov.interfaces.BufferInterface;
 
 public class BoyerMooreHorspoolAlgorithm {
     private final List<Integer> result = new ArrayList<>();
-    private final BufferInterface<Character> buffer;
     private final String target;
     private final int targetLength;
     private final HashMap<Character, Integer> shiftTable = new HashMap<>();
     private int totalShift = 0;
 
-    public BoyerMooreHorspoolAlgorithm(BufferInterface<Character> buffer, String target) {
+    public BoyerMooreHorspoolAlgorithm(String target) {
         targetLength = target.length();
         if (targetLength == 0) {
             throw new IllegalArgumentException("You cannot search for an empty substring.");
         }
+        this.target = target;
+        buildShiftTable();
+    }
+
+    public int getStringPatternShift(BufferInterface<Character> buffer) {
         if (buffer.getCapacity() < targetLength) {
             throw new IllegalArgumentException(
                     "The buffer size is less than the size of the searched substring.");
         }
 
-        this.buffer = buffer;
-        this.target = target;
-        buildShiftTable();
-    }
-
-    public int getStringPatternShift() {
         if (buffer.getSize() < targetLength) {
             totalShift += buffer.getSize();
             return buffer.getSize();

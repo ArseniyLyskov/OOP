@@ -14,17 +14,10 @@ public class TextFileReaderRB {
             FileBufferProcessor processingFunction)
             throws IOException {
 
-        readFile(filePath, new RingBuffer<>(ringBufferCapacity), processingFunction);
-    }
-
-    public static void readFile(
-            String filePath, RingBuffer<Character> ringBuffer,
-            FileBufferProcessor processingFunction)
-            throws IOException {
-
         try (BufferedReader reader =
                      new BufferedReader(new FileReader(filePath, StandardCharsets.UTF_8))) {
 
+            RingBuffer<Character> ringBuffer = new RingBuffer<>(ringBufferCapacity);
             int c;
             while ((c = reader.read()) != -1) {
                 ringBuffer.put((char) c);
