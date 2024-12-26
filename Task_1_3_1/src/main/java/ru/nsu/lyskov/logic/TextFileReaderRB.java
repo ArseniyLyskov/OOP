@@ -1,9 +1,13 @@
-package ru.nsu.lyskov.classes;
+package ru.nsu.lyskov.logic;
+
+import static ru.nsu.lyskov.LoggingParameters.LOG_FILE_READING;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import ru.nsu.lyskov.exceptions.IllegalFunctionReturnException;
 import ru.nsu.lyskov.interfaces.FileBufferProcessor;
 
@@ -14,13 +18,26 @@ public class TextFileReaderRB {
             FileBufferProcessor processingFunction)
             throws IOException {
 
+        long fileSize = Files.size(Paths.get(filePath));
+        long bytesRead = 0, logCount = 0;
+        RingBuffer<Character> ringBuffer = new RingBuffer<>(ringBufferCapacity);
+        int c;
+
         try (BufferedReader reader =
                      new BufferedReader(new FileReader(filePath, StandardCharsets.UTF_8))) {
-
-            RingBuffer<Character> ringBuffer = new RingBuffer<>(ringBufferCapacity);
-            int c;
             while ((c = reader.read()) != -1) {
                 ringBuffer.put((char) c);
+
+                bytesRead++;
+                if (LOG_FILE_READING && bytesRead > logCount * fileSize * 0.01) {
+                    System.out.printf(
+                            "\rRead from file: %d%%",
+                            (int) ((double) bytesRead / fileSize * 100)
+                    );
+                    System.out.flush();
+                    logCount++;
+                }
+
                 if (!ringBuffer.isFull()) {
                     continue;
                 }
@@ -29,7 +46,9 @@ public class TextFileReaderRB {
             while (!ringBuffer.isEmpty()) {
                 applyProcessingFunction(ringBuffer, processingFunction);
             }
-
+            if (LOG_FILE_READING) {
+                System.out.print("\rFile reading complete!\n");
+            }
         }
     }
 

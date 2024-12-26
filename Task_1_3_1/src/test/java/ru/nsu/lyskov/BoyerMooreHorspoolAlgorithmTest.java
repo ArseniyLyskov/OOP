@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import ru.nsu.lyskov.classes.BoyerMooreHorspoolAlgorithm;
-import ru.nsu.lyskov.classes.RingBuffer;
+import ru.nsu.lyskov.logic.BoyerMooreHorspoolAlgorithm;
+import ru.nsu.lyskov.logic.RingBuffer;
 
 class BoyerMooreHorspoolAlgorithmTest {
 
@@ -14,8 +14,9 @@ class BoyerMooreHorspoolAlgorithmTest {
     void invalidCapacityExceptionTest() {
         int bufferCapacity = 2;
         String content = "12345", target = "123";
-        assertThrows(IllegalArgumentException.class,
-                     () -> parameterizedTest(bufferCapacity, content, target)
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> parameterizedTest(bufferCapacity, content, target)
         );
     }
 
@@ -30,8 +31,9 @@ class BoyerMooreHorspoolAlgorithmTest {
     void emptyTargetTest() {
         int bufferCapacity = 10;
         String content = "something", target = "";
-        assertThrows(IllegalArgumentException.class,
-                     () -> parameterizedTest(bufferCapacity, content, target)
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> parameterizedTest(bufferCapacity, content, target)
         );
     }
 
@@ -39,31 +41,31 @@ class BoyerMooreHorspoolAlgorithmTest {
     void smallBufferTest() {
         int bufferCapacity = 5;
         String content = "abeccacbadbabbad", target = "abbad";
-        assertEquals(List.of(11), parameterizedTest(bufferCapacity, content, target));
+        assertEquals(List.of(11L), parameterizedTest(bufferCapacity, content, target));
     }
 
     @Test
     void bigBufferTest() {
         int bufferCapacity = 20;
         String content = "aaaaa", target = "aaa";
-        assertEquals(List.of(0, 1, 2), parameterizedTest(bufferCapacity, content, target));
+        assertEquals(List.of(0L, 1L, 2L), parameterizedTest(bufferCapacity, content, target));
     }
 
     @Test
     void taskTest() {
         int bufferCapacity = 5;
         String content = "абракадабра", target = "бра";
-        assertEquals(List.of(1, 8), parameterizedTest(bufferCapacity, content, target));
+        assertEquals(List.of(1L, 8L), parameterizedTest(bufferCapacity, content, target));
     }
 
     @Test
     void differentCharactersTest() {
         int bufferCapacity = 4;
         String content = " !@¶Ǣ∑ʩЋ∑∑֍ޘࡤ⅚␀☂∑ヰ鿜", target = "∑";
-        assertEquals(List.of(5, 8, 9, 16), parameterizedTest(bufferCapacity, content, target));
+        assertEquals(List.of(5L, 8L, 9L, 16L), parameterizedTest(bufferCapacity, content, target));
     }
 
-    private List<Integer> parameterizedTest(
+    private List<Long> parameterizedTest(
             int bufferCapacity, String content, String target) {
 
         int contentReadingIndex = 0, contentLength = content.length();
@@ -74,7 +76,7 @@ class BoyerMooreHorspoolAlgorithmTest {
         while (contentReadingIndex < contentLength) {
             ringBuffer.put(content.charAt(contentReadingIndex));
             if (ringBuffer.isFull()) {
-                int charSkipCount = algorithm.getStringPatternShift(ringBuffer);
+                int charSkipCount = algorithm.calculateWindowShift(ringBuffer);
                 System.out.print("Skipped " + charSkipCount + " characters: ");
                 for (int i = 0; i < charSkipCount; i++) {
                     System.out.print(ringBuffer.pop() + " ");
@@ -86,7 +88,7 @@ class BoyerMooreHorspoolAlgorithmTest {
 
         System.out.println("\nProcessing the remaining elements in the buffer...");
         while (!ringBuffer.isEmpty()) {
-            int charSkipCount = algorithm.getStringPatternShift(ringBuffer);
+            int charSkipCount = algorithm.calculateWindowShift(ringBuffer);
             System.out.print("Skipped " + charSkipCount + " characters: ");
             for (int i = 0; i < charSkipCount; i++) {
                 System.out.print(ringBuffer.pop() + " ");

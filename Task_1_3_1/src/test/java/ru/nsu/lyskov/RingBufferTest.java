@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import ru.nsu.lyskov.classes.RingBuffer;
 import ru.nsu.lyskov.exceptions.DataOverreadingException;
 import ru.nsu.lyskov.exceptions.DataOverwritingException;
+import ru.nsu.lyskov.logic.RingBuffer;
 
 class RingBufferTest {
     @Test

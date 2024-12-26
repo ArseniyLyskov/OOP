@@ -1,4 +1,4 @@
-package ru.nsu.lyskov.classes;
+package ru.nsu.lyskov.logic;
 
 import ru.nsu.lyskov.exceptions.DataOverreadingException;
 import ru.nsu.lyskov.exceptions.DataOverwritingException;

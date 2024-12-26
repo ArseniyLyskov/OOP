@@ -1,4 +1,4 @@
-package ru.nsu.lyskov.classes;
+package ru.nsu.lyskov.logic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,11 +6,11 @@ import java.util.List;
 import ru.nsu.lyskov.interfaces.BufferInterface;
 
 public class BoyerMooreHorspoolAlgorithm {
-    private final List<Integer> result = new ArrayList<>();
+    private final List<Long> result = new ArrayList<>();
     private final String target;
     private final int targetLength;
     private final HashMap<Character, Integer> shiftTable = new HashMap<>();
-    private int totalShift = 0;
+    private long totalShift = 0;
 
     public BoyerMooreHorspoolAlgorithm(String target) {
         targetLength = target.length();
@@ -21,7 +21,7 @@ public class BoyerMooreHorspoolAlgorithm {
         buildShiftTable();
     }
 
-    public int getStringPatternShift(BufferInterface<Character> buffer) {
+    public int calculateWindowShift(BufferInterface<Character> buffer) {
         if (buffer.getCapacity() < targetLength) {
             throw new IllegalArgumentException(
                     "The buffer size is less than the size of the searched substring.");
@@ -45,7 +45,7 @@ public class BoyerMooreHorspoolAlgorithm {
         return shift;
     }
 
-    public List<Integer> getResult() {
+    public List<Long> getResult() {
         return result;
     }
 

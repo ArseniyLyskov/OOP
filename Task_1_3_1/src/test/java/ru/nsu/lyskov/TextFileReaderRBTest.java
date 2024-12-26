@@ -2,17 +2,17 @@ package ru.nsu.lyskov;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static ru.nsu.lyskov.FileGenerator.FILE_NAME;
+import static ru.nsu.lyskov.FileGenerator.TEST_FILE_NAME;
 import static ru.nsu.lyskov.FileGenerator.deleteFile;
 import static ru.nsu.lyskov.FileGenerator.generateFile;
 
 import java.io.IOException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import ru.nsu.lyskov.classes.TextFileReaderRB;
 import ru.nsu.lyskov.exceptions.IllegalFunctionReturnException;
 import ru.nsu.lyskov.interfaces.BufferInterface;
 import ru.nsu.lyskov.interfaces.FileBufferProcessor;
+import ru.nsu.lyskov.logic.TextFileReaderRB;
 
 class TextFileReaderRBTest {
 
@@ -20,7 +20,7 @@ class TextFileReaderRBTest {
     void bufferProcessorReturns0Test() throws IOException {
         generateFile("test");
         assertThrows(IllegalFunctionReturnException.class, () ->
-                TextFileReaderRB.readFile(FILE_NAME, 5,
+                TextFileReaderRB.readFile(TEST_FILE_NAME, 5,
                                           (BufferInterface<Character> buffer) -> 0
                 ));
     }
@@ -29,7 +29,7 @@ class TextFileReaderRBTest {
     void bufferProcessorReturnsTooMuchTest() throws IOException {
         generateFile("tes");
         assertThrows(IllegalFunctionReturnException.class, () ->
-                TextFileReaderRB.readFile(FILE_NAME, 4,
+                TextFileReaderRB.readFile(TEST_FILE_NAME, 4,
                                           (BufferInterface<Character> buffer) -> 2
                 ));
     }
@@ -53,7 +53,7 @@ class TextFileReaderRBTest {
             return buffer.getSize();
         };
 
-        TextFileReaderRB.readFile(FILE_NAME, ringBufferCapacity, processingFunction);
+        TextFileReaderRB.readFile(TEST_FILE_NAME, ringBufferCapacity, processingFunction);
 
         assertEquals(content, readCheck.toString());
         assertEquals(
