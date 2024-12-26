@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.lyskov"},{"l":"ru.nsu.lyskov.exceptions"},{"l":"ru.nsu.lyskov.interfaces"},{"l":"ru.nsu.lyskov.logic"}];updateSearchResults();
