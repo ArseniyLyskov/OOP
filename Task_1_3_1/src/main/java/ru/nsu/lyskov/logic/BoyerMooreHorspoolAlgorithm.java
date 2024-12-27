@@ -5,6 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import ru.nsu.lyskov.interfaces.BufferInterface;
 
+/**
+ * Класс, реализующий функцию-обработчик буфера с алгоритмом Бойера-Мура-Хорспула, объект класса
+ * аккумулирует результат посредством применения функции-обработчика к буферу. Необходима
+ * осторожноть, отсутствует логика защиты от применения функции к разным буферам и прочих
+ * непотокобезопасных операций.
+ */
 public class BoyerMooreHorspoolAlgorithm {
     private final List<Long> result = new ArrayList<>();
     private final String target;
@@ -12,6 +18,11 @@ public class BoyerMooreHorspoolAlgorithm {
     private final HashMap<Character, Integer> shiftTable = new HashMap<>();
     private long totalShift = 0;
 
+    /**
+     * Конструктор класса.
+     *
+     * @param target подстрока, поиском которой занимается алгоритм.
+     */
     public BoyerMooreHorspoolAlgorithm(String target) {
         targetLength = target.length();
         if (targetLength == 0) {
@@ -21,6 +32,12 @@ public class BoyerMooreHorspoolAlgorithm {
         buildShiftTable();
     }
 
+    /**
+     * Функция-обработчик буфера.
+     *
+     * @param buffer обрабатываемый буфер.
+     * @return количество обработанных элементов.
+     */
     public int calculateWindowShift(BufferInterface<Character> buffer) {
         if (buffer.getCapacity() < targetLength) {
             throw new IllegalArgumentException(
@@ -45,6 +62,11 @@ public class BoyerMooreHorspoolAlgorithm {
         return shift;
     }
 
+    /**
+     * Получение накопленного результата работы алгоритма.
+     *
+     * @return список индексов, с которых начинаются вхождения искомой подстроки.
+     */
     public List<Long> getResult() {
         return result;
     }

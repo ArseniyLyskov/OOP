@@ -11,15 +11,28 @@ import java.nio.file.Paths;
 import ru.nsu.lyskov.exceptions.IllegalFunctionReturnException;
 import ru.nsu.lyskov.interfaces.FileBufferProcessor;
 
-public class TextFileReaderRB {
+/**
+ * Класс, реализующий чтение текстового файла с использованием кольцевого буфера и функционального
+ * интерфейса для его обработки.
+ */
+public class TextFileReader {
 
+    /**
+     * Чтение файла.
+     *
+     * @param filePath           путь к файлу.
+     * @param ringBufferCapacity ёмкость кольцевого буфера, используемого для чтения.
+     * @param processingFunction функция-обработчик буфера.
+     * @throws IOException возможное IO-исключение.
+     */
     public static void readFile(
             String filePath, int ringBufferCapacity,
             FileBufferProcessor processingFunction)
             throws IOException {
 
         long fileSize = Files.size(Paths.get(filePath));
-        long bytesRead = 0, logCount = 0;
+        long bytesRead = 0;
+        int logCount = 0;
         RingBuffer<Character> ringBuffer = new RingBuffer<>(ringBufferCapacity);
         int c;
 

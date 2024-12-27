@@ -13,7 +13,8 @@ class BoyerMooreHorspoolAlgorithmTest {
     @Test
     void invalidCapacityExceptionTest() {
         int bufferCapacity = 2;
-        String content = "12345", target = "123";
+        String content = "12345";
+        String target = "123";
         assertThrows(
                 IllegalArgumentException.class,
                 () -> parameterizedTest(bufferCapacity, content, target)
@@ -23,14 +24,16 @@ class BoyerMooreHorspoolAlgorithmTest {
     @Test
     void emptyContentTest() {
         int bufferCapacity = 10;
-        String content = "", target = "anything";
+        String content = "";
+        String target = "anything";
         assertEquals(List.of(), parameterizedTest(bufferCapacity, content, target));
     }
 
     @Test
     void emptyTargetTest() {
         int bufferCapacity = 10;
-        String content = "something", target = "";
+        String content = "something";
+        String target = "";
         assertThrows(
                 IllegalArgumentException.class,
                 () -> parameterizedTest(bufferCapacity, content, target)
@@ -40,28 +43,32 @@ class BoyerMooreHorspoolAlgorithmTest {
     @Test
     void smallBufferTest() {
         int bufferCapacity = 5;
-        String content = "abeccacbadbabbad", target = "abbad";
+        String content = "abeccacbadbabbad";
+        String target = "abbad";
         assertEquals(List.of(11L), parameterizedTest(bufferCapacity, content, target));
     }
 
     @Test
     void bigBufferTest() {
         int bufferCapacity = 20;
-        String content = "aaaaa", target = "aaa";
+        String content = "aaaaa";
+        String target = "aaa";
         assertEquals(List.of(0L, 1L, 2L), parameterizedTest(bufferCapacity, content, target));
     }
 
     @Test
     void taskTest() {
         int bufferCapacity = 5;
-        String content = "абракадабра", target = "бра";
+        String content = "абракадабра";
+        String target = "бра";
         assertEquals(List.of(1L, 8L), parameterizedTest(bufferCapacity, content, target));
     }
 
     @Test
     void differentCharactersTest() {
         int bufferCapacity = 4;
-        String content = " !@¶Ǣ∑ʩЋ∑∑֍ޘࡤ⅚␀☂∑ヰ鿜", target = "∑";
+        String content = " !@¶Ǣ∑ʩЋ∑∑֍ޘࡤ⅚␀☂∑ヰ鿜";
+        String target = "∑";
         assertEquals(List.of(5L, 8L, 9L, 16L), parameterizedTest(bufferCapacity, content, target));
     }
 

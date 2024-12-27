@@ -12,16 +12,16 @@ import org.junit.jupiter.api.Test;
 import ru.nsu.lyskov.exceptions.IllegalFunctionReturnException;
 import ru.nsu.lyskov.interfaces.BufferInterface;
 import ru.nsu.lyskov.interfaces.FileBufferProcessor;
-import ru.nsu.lyskov.logic.TextFileReaderRB;
+import ru.nsu.lyskov.logic.TextFileReader;
 
-class TextFileReaderRBTest {
+class TextFileReaderTest {
 
     @Test
     void bufferProcessorReturns0Test() throws IOException {
         generateFile("test");
         assertThrows(IllegalFunctionReturnException.class, () ->
-                TextFileReaderRB.readFile(TEST_FILE_NAME, 5,
-                                          (BufferInterface<Character> buffer) -> 0
+                TextFileReader.readFile(TEST_FILE_NAME, 5,
+                                        (BufferInterface<Character> buffer) -> 0
                 ));
     }
 
@@ -29,8 +29,8 @@ class TextFileReaderRBTest {
     void bufferProcessorReturnsTooMuchTest() throws IOException {
         generateFile("tes");
         assertThrows(IllegalFunctionReturnException.class, () ->
-                TextFileReaderRB.readFile(TEST_FILE_NAME, 4,
-                                          (BufferInterface<Character> buffer) -> 2
+                TextFileReader.readFile(TEST_FILE_NAME, 4,
+                                        (BufferInterface<Character> buffer) -> 2
                 ));
     }
 
@@ -53,7 +53,7 @@ class TextFileReaderRBTest {
             return buffer.getSize();
         };
 
-        TextFileReaderRB.readFile(TEST_FILE_NAME, ringBufferCapacity, processingFunction);
+        TextFileReader.readFile(TEST_FILE_NAME, ringBufferCapacity, processingFunction);
 
         assertEquals(content, readCheck.toString());
         assertEquals(

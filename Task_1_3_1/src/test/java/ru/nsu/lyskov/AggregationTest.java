@@ -14,14 +14,15 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import ru.nsu.lyskov.logic.BoyerMooreHorspoolAlgorithm;
-import ru.nsu.lyskov.logic.TextFileReaderRB;
+import ru.nsu.lyskov.logic.TextFileReader;
 
 public class AggregationTest {
 
     @Test
     void invalidCapacityExceptionTest() {
         int bufferCapacity = 2;
-        String content = "12345", target = "123";
+        String content = "12345";
+        String target = "123";
         assertThrows(IllegalArgumentException.class,
                      () -> parameterizedSmallTest(bufferCapacity, content, target)
         );
@@ -30,14 +31,16 @@ public class AggregationTest {
     @Test
     void emptyContentTest() throws IOException {
         int bufferCapacity = 10;
-        String content = "", target = "anything";
+        String content = "";
+        String target = "anything";
         assertEquals(List.of(), parameterizedSmallTest(bufferCapacity, content, target));
     }
 
     @Test
     void emptyTargetTest() {
         int bufferCapacity = 10;
-        String content = "something", target = "";
+        String content = "something";
+        String target = "";
         assertThrows(IllegalArgumentException.class,
                      () -> parameterizedSmallTest(bufferCapacity, content, target)
         );
@@ -46,30 +49,35 @@ public class AggregationTest {
     @Test
     void smallBufferTest() throws IOException {
         int bufferCapacity = 5;
-        String content = "abeccacbadbabbad", target = "abbad";
+        String content = "abeccacbadbabbad"
+        String target = "abbad";
         assertEquals(List.of(11L), parameterizedSmallTest(bufferCapacity, content, target));
     }
 
     @Test
     void bigBufferTest() throws IOException {
         int bufferCapacity = 20;
-        String content = "aaaaa", target = "aaa";
+        String content = "aaaaa";
+        String target = "aaa";
         assertEquals(List.of(0L, 1L, 2L), parameterizedSmallTest(bufferCapacity, content, target));
     }
 
     @Test
     void taskTest() throws IOException {
         int bufferCapacity = 5;
-        String content = "абракадабра", target = "бра";
+        String content = "абракадабра";
+        String target = "бра";
         assertEquals(List.of(1L, 8L), parameterizedSmallTest(bufferCapacity, content, target));
     }
 
     @Test
     void differentCharactersTest() throws IOException {
         int bufferCapacity = 4;
-        String content = " !@¶Ǣ∑ʩЋ∑∑֍ޘࡤ⅚␀☂∑ヰ鿜", target = "∑";
-        assertEquals(List.of(5L, 8L, 9L, 16L),
-                     parameterizedSmallTest(bufferCapacity, content, target)
+        String content = " !@¶Ǣ∑ʩЋ∑∑֍ޘࡤ⅚␀☂∑ヰ鿜";
+        String target = "∑";
+        assertEquals(
+                List.of(5L, 8L, 9L, 16L),
+                parameterizedSmallTest(bufferCapacity, content, target)
         );
     }
 
@@ -91,10 +99,21 @@ public class AggregationTest {
     }
 
     @Test
-    void invalidSymbolInPatternExceptionTest() throws IOException {
-        long sizeInChars = 1024L * 1024 * 50;
+    void invalidSymbolInPatternExceptionTest() {
+        long sizeInChars = 1024L * 1024 * 10;
         int bufferCapacity = 1024;
         String pattern = " !qwerty 123456789 !\"£$%^&*∑()-= <>:{}@?,.;[]'/ S0me_rAnDDom Str|ng! ";
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> parameterizedTest(sizeInChars, bufferCapacity, pattern)
+        );
+    }
+
+    @Test
+    void invalidTargetSubstringExceptionTest() {
+        long sizeInChars = 1024L * 1024 * 10;
+        int bufferCapacity = 1024;
+        String pattern = "aaaaa";
         assertThrows(
                 IllegalArgumentException.class,
                 () -> parameterizedTest(sizeInChars, bufferCapacity, pattern)
@@ -111,7 +130,7 @@ public class AggregationTest {
 
         BoyerMooreHorspoolAlgorithm algorithm = new BoyerMooreHorspoolAlgorithm(target);
         generateFile(content);
-        TextFileReaderRB.readFile(TEST_FILE_NAME, bufferCapacity, algorithm::calculateWindowShift);
+        TextFileReader.readFile(TEST_FILE_NAME, bufferCapacity, algorithm::calculateWindowShift);
 
         return algorithm.getResult();
     }
@@ -121,7 +140,7 @@ public class AggregationTest {
 
         List<Long> expectedResult = generateLargeFile(sizeInChars, target);
         BoyerMooreHorspoolAlgorithm algorithm = new BoyerMooreHorspoolAlgorithm(target);
-        TextFileReaderRB.readFile(
+        TextFileReader.readFile(
                 LARGE_TEST_FILE_NAME,
                 bufferCapacity, algorithm::calculateWindowShift
         );
