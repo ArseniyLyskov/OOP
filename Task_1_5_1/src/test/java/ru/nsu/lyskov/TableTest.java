@@ -1,8 +1,8 @@
 package ru.nsu.lyskov;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class TableTest {
 
@@ -13,9 +13,9 @@ class TableTest {
                 .addRow("Index", "Random");
         for (int i = 1; i <= 5; i++) {
             if (i == 1 || i == 4) {
-                tableBuilder.addRow(i, new Text.Bold(String.valueOf(6-i)));
+                tableBuilder.addRow(i, new Text.Bold(String.valueOf(6 - i)));
             } else {
-                tableBuilder.addRow(i, 6-i);
+                tableBuilder.addRow(i, 6 - i);
             }
         }
         assertEquals(
