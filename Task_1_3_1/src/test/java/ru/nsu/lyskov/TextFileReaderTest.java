@@ -58,7 +58,7 @@ class TextFileReaderTest {
         assertEquals(content, readCheck.toString());
         assertEquals(
                 Math.ceil((double) content.length() / ringBufferCapacity),
-                bufferReloadingCount.getI()
+                bufferReloadingCount.getIndex()
         );
     }
 
@@ -68,14 +68,14 @@ class TextFileReaderTest {
     }
 
     private class Counter {
-        private int i = 0;
+        private int index = 0;
 
         void increment() {
-            i++;
+            index++;
         }
 
-        int getI() {
-            return i;
+        int getIndex() {
+            return index;
         }
     }
 }

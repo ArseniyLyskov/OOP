@@ -16,6 +16,9 @@ import org.junit.jupiter.api.Test;
 import ru.nsu.lyskov.logic.BoyerMooreHorspoolAlgorithm;
 import ru.nsu.lyskov.logic.TextFileReader;
 
+/**
+ * Тестовый класс, проверяющий итоговое взаимодействие всех компонентов.
+ */
 public class AggregationTest {
 
     @Test

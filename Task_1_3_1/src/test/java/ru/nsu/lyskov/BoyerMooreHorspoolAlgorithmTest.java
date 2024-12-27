@@ -75,7 +75,8 @@ class BoyerMooreHorspoolAlgorithmTest {
     private List<Long> parameterizedTest(
             int bufferCapacity, String content, String target) {
 
-        int contentReadingIndex = 0, contentLength = content.length();
+        int contentReadingIndex = 0;
+        int contentLength = content.length();
         RingBuffer<Character> ringBuffer = new RingBuffer<>(bufferCapacity);
         BoyerMooreHorspoolAlgorithm algorithm = new BoyerMooreHorspoolAlgorithm(target);
 
