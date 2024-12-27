@@ -104,10 +104,10 @@ public class FileGenerator {
 
     private static ArrayList<Character> getCharacterList(String pattern) {
         LinkedHashSet<Character> uniquePatternCharacters = new LinkedHashSet<>();
-        ArrayList<Character> characterList = new ArrayList<>(uniquePatternCharacters);
         for (char c : pattern.toCharArray()) {
             uniquePatternCharacters.add(c);
         }
+        ArrayList<Character> characterList = new ArrayList<>(uniquePatternCharacters);
         if (characterList.size() < 2) {
             throw new IllegalArgumentException("The substring you are looking for must contain at"
                                                        + " least two different characters.");

@@ -49,7 +49,7 @@ public class AggregationTest {
     @Test
     void smallBufferTest() throws IOException {
         int bufferCapacity = 5;
-        String content = "abeccacbadbabbad"
+        String content = "abeccacbadbabbad";
         String target = "abbad";
         assertEquals(List.of(11L), parameterizedSmallTest(bufferCapacity, content, target));
     }
