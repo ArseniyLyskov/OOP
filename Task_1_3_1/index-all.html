@@ -53,70 +53,122 @@ loadScripts(document, 'script');</script>
 <h2 class="title" id="I:B">B</h2>
 <dl class="index">
 <dt><a href="ru/nsu/lyskov/logic/BoyerMooreHorspoolAlgorithm.html" class="type-name-link" title="class in ru.nsu.lyskov.logic">BoyerMooreHorspoolAlgorithm</a> - Class in <a href="ru/nsu/lyskov/logic/package-summary.html">ru.nsu.lyskov.logic</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Класс, реализующий функцию-обработчик буфера с алгоритмом Бойера-Мура-Хорспула, объект класса
+ аккумулирует результат посредством применения функции-обработчика к буферу.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/logic/BoyerMooreHorspoolAlgorithm.html#%3Cinit%3E(java.lang.String)" class="member-name-link">BoyerMooreHorspoolAlgorithm(String)</a> - Constructor for class ru.nsu.lyskov.logic.<a href="ru/nsu/lyskov/logic/BoyerMooreHorspoolAlgorithm.html" title="class in ru.nsu.lyskov.logic">BoyerMooreHorspoolAlgorithm</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Конструктор класса.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/interfaces/BufferInterface.html" class="type-name-link" title="interface in ru.nsu.lyskov.interfaces">BufferInterface</a>&lt;<a href="ru/nsu/lyskov/interfaces/BufferInterface.html" title="type parameter in BufferInterface">T</a>&gt; - Interface in <a href="ru/nsu/lyskov/interfaces/package-summary.html">ru.nsu.lyskov.interfaces</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Интерфейс, через который можно взаимодействовать с буфером данных.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:C">C</h2>
 <dl class="index">
 <dt><a href="ru/nsu/lyskov/logic/BoyerMooreHorspoolAlgorithm.html#calculateWindowShift(ru.nsu.lyskov.interfaces.BufferInterface)" class="member-name-link">calculateWindowShift(BufferInterface&lt;Character&gt;)</a> - Method in class ru.nsu.lyskov.logic.<a href="ru/nsu/lyskov/logic/BoyerMooreHorspoolAlgorithm.html" title="class in ru.nsu.lyskov.logic">BoyerMooreHorspoolAlgorithm</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Функция-обработчик буфера.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:D">D</h2>
 <dl class="index">
 <dt><a href="ru/nsu/lyskov/exceptions/DataOverreadingException.html" class="type-name-link" title="class in ru.nsu.lyskov.exceptions">DataOverreadingException</a> - Exception in <a href="ru/nsu/lyskov/exceptions/package-summary.html">ru.nsu.lyskov.exceptions</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Исключение, которое выбрасывается при попытке чтения из кольцевого буфера, когда непрочитанных
+ элементов не осталось.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/exceptions/DataOverreadingException.html#%3Cinit%3E(java.lang.String)" class="member-name-link">DataOverreadingException(String)</a> - Constructor for exception ru.nsu.lyskov.exceptions.<a href="ru/nsu/lyskov/exceptions/DataOverreadingException.html" title="class in ru.nsu.lyskov.exceptions">DataOverreadingException</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Создаёт исключение с указанным сообщением.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/exceptions/DataOverwritingException.html" class="type-name-link" title="class in ru.nsu.lyskov.exceptions">DataOverwritingException</a> - Exception in <a href="ru/nsu/lyskov/exceptions/package-summary.html">ru.nsu.lyskov.exceptions</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Исключение, которое выбрасывается при попытке записи в кольцевой буфер, когда количество
+ непрочитанных в нём элементов равно его размеру.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/exceptions/DataOverwritingException.html#%3Cinit%3E(java.lang.String)" class="member-name-link">DataOverwritingException(String)</a> - Constructor for exception ru.nsu.lyskov.exceptions.<a href="ru/nsu/lyskov/exceptions/DataOverwritingException.html" title="class in ru.nsu.lyskov.exceptions">DataOverwritingException</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Создаёт исключение с указанным сообщением.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/FileGenerator.html#deleteFile()" class="member-name-link">deleteFile()</a> - Static method in class ru.nsu.lyskov.<a href="ru/nsu/lyskov/FileGenerator.html" title="class in ru.nsu.lyskov">FileGenerator</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Удаление сгенерированных файлов.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:F">F</h2>
 <dl class="index">
 <dt><a href="ru/nsu/lyskov/interfaces/FileBufferProcessor.html" class="type-name-link" title="interface in ru.nsu.lyskov.interfaces">FileBufferProcessor</a> - Interface in <a href="ru/nsu/lyskov/interfaces/package-summary.html">ru.nsu.lyskov.interfaces</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">При чтении файла с <code>TextFileReader</code>, данные из него поступают в буфер.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/FileGenerator.html" class="type-name-link" title="class in ru.nsu.lyskov">FileGenerator</a> - Class in <a href="ru/nsu/lyskov/package-summary.html">ru.nsu.lyskov</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Класс, представляющий методы для генерации текстовых файлов для тестирования.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/FileGenerator.html#%3Cinit%3E()" class="member-name-link">FileGenerator()</a> - Constructor for class ru.nsu.lyskov.<a href="ru/nsu/lyskov/FileGenerator.html" title="class in ru.nsu.lyskov">FileGenerator</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:G">G</h2>
 <dl class="index">
 <dt><a href="ru/nsu/lyskov/FileGenerator.html#generateFile(java.lang.String)" class="member-name-link">generateFile(String)</a> - Static method in class ru.nsu.lyskov.<a href="ru/nsu/lyskov/FileGenerator.html" title="class in ru.nsu.lyskov">FileGenerator</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Генерация файла с указанным текстовым содержимым.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/FileGenerator.html#generateLargeFile(long,java.lang.String)" class="member-name-link">generateLargeFile(long, String)</a> - Static method in class ru.nsu.lyskov.<a href="ru/nsu/lyskov/FileGenerator.html" title="class in ru.nsu.lyskov">FileGenerator</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Генерация файла указанного размера с произвольным содержимым по искомой подстроке.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/interfaces/BufferInterface.html#getCapacity()" class="member-name-link">getCapacity()</a> - Method in interface ru.nsu.lyskov.interfaces.<a href="ru/nsu/lyskov/interfaces/BufferInterface.html" title="interface in ru.nsu.lyskov.interfaces">BufferInterface</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Получение ёмкости буфера.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/logic/RingBuffer.html#getCapacity()" class="member-name-link">getCapacity()</a> - Method in class ru.nsu.lyskov.logic.<a href="ru/nsu/lyskov/logic/RingBuffer.html" title="class in ru.nsu.lyskov.logic">RingBuffer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Получение ёмкости буфера.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/logic/BoyerMooreHorspoolAlgorithm.html#getResult()" class="member-name-link">getResult()</a> - Method in class ru.nsu.lyskov.logic.<a href="ru/nsu/lyskov/logic/BoyerMooreHorspoolAlgorithm.html" title="class in ru.nsu.lyskov.logic">BoyerMooreHorspoolAlgorithm</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Получение накопленного результата работы алгоритма.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/interfaces/BufferInterface.html#getSize()" class="member-name-link">getSize()</a> - Method in interface ru.nsu.lyskov.interfaces.<a href="ru/nsu/lyskov/interfaces/BufferInterface.html" title="interface in ru.nsu.lyskov.interfaces">BufferInterface</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Получение размера буфера.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/logic/RingBuffer.html#getSize()" class="member-name-link">getSize()</a> - Method in class ru.nsu.lyskov.logic.<a href="ru/nsu/lyskov/logic/RingBuffer.html" title="class in ru.nsu.lyskov.logic">RingBuffer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Получение размера буфера.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:I">I</h2>
 <dl class="index">
 <dt><a href="ru/nsu/lyskov/exceptions/IllegalFunctionReturnException.html" class="type-name-link" title="class in ru.nsu.lyskov.exceptions">IllegalFunctionReturnException</a> - Exception in <a href="ru/nsu/lyskov/exceptions/package-summary.html">ru.nsu.lyskov.exceptions</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Исключение, которое выбрасывается, если функция, обрабатывающая буфер, вернула меньше единицы,
+ либо больше размера буфера.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/exceptions/IllegalFunctionReturnException.html#%3Cinit%3E(java.lang.String)" class="member-name-link">IllegalFunctionReturnException(String)</a> - Constructor for exception ru.nsu.lyskov.exceptions.<a href="ru/nsu/lyskov/exceptions/IllegalFunctionReturnException.html" title="class in ru.nsu.lyskov.exceptions">IllegalFunctionReturnException</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Создаёт исключение с указанным сообщением.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/interfaces/BufferInterface.html#isEmpty()" class="member-name-link">isEmpty()</a> - Method in interface ru.nsu.lyskov.interfaces.<a href="ru/nsu/lyskov/interfaces/BufferInterface.html" title="interface in ru.nsu.lyskov.interfaces">BufferInterface</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Проверка буфера на пустоту.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/logic/RingBuffer.html#isEmpty()" class="member-name-link">isEmpty()</a> - Method in class ru.nsu.lyskov.logic.<a href="ru/nsu/lyskov/logic/RingBuffer.html" title="class in ru.nsu.lyskov.logic">RingBuffer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Проверка буфера на пустоту.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/interfaces/BufferInterface.html#isFull()" class="member-name-link">isFull()</a> - Method in interface ru.nsu.lyskov.interfaces.<a href="ru/nsu/lyskov/interfaces/BufferInterface.html" title="interface in ru.nsu.lyskov.interfaces">BufferInterface</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Проверка буфера на заполненность.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/logic/RingBuffer.html#isFull()" class="member-name-link">isFull()</a> - Method in class ru.nsu.lyskov.logic.<a href="ru/nsu/lyskov/logic/RingBuffer.html" title="class in ru.nsu.lyskov.logic">RingBuffer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Проверка буфера на заполненность.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:L">L</h2>
 <dl class="index">
@@ -127,31 +179,49 @@ loadScripts(document, 'script');</script>
 <dt><a href="ru/nsu/lyskov/LoggingParameters.html#LOG_FILE_READING" class="member-name-link">LOG_FILE_READING</a> - Static variable in class ru.nsu.lyskov.<a href="ru/nsu/lyskov/LoggingParameters.html" title="class in ru.nsu.lyskov">LoggingParameters</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/lyskov/LoggingParameters.html" class="type-name-link" title="class in ru.nsu.lyskov">LoggingParameters</a> - Class in <a href="ru/nsu/lyskov/package-summary.html">ru.nsu.lyskov</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Класс, содержащий константы, определяющие логирование.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/LoggingParameters.html#%3Cinit%3E()" class="member-name-link">LoggingParameters()</a> - Constructor for class ru.nsu.lyskov.<a href="ru/nsu/lyskov/LoggingParameters.html" title="class in ru.nsu.lyskov">LoggingParameters</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:P">P</h2>
 <dl class="index">
 <dt><a href="ru/nsu/lyskov/interfaces/BufferInterface.html#peek(int)" class="member-name-link">peek(int)</a> - Method in interface ru.nsu.lyskov.interfaces.<a href="ru/nsu/lyskov/interfaces/BufferInterface.html" title="interface in ru.nsu.lyskov.interfaces">BufferInterface</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Взятие элемента по индексу.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/logic/RingBuffer.html#peek(int)" class="member-name-link">peek(int)</a> - Method in class ru.nsu.lyskov.logic.<a href="ru/nsu/lyskov/logic/RingBuffer.html" title="class in ru.nsu.lyskov.logic">RingBuffer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Получение элемента по индексу, начиная от последнего непрочитанного элемента.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/logic/RingBuffer.html#pop()" class="member-name-link">pop()</a> - Method in class ru.nsu.lyskov.logic.<a href="ru/nsu/lyskov/logic/RingBuffer.html" title="class in ru.nsu.lyskov.logic">RingBuffer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Извлечение элемента из буфера.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/interfaces/FileBufferProcessor.html#processBuffer(ru.nsu.lyskov.interfaces.BufferInterface)" class="member-name-link">processBuffer(BufferInterface&lt;Character&gt;)</a> - Method in interface ru.nsu.lyskov.interfaces.<a href="ru/nsu/lyskov/interfaces/FileBufferProcessor.html" title="interface in ru.nsu.lyskov.interfaces">FileBufferProcessor</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Функция-обработчик буфера.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/logic/RingBuffer.html#put(T)" class="member-name-link">put(T)</a> - Method in class ru.nsu.lyskov.logic.<a href="ru/nsu/lyskov/logic/RingBuffer.html" title="class in ru.nsu.lyskov.logic">RingBuffer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Добавление элемента в буфер.</div>
+</dd>
 </dl>
 <h2 class="title" id="I:R">R</h2>
 <dl class="index">
-<dt><a href="ru/nsu/lyskov/logic/TextFileReaderRB.html#readFile(java.lang.String,int,ru.nsu.lyskov.interfaces.FileBufferProcessor)" class="member-name-link">readFile(String, int, FileBufferProcessor)</a> - Static method in class ru.nsu.lyskov.logic.<a href="ru/nsu/lyskov/logic/TextFileReaderRB.html" title="class in ru.nsu.lyskov.logic">TextFileReaderRB</a></dt>
-<dd>&nbsp;</dd>
+<dt><a href="ru/nsu/lyskov/logic/TextFileReader.html#readFile(java.lang.String,int,ru.nsu.lyskov.interfaces.FileBufferProcessor)" class="member-name-link">readFile(String, int, FileBufferProcessor)</a> - Static method in class ru.nsu.lyskov.logic.<a href="ru/nsu/lyskov/logic/TextFileReader.html" title="class in ru.nsu.lyskov.logic">TextFileReader</a></dt>
+<dd>
+<div class="block">Чтение файла.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/logic/RingBuffer.html" class="type-name-link" title="class in ru.nsu.lyskov.logic">RingBuffer</a>&lt;<a href="ru/nsu/lyskov/logic/RingBuffer.html" title="type parameter in RingBuffer">T</a>&gt; - Class in <a href="ru/nsu/lyskov/logic/package-summary.html">ru.nsu.lyskov.logic</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Параметризованный кольцевой буфер.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/logic/RingBuffer.html#%3Cinit%3E(int)" class="member-name-link">RingBuffer(int)</a> - Constructor for class ru.nsu.lyskov.logic.<a href="ru/nsu/lyskov/logic/RingBuffer.html" title="class in ru.nsu.lyskov.logic">RingBuffer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Конструктор класса.</div>
+</dd>
 <dt><a href="ru/nsu/lyskov/package-summary.html">ru.nsu.lyskov</a> - package ru.nsu.lyskov</dt>
 <dd>&nbsp;</dd>
 <dt><a href="ru/nsu/lyskov/exceptions/package-summary.html">ru.nsu.lyskov.exceptions</a> - package ru.nsu.lyskov.exceptions</dt>
@@ -165,9 +235,12 @@ loadScripts(document, 'script');</script>
 <dl class="index">
 <dt><a href="ru/nsu/lyskov/FileGenerator.html#TEST_FILE_NAME" class="member-name-link">TEST_FILE_NAME</a> - Static variable in class ru.nsu.lyskov.<a href="ru/nsu/lyskov/FileGenerator.html" title="class in ru.nsu.lyskov">FileGenerator</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="ru/nsu/lyskov/logic/TextFileReaderRB.html" class="type-name-link" title="class in ru.nsu.lyskov.logic">TextFileReaderRB</a> - Class in <a href="ru/nsu/lyskov/logic/package-summary.html">ru.nsu.lyskov.logic</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="ru/nsu/lyskov/logic/TextFileReaderRB.html#%3Cinit%3E()" class="member-name-link">TextFileReaderRB()</a> - Constructor for class ru.nsu.lyskov.logic.<a href="ru/nsu/lyskov/logic/TextFileReaderRB.html" title="class in ru.nsu.lyskov.logic">TextFileReaderRB</a></dt>
+<dt><a href="ru/nsu/lyskov/logic/TextFileReader.html" class="type-name-link" title="class in ru.nsu.lyskov.logic">TextFileReader</a> - Class in <a href="ru/nsu/lyskov/logic/package-summary.html">ru.nsu.lyskov.logic</a></dt>
+<dd>
+<div class="block">Класс, реализующий чтение текстового файла с использованием кольцевого буфера и функционального
+ интерфейса для его обработки.</div>
+</dd>
+<dt><a href="ru/nsu/lyskov/logic/TextFileReader.html#%3Cinit%3E()" class="member-name-link">TextFileReader()</a> - Constructor for class ru.nsu.lyskov.logic.<a href="ru/nsu/lyskov/logic/TextFileReader.html" title="class in ru.nsu.lyskov.logic">TextFileReader</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:T">T</a>&nbsp;<br><a href="allclasses-index.html">All&nbsp;Classes&nbsp;and&nbsp;Interfaces</a><span class="vertical-separator">|</span><a href="allpackages-index.html">All&nbsp;Packages</a><span class="vertical-separator">|</span><a href="constant-values.html">Constant&nbsp;Field&nbsp;Values</a><span class="vertical-separator">|</span><a href="serialized-form.html">Serialized&nbsp;Form</a></main>

@@ -60,25 +60,50 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Class</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/lyskov/logic/BoyerMooreHorspoolAlgorithm.html" title="class in ru.nsu.lyskov.logic">BoyerMooreHorspoolAlgorithm</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Класс, реализующий функцию-обработчик буфера с алгоритмом Бойера-Мура-Хорспула, объект класса
+ аккумулирует результат посредством применения функции-обработчика к буферу.</div>
+</div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab1"><a href="ru/nsu/lyskov/interfaces/BufferInterface.html" title="interface in ru.nsu.lyskov.interfaces">BufferInterface</a>&lt;<a href="ru/nsu/lyskov/interfaces/BufferInterface.html" title="type parameter in BufferInterface">T</a>&gt;</div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">&nbsp;</div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab1">
+<div class="block">Интерфейс, через который можно взаимодействовать с буфером данных.</div>
+</div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab5"><a href="ru/nsu/lyskov/exceptions/DataOverreadingException.html" title="class in ru.nsu.lyskov.exceptions">DataOverreadingException</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab5">&nbsp;</div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab5">
+<div class="block">Исключение, которое выбрасывается при попытке чтения из кольцевого буфера, когда непрочитанных
+ элементов не осталось.</div>
+</div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab5"><a href="ru/nsu/lyskov/exceptions/DataOverwritingException.html" title="class in ru.nsu.lyskov.exceptions">DataOverwritingException</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab5">&nbsp;</div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab5">
+<div class="block">Исключение, которое выбрасывается при попытке записи в кольцевой буфер, когда количество
+ непрочитанных в нём элементов равно его размеру.</div>
+</div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="ru/nsu/lyskov/interfaces/FileBufferProcessor.html" title="interface in ru.nsu.lyskov.interfaces">FileBufferProcessor</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab1">&nbsp;</div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab1">
+<div class="block">При чтении файла с <code>TextFileReader</code>, данные из него поступают в буфер.</div>
+</div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/lyskov/FileGenerator.html" title="class in ru.nsu.lyskov">FileGenerator</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Класс, представляющий методы для генерации текстовых файлов для тестирования.</div>
+</div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab5"><a href="ru/nsu/lyskov/exceptions/IllegalFunctionReturnException.html" title="class in ru.nsu.lyskov.exceptions">IllegalFunctionReturnException</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab5">&nbsp;</div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab5">
+<div class="block">Исключение, которое выбрасывается, если функция, обрабатывающая буфер, вернула меньше единицы,
+ либо больше размера буфера.</div>
+</div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/lyskov/LoggingParameters.html" title="class in ru.nsu.lyskov">LoggingParameters</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Класс, содержащий константы, определяющие логирование.</div>
+</div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/lyskov/logic/RingBuffer.html" title="class in ru.nsu.lyskov.logic">RingBuffer</a>&lt;<a href="ru/nsu/lyskov/logic/RingBuffer.html" title="type parameter in RingBuffer">T</a>&gt;</div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/lyskov/logic/TextFileReaderRB.html" title="class in ru.nsu.lyskov.logic">TextFileReaderRB</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Параметризованный кольцевой буфер.</div>
+</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="ru/nsu/lyskov/logic/TextFileReader.html" title="class in ru.nsu.lyskov.logic">TextFileReader</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="block">Класс, реализующий чтение текстового файла с использованием кольцевого буфера и функционального
+ интерфейса для его обработки.</div>
+</div>
 </div>
 </div>
 </div>

@@ -75,6 +75,10 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
+<dt>Type Parameters:</dt>
+<dd><code>T</code> - тип элементов буфера.</dd>
+</dl>
+<dl class="notes">
 <dt>All Implemented Interfaces:</dt>
 <dd><code><a href="../interfaces/BufferInterface.html" title="interface in ru.nsu.lyskov.interfaces">BufferInterface</a>&lt;T&gt;</code></dd>
 </dl>
@@ -82,6 +86,7 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">RingBuffer&lt;T&gt;</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="../interfaces/BufferInterface.html" title="interface in ru.nsu.lyskov.interfaces">BufferInterface</a>&lt;T&gt;</span></div>
+<div class="block">Параметризованный кольцевой буфер.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -94,7 +99,9 @@ implements <a href="../interfaces/BufferInterface.html" title="interface in ru.n
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int)" class="member-name-link">RingBuffer</a><wbr>(int&nbsp;capacity)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Конструктор класса.</div>
+</div>
 </div>
 </section>
 </li>
@@ -111,25 +118,39 @@ implements <a href="../interfaces/BufferInterface.html" title="interface in ru.n
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCapacity()" class="member-name-link">getCapacity</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Получение ёмкости буфера.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSize()" class="member-name-link">getSize</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Получение размера буфера.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isEmpty()" class="member-name-link">isEmpty</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Проверка буфера на пустоту.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isFull()" class="member-name-link">isFull</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Проверка буфера на заполненность.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RingBuffer.html" title="type parameter in RingBuffer">T</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#peek(int)" class="member-name-link">peek</a><wbr>(int&nbsp;index)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Получение элемента по индексу, начиная от последнего непрочитанного элемента.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="RingBuffer.html" title="type parameter in RingBuffer">T</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#pop()" class="member-name-link">pop</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Извлечение элемента из буфера.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#put(T)" class="member-name-link">put</a><wbr>(<a href="RingBuffer.html" title="type parameter in RingBuffer">T</a>&nbsp;element)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Добавление элемента в буфер.</div>
+</div>
 </div>
 </div>
 </div>
@@ -151,6 +172,11 @@ implements <a href="../interfaces/BufferInterface.html" title="interface in ru.n
 <section class="detail" id="&lt;init&gt;(int)">
 <h3>RingBuffer</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">RingBuffer</span><wbr><span class="parameters">(int&nbsp;capacity)</span></div>
+<div class="block">Конструктор класса.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>capacity</code> - ёмкость буфера.</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -165,21 +191,36 @@ implements <a href="../interfaces/BufferInterface.html" title="interface in ru.n
 <section class="detail" id="put(T)">
 <h3 id="put(java.lang.Object)">put</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">put</span><wbr><span class="parameters">(<a href="RingBuffer.html" title="type parameter in RingBuffer">T</a>&nbsp;element)</span></div>
+<div class="block">Добавление элемента в буфер.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>element</code> - элемент.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="pop()">
 <h3>pop</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="RingBuffer.html" title="type parameter in RingBuffer">T</a></span>&nbsp;<span class="element-name">pop</span>()</div>
+<div class="block">Извлечение элемента из буфера. (FIFO).</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>элемент.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="peek(int)">
 <h3>peek</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="RingBuffer.html" title="type parameter in RingBuffer">T</a></span>&nbsp;<span class="element-name">peek</span><wbr><span class="parameters">(int&nbsp;index)</span></div>
+<div class="block">Получение элемента по индексу, начиная от последнего непрочитанного элемента.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../interfaces/BufferInterface.html#peek(int)">peek</a></code>&nbsp;in interface&nbsp;<code><a href="../interfaces/BufferInterface.html" title="interface in ru.nsu.lyskov.interfaces">BufferInterface</a>&lt;<a href="RingBuffer.html" title="type parameter in RingBuffer">T</a>&gt;</code></dd>
+<dt>Parameters:</dt>
+<dd><code>index</code> - индекс.</dd>
+<dt>Returns:</dt>
+<dd>элемент.</dd>
 </dl>
 </section>
 </li>
@@ -187,9 +228,12 @@ implements <a href="../interfaces/BufferInterface.html" title="interface in ru.n
 <section class="detail" id="isFull()">
 <h3>isFull</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isFull</span>()</div>
+<div class="block">Проверка буфера на заполненность.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../interfaces/BufferInterface.html#isFull()">isFull</a></code>&nbsp;in interface&nbsp;<code><a href="../interfaces/BufferInterface.html" title="interface in ru.nsu.lyskov.interfaces">BufferInterface</a>&lt;<a href="RingBuffer.html" title="type parameter in RingBuffer">T</a>&gt;</code></dd>
+<dt>Returns:</dt>
+<dd>заполнен ли.</dd>
 </dl>
 </section>
 </li>
@@ -197,9 +241,12 @@ implements <a href="../interfaces/BufferInterface.html" title="interface in ru.n
 <section class="detail" id="isEmpty()">
 <h3>isEmpty</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isEmpty</span>()</div>
+<div class="block">Проверка буфера на пустоту.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../interfaces/BufferInterface.html#isEmpty()">isEmpty</a></code>&nbsp;in interface&nbsp;<code><a href="../interfaces/BufferInterface.html" title="interface in ru.nsu.lyskov.interfaces">BufferInterface</a>&lt;<a href="RingBuffer.html" title="type parameter in RingBuffer">T</a>&gt;</code></dd>
+<dt>Returns:</dt>
+<dd>пуст ли.</dd>
 </dl>
 </section>
 </li>
@@ -207,9 +254,12 @@ implements <a href="../interfaces/BufferInterface.html" title="interface in ru.n
 <section class="detail" id="getSize()">
 <h3>getSize</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getSize</span>()</div>
+<div class="block">Получение размера буфера. (Количества существующих элементов в нём).</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../interfaces/BufferInterface.html#getSize()">getSize</a></code>&nbsp;in interface&nbsp;<code><a href="../interfaces/BufferInterface.html" title="interface in ru.nsu.lyskov.interfaces">BufferInterface</a>&lt;<a href="RingBuffer.html" title="type parameter in RingBuffer">T</a>&gt;</code></dd>
+<dt>Returns:</dt>
+<dd>размер буфера.</dd>
 </dl>
 </section>
 </li>
@@ -217,9 +267,12 @@ implements <a href="../interfaces/BufferInterface.html" title="interface in ru.n
 <section class="detail" id="getCapacity()">
 <h3>getCapacity</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getCapacity</span>()</div>
+<div class="block">Получение ёмкости буфера. (Максимально допустимое значение размера).</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../interfaces/BufferInterface.html#getCapacity()">getCapacity</a></code>&nbsp;in interface&nbsp;<code><a href="../interfaces/BufferInterface.html" title="interface in ru.nsu.lyskov.interfaces">BufferInterface</a>&lt;<a href="RingBuffer.html" title="type parameter in RingBuffer">T</a>&gt;</code></dd>
+<dt>Returns:</dt>
+<dd>ёмкость буфера.</dd>
 </dl>
 </section>
 </li>

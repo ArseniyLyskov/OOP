@@ -77,6 +77,10 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">BoyerMooreHorspoolAlgorithm</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Класс, реализующий функцию-обработчик буфера с алгоритмом Бойера-Мура-Хорспула, объект класса
+ аккумулирует результат посредством применения функции-обработчика к буферу. Необходима
+ осторожноть, отсутствует логика защиты от применения функции к разным буферам и прочих
+ непотокобезопасных операций.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -89,7 +93,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String)" class="member-name-link">BoyerMooreHorspoolAlgorithm</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;target)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Конструктор класса.</div>
+</div>
 </div>
 </section>
 </li>
@@ -106,10 +112,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculateWindowShift(ru.nsu.lyskov.interfaces.BufferInterface)" class="member-name-link">calculateWindowShift</a><wbr>(<a href="../interfaces/BufferInterface.html" title="interface in ru.nsu.lyskov.interfaces">BufferInterface</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Character.html" title="class or interface in java.lang" class="external-link">Character</a>&gt;&nbsp;buffer)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Функция-обработчик буфера.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getResult()" class="member-name-link">getResult</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Получение накопленного результата работы алгоритма.</div>
+</div>
 </div>
 </div>
 </div>
@@ -131,6 +141,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(java.lang.String)">
 <h3>BoyerMooreHorspoolAlgorithm</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">BoyerMooreHorspoolAlgorithm</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;target)</span></div>
+<div class="block">Конструктор класса.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>target</code> - подстрока, поиском которой занимается алгоритм.</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -145,12 +160,24 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="calculateWindowShift(ru.nsu.lyskov.interfaces.BufferInterface)">
 <h3>calculateWindowShift</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">calculateWindowShift</span><wbr><span class="parameters">(<a href="../interfaces/BufferInterface.html" title="interface in ru.nsu.lyskov.interfaces">BufferInterface</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Character.html" title="class or interface in java.lang" class="external-link">Character</a>&gt;&nbsp;buffer)</span></div>
+<div class="block">Функция-обработчик буфера.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>buffer</code> - обрабатываемый буфер.</dd>
+<dt>Returns:</dt>
+<dd>количество обработанных элементов.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getResult()">
 <h3>getResult</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&gt;</span>&nbsp;<span class="element-name">getResult</span>()</div>
+<div class="block">Получение накопленного результата работы алгоритма.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>список индексов, с которых начинаются вхождения искомой подстроки.</dd>
+</dl>
 </section>
 </li>
 </ul>
