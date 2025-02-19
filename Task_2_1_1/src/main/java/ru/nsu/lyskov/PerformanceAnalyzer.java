@@ -72,7 +72,8 @@ public class PerformanceAnalyzer {
 
         // Создаём график
         JFreeChart chart = ChartFactory.createXYLineChart(
-                "Проверка наличия составного числа в массиве из " + arraySize + " чисел",
+                "Проверка наличия составного числа в массиве из " + arraySize + " чисел"
+                    + "\nКоличество доступных процессоров: " + getAvailableProcessorsCount(),
                 "Количество потоков для ThreadCompositeChecker, шт",
                 "Время выполнения программ, мс",
                 dataset,
@@ -117,5 +118,9 @@ public class PerformanceAnalyzer {
             renderer.setSeriesStroke(i, new BasicStroke(4.0f));
         }
         return renderer;
+    }
+
+    public static void main(String[] args) {
+        saveAnalysisChart(1_000_000);
     }
 }

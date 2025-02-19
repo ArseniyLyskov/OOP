@@ -3,8 +3,15 @@ package ru.nsu.lyskov;
 import org.junit.jupiter.api.Test;
 
 class PerformanceAnalyzerTest {
+    private static final int arraySize = 10_000;
+
     @Test
-    void testOnMillionElements() {
-        PerformanceAnalyzer.saveAnalysisChart(1_000_000);
+    void testSave() {
+        PerformanceAnalyzer.saveAnalysisChart(arraySize);
+    }
+
+    @Test
+    void testShow() {
+        PerformanceAnalyzer.showAnalysisChart(arraySize);
     }
 }

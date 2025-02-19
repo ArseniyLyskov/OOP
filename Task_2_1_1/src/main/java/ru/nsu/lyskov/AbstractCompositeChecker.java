@@ -9,7 +9,7 @@ abstract class AbstractCompositeChecker {
             case 1, 2:
                 return false;
             default:
-                for (int i = 3; i * i <= num; i += 2) {
+                for (int i = 2; i * i <= num; i++) {
                     if (num % i == 0) return true;
                 }
                 break;
