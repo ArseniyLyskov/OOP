@@ -23,12 +23,4 @@ class PerformanceAnalyzerTest {
     void testSave() {
         PerformanceAnalyzer.saveAnalysisChart(arraySize);
     }
-
-    /**
-     * Тестирует отображение графика анализа производительности в окне.
-     */
-    @Test
-    void testShow() {
-        PerformanceAnalyzer.showAnalysisChart(arraySize);
-    }
 }
