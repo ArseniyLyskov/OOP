@@ -10,8 +10,7 @@ public class CompositeChecker {
      * последовательного алгоритма.
      *
      * @param array массив целых чисел.
-     * @return {@code true}, если массив содержит хотя бы одно составное число, иначе
-     * {@code false}.
+     * @return true, если массив содержит хотя бы одно составное число, иначе false.
      */
     public static boolean sequentialCompositeCheck(int[] array) {
         AbstractCompositeChecker checker = new SequentialCompositeChecker();
@@ -23,8 +22,7 @@ public class CompositeChecker {
      * алгоритма.
      *
      * @param array массив целых чисел.
-     * @return {@code true}, если массив содержит хотя бы одно составное число, иначе
-     * {@code false}.
+     * @return true, если массив содержит хотя бы одно составное число, иначе false.
      */
     public static boolean threadCompositeCheck(int[] array) {
         AbstractCompositeChecker checker = new ThreadCompositeChecker();
@@ -37,8 +35,7 @@ public class CompositeChecker {
      *
      * @param array      массив целых чисел.
      * @param numThreads количество потоков для обработки массива.
-     * @return {@code true}, если массив содержит хотя бы одно составное число, иначе
-     * {@code false}.
+     * @return true, если массив содержит хотя бы одно составное число, иначе false.
      */
     public static boolean threadCompositeCheck(int[] array, int numThreads) {
         ThreadCompositeChecker checker = new ThreadCompositeChecker();
@@ -49,8 +46,7 @@ public class CompositeChecker {
      * Проверяет, содержит ли массив хотя бы одно составное число с использованием stream API.
      *
      * @param array массив целых чисел.
-     * @return {@code true}, если массив содержит хотя бы одно составное число, иначе
-     * {@code false}.
+     * @return true, если массив содержит хотя бы одно составное число, иначе false.
      */
     public static boolean streamCompositeCheck(int[] array) {
         AbstractCompositeChecker checker = new StreamCompositeChecker();
