@@ -4,13 +4,31 @@ import static ru.nsu.lyskov.PerformanceAnalyzer.getAvailableProcessorsCount;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * Класс, реализующий многопоточный поиск составных чисел в массиве.
+ */
 class ThreadCompositeChecker extends AbstractCompositeChecker {
 
+    /**
+     * Проверяет, содержит ли массив хотя бы одно составное число, используя количество потоков,
+     * соответствующее числу доступных процессоров.
+     *
+     * @param array массив целых чисел.
+     * @return {@code true}, если в массиве есть хотя бы одно составное число, иначе {@code false}.
+     */
     @Override
     boolean containsComposite(int[] array) {
         return containsComposite(array, getAvailableProcessorsCount());
     }
 
+    /**
+     * Проверяет, содержит ли массив хотя бы одно составное число, используя заданное количество
+     * потоков.
+     *
+     * @param array      массив целых чисел.
+     * @param numThreads количество потоков для обработки массива.
+     * @return {@code true}, если в массиве есть хотя бы одно составное число, иначе {@code false}.
+     */
     boolean containsComposite(int[] array, int numThreads) {
         int length = array.length;
         Thread[] threads = new Thread[numThreads];
@@ -35,7 +53,7 @@ class ThreadCompositeChecker extends AbstractCompositeChecker {
             try {
                 thread.join();
             } catch (InterruptedException e) {
-                throw new RuntimeException("Interrupted exception occurred.");
+                throw new RuntimeException("Произошло прерывание потока.");
             }
         }
 

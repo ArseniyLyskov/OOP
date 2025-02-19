@@ -16,13 +16,30 @@ import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
+/**
+ * Класс для анализа производительности различных методов проверки наличия составных чисел в
+ * массиве.
+ *
+ * <p>Позволяет измерять время выполнения алгоритмов и строить графики их эффективности.</p>
+ */
 public class PerformanceAnalyzer {
     private static final String FileName = "Analysis chart.png";
 
+    /**
+     * Возвращает количество доступных процессоров в системе.
+     *
+     * @return количество доступных процессоров.
+     */
     public static int getAvailableProcessorsCount() {
         return Runtime.getRuntime().availableProcessors();
     }
 
+    /**
+     * Измеряет время выполнения переданной задачи.
+     *
+     * @param task выполняемая задача.
+     * @return время выполнения в миллисекундах.
+     */
     private static long measureExecutionTime(Runnable task) {
         long startTime = System.currentTimeMillis();
         task.run();
@@ -30,6 +47,12 @@ public class PerformanceAnalyzer {
         return endTime - startTime;
     }
 
+    /**
+     * Генерирует массив простых чисел заданного размера.
+     *
+     * @param size количество простых чисел в массиве.
+     * @return массив простых чисел.
+     */
     private static int[] generatePrimes(int size) {
         List<Integer> primes = new ArrayList<>();
         int num = 2;
@@ -42,6 +65,12 @@ public class PerformanceAnalyzer {
         return primes.stream().mapToInt(i -> i).toArray();
     }
 
+    /**
+     * Создает график анализа производительности различных методов проверки составных чисел.
+     *
+     * @param arraySize размер массива чисел для проверки.
+     * @return объект {@link JFreeChart}, представляющий график.
+     */
     private static JFreeChart getAnalysisChart(int arraySize) {
         int[] array = generatePrimes(arraySize);
         int xDotsCount = getAvailableProcessorsCount() * 2;
@@ -53,27 +82,26 @@ public class PerformanceAnalyzer {
         XYSeries streamLine = new XYSeries("Stream checker");
         XYSeries threadLine = new XYSeries("Thread checker");
         XYSeries sequentialLine = new XYSeries("Sequential checker");
-        for (int x = 1; x <= xDotsCount; x ++) {
+        for (int x = 1; x <= xDotsCount; x++) {
             streamLine.add(x, streamExecutionTime);
 
             int finalX = x;
             long threadExecutionTime =
-                    measureExecutionTime(() -> CompositeChecker.threadCompositeCheck(array, finalX));
+                    measureExecutionTime(
+                            () -> CompositeChecker.threadCompositeCheck(array, finalX));
             threadLine.add(x, threadExecutionTime);
 
             sequentialLine.add(x, sequentialExecutionTime);
         }
 
-        // Объединяем серии в dataset
         XYSeriesCollection dataset = new XYSeriesCollection();
         dataset.addSeries(streamLine);
         dataset.addSeries(threadLine);
         dataset.addSeries(sequentialLine);
 
-        // Создаём график
         JFreeChart chart = ChartFactory.createXYLineChart(
                 "Проверка наличия составного числа в массиве из " + arraySize + " чисел"
-                    + "\nКоличество доступных процессоров: " + getAvailableProcessorsCount(),
+                        + "\nКоличество доступных процессоров: " + getAvailableProcessorsCount(),
                 "Количество потоков для ThreadCompositeChecker, шт",
                 "Время выполнения программ, мс",
                 dataset,
@@ -81,16 +109,18 @@ public class PerformanceAnalyzer {
                 true, true, false
         );
 
-        // Делаем точки на кривой видимыми
         XYPlot plot = chart.getXYPlot();
-        XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
         plot.setRenderer(setupAndGetRenderer());
 
         return chart;
     }
 
+    /**
+     * Отображает график анализа производительности в отдельном окне.
+     *
+     * @param arraySize размер массива чисел для проверки.
+     */
     public static void showAnalysisChart(int arraySize) {
-        // Отображаем окно
         JFrame frame = new JFrame("График");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(new ChartPanel(getAnalysisChart(arraySize)));
@@ -98,6 +128,11 @@ public class PerformanceAnalyzer {
         frame.setVisible(true);
     }
 
+    /**
+     * Сохраняет график анализа производительности в PNG-файл.
+     *
+     * @param arraySize размер массива чисел для проверки.
+     */
     public static void saveAnalysisChart(int arraySize) {
         try {
             ChartUtils.saveChartAsPNG(new File(FileName), getAnalysisChart(arraySize), 800, 600);
@@ -106,6 +141,11 @@ public class PerformanceAnalyzer {
         }
     }
 
+    /**
+     * Настраивает и возвращает рендерер для графика.
+     *
+     * @return настроенный {@link XYLineAndShapeRenderer}.
+     */
     private static XYLineAndShapeRenderer setupAndGetRenderer() {
         XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
         renderer.setSeriesShapesVisible(0, false);
@@ -120,6 +160,13 @@ public class PerformanceAnalyzer {
         return renderer;
     }
 
+    /**
+     * Точка входа в программу. Создает и сохраняет график анализа производительности.
+     * Рекомендуется пользоваться {@code psvm} в данном классе, а не методами тестового класса для
+     * получения корректной информации.
+     *
+     * @param args аргументы командной строки (не используются).
+     */
     public static void main(String[] args) {
         saveAnalysisChart(1_000_000);
     }

@@ -6,7 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Набор тестов для проверки корректности работы класса {@link CompositeChecker}.
+ */
 public class CompositeCheckerTest {
+
+    /**
+     * Проверяет, что метод выбрасывает {@link IllegalArgumentException} при передаче некорректного
+     * массива чисел.
+     */
     @Test
     void illegalArgumentExceptionTest() {
         assertThrows(
@@ -19,6 +27,9 @@ public class CompositeCheckerTest {
         );
     }
 
+    /**
+     * Проверяет корректность поиска составных чисел в массиве разными методами.
+     */
     @Test
     void compositeFindingCheck() {
         assertTrue(CompositeChecker.streamCompositeCheck(new int[]{2, 3, 4, 7}));
@@ -31,5 +42,4 @@ public class CompositeCheckerTest {
         assertFalse(CompositeChecker.threadCompositeCheck(new int[]{2, 3, 5, 7}, 3));
         assertFalse(CompositeChecker.sequentialCompositeCheck(new int[]{2, 3, 5, 7}));
     }
-
 }
