@@ -76,6 +76,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">CompositeChecker</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Утилитарный класс для проверки наличия составных чисел в массиве различными методами.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -105,17 +106,28 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#sequentialCompositeCheck(int%5B%5D)" class="member-name-link">sequentialCompositeCheck</a><wbr>(int[]&nbsp;array)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Проверяет, содержит ли массив хотя бы одно составное число с использованием
+ последовательного алгоритма.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#streamCompositeCheck(int%5B%5D)" class="member-name-link">streamCompositeCheck</a><wbr>(int[]&nbsp;array)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Проверяет, содержит ли массив хотя бы одно составное число с использованием stream API.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#threadCompositeCheck(int%5B%5D)" class="member-name-link">threadCompositeCheck</a><wbr>(int[]&nbsp;array)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Проверяет, содержит ли массив хотя бы одно составное число с использованием многопоточного
+ алгоритма.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#threadCompositeCheck(int%5B%5D,int)" class="member-name-link">threadCompositeCheck</a><wbr>(int[]&nbsp;array,
  int&nbsp;numThreads)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Проверяет, содержит ли массив хотя бы одно составное число с использованием многопоточного
+ алгоритма с заданным количеством потоков.</div>
+</div>
 </div>
 </div>
 </div>
@@ -151,12 +163,28 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="sequentialCompositeCheck(int[])">
 <h3>sequentialCompositeCheck</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">sequentialCompositeCheck</span><wbr><span class="parameters">(int[]&nbsp;array)</span></div>
+<div class="block">Проверяет, содержит ли массив хотя бы одно составное число с использованием
+ последовательного алгоритма.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>array</code> - массив целых чисел.</dd>
+<dt>Returns:</dt>
+<dd>true, если массив содержит хотя бы одно составное число, иначе false.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="threadCompositeCheck(int[])">
 <h3>threadCompositeCheck</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">threadCompositeCheck</span><wbr><span class="parameters">(int[]&nbsp;array)</span></div>
+<div class="block">Проверяет, содержит ли массив хотя бы одно составное число с использованием многопоточного
+ алгоритма.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>array</code> - массив целых чисел.</dd>
+<dt>Returns:</dt>
+<dd>true, если массив содержит хотя бы одно составное число, иначе false.</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -164,12 +192,28 @@ loadScripts(document, 'script');</script>
 <h3>threadCompositeCheck</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">threadCompositeCheck</span><wbr><span class="parameters">(int[]&nbsp;array,
  int&nbsp;numThreads)</span></div>
+<div class="block">Проверяет, содержит ли массив хотя бы одно составное число с использованием многопоточного
+ алгоритма с заданным количеством потоков.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>array</code> - массив целых чисел.</dd>
+<dd><code>numThreads</code> - количество потоков для обработки массива.</dd>
+<dt>Returns:</dt>
+<dd>true, если массив содержит хотя бы одно составное число, иначе false.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="streamCompositeCheck(int[])">
 <h3>streamCompositeCheck</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">streamCompositeCheck</span><wbr><span class="parameters">(int[]&nbsp;array)</span></div>
+<div class="block">Проверяет, содержит ли массив хотя бы одно составное число с использованием stream API.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>array</code> - массив целых чисел.</dd>
+<dt>Returns:</dt>
+<dd>true, если массив содержит хотя бы одно составное число, иначе false.</dd>
+</dl>
 </section>
 </li>
 </ul>
