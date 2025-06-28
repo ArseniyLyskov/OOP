@@ -1,18 +1,18 @@
 package ru.nsu.lyskov.views;
 
+import static ru.nsu.lyskov.Constants.CELL_SIDE;
+import static ru.nsu.lyskov.Constants.M_COLUMNS;
+import static ru.nsu.lyskov.Constants.N_ROWS;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
-
 import javafx.util.Duration;
-import ru.nsu.lyskov.models.GameModel;
 
 public class GameView {
-    public static final int CELL_SIDE = 10;
-
     private final Canvas canvas;
     private final GraphicsContext gc;
     private final Label scoreLabel;
@@ -25,25 +25,8 @@ public class GameView {
         this.scoreLabel = scoreLabel;
         this.statusLabel = statusLabel;
 
-        canvas.setWidth(GameModel.COLUMNS * CELL_SIDE);
-        canvas.setHeight(GameModel.ROWS * CELL_SIDE);
-    }
-
-    private void showStatus(String message, String color) {
-        statusLabel.setText(message);
-        statusLabel.setStyle("-fx-text-fill: " + color + ";");
-        statusLabel.setVisible(true);
-
-        if (blinkTimeline != null) {
-            blinkTimeline.stop();
-        }
-
-        blinkTimeline = new Timeline(
-                new KeyFrame(Duration.seconds(0.5), e -> statusLabel.setVisible(false)),
-                new KeyFrame(Duration.seconds(1.0), e -> statusLabel.setVisible(true))
-        );
-        blinkTimeline.setCycleCount(Timeline.INDEFINITE);
-        blinkTimeline.play();
+        canvas.setWidth(M_COLUMNS * CELL_SIDE);
+        canvas.setHeight(N_ROWS * CELL_SIDE);
     }
 
     public void showWinStatus() {
@@ -72,5 +55,22 @@ public class GameView {
 
     public void drawInitial() {
         clear();
+    }
+
+    private void showStatus(String message, String color) {
+        statusLabel.setText(message);
+        statusLabel.setStyle("-fx-text-fill: " + color + ";");
+        statusLabel.setVisible(true);
+
+        if (blinkTimeline != null) {
+            blinkTimeline.stop();
+        }
+
+        blinkTimeline = new Timeline(
+                new KeyFrame(Duration.seconds(0.5), e -> statusLabel.setVisible(false)),
+                new KeyFrame(Duration.seconds(1.0), e -> statusLabel.setVisible(true))
+        );
+        blinkTimeline.setCycleCount(Timeline.INDEFINITE);
+        blinkTimeline.play();
     }
 }
