@@ -1,0 +1,9 @@
+module:ru.nsu.lyskov
+ru.nsu.lyskov
+ru.nsu.lyskov.controllers
+ru.nsu.lyskov.models
+ru.nsu.lyskov.models.food
+ru.nsu.lyskov.models.map
+ru.nsu.lyskov.models.snake
+ru.nsu.lyskov.views
+ru.nsu.lyskov.views.rendering
