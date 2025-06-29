@@ -11,22 +11,25 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import ru.nsu.lyskov.models.GameModel;
 
 public class GameView {
-    private final Canvas canvas;
+    private final int CANVAS_WIDTH;
+    private final int CANVAS_HEIGHT;
     private final GraphicsContext gc;
     private final Label scoreLabel;
     private final Label statusLabel;
     private Timeline blinkTimeline;
 
     public GameView(Canvas canvas, Label scoreLabel, Label statusLabel) {
-        this.canvas = canvas;
         this.gc = canvas.getGraphicsContext2D();
         this.scoreLabel = scoreLabel;
         this.statusLabel = statusLabel;
+        CANVAS_WIDTH = M_COLUMNS * CELL_SIDE;
+        CANVAS_HEIGHT = N_ROWS * CELL_SIDE;
 
-        canvas.setWidth(M_COLUMNS * CELL_SIDE);
-        canvas.setHeight(N_ROWS * CELL_SIDE);
+        canvas.setWidth(CANVAS_WIDTH);
+        canvas.setHeight(CANVAS_HEIGHT);
     }
 
     public void showWinStatus() {
@@ -45,16 +48,12 @@ public class GameView {
         if (blinkTimeline != null) {
             blinkTimeline.stop();
         }
-        clear();
-    }
-
-    public void clear() {
         gc.setFill(Color.BLACK);
-        gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        gc.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     }
 
-    public void drawInitial() {
-        clear();
+    public void redraw(GameModel model) {
+        model.render(gc);
     }
 
     private void showStatus(String message, String color) {

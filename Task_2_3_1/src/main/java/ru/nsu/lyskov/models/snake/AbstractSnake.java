@@ -2,8 +2,9 @@ package ru.nsu.lyskov.models.snake;
 
 import java.util.LinkedList;
 import ru.nsu.lyskov.Direction;
+import ru.nsu.lyskov.views.rendering.Renderable;
 
-public abstract class AbstractSnake {
+public abstract class AbstractSnake implements Renderable {
     private final LinkedList<SnakeSegment> segments = new LinkedList<>();
     private Direction direction;
 
@@ -109,8 +110,8 @@ public abstract class AbstractSnake {
         return segments.size() == 1;
     }
 
-    public int getSnakeLength() {
-        return segments.size();
+    public LinkedList<SnakeSegment> getSegments() {
+        return segments;
     }
 
     public Direction getDirection() {
@@ -130,5 +131,4 @@ public abstract class AbstractSnake {
         this.direction = newDirection;
     }
 
-    public abstract void render();
 }

@@ -12,4 +12,6 @@ module ru.nsu.lyskov {
     opens ru.nsu.lyskov.models to javafx.fxml;
     exports ru.nsu.lyskov.models.snake;
     opens ru.nsu.lyskov.models.snake to javafx.fxml;
+    exports ru.nsu.lyskov.views.rendering;
+    opens ru.nsu.lyskov.views.rendering to javafx.fxml;
 }
