@@ -1,12 +1,17 @@
 package ru.nsu.lyskov.controllers;
 
+import static javafx.scene.input.KeyCode.ENTER;
 import static ru.nsu.lyskov.Constants.CELL_SIDE;
+import static ru.nsu.lyskov.Constants.L_WIN_SCORE;
 import static ru.nsu.lyskov.Constants.M_COLUMNS;
 import static ru.nsu.lyskov.Constants.N_ROWS;
+import static ru.nsu.lyskov.Constants.SPEED_BASE_INTERVAL;
+import static ru.nsu.lyskov.Constants.SPEED_INCREASE_FACTOR;
 
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -15,6 +20,8 @@ import ru.nsu.lyskov.models.GameModel;
 import ru.nsu.lyskov.views.GameView;
 
 public class GameController {
+    @FXML
+    private Button startButton;
     @FXML
     private Canvas gameCanvas;
     @FXML
@@ -27,6 +34,8 @@ public class GameController {
 
     private AnimationTimer gameLoop;
     private boolean isRunning = false;
+    private Direction pendingDirection = null;
+    private long currentInterval = SPEED_BASE_INTERVAL;
 
     public void setScene(Stage stage) {
         model = new GameModel();
@@ -40,13 +49,19 @@ public class GameController {
         stage.setWidth(canvasWidth + 60);
         stage.setHeight(canvasHeight + 100);
 
+        startButton.setFocusTraversable(false);
         stage.getScene().setOnKeyPressed(this::handleKeyPress);
 
         reset();
     }
 
     private void handleKeyPress(KeyEvent event) {
-        if (!isRunning) return;
+        if (!isRunning) {
+            if (event.getCode() == ENTER || event.getCode().isWhitespaceKey()) {
+                onStart();
+            }
+            return;
+        }
 
         Direction newDirection = switch (event.getCode()) {
             case UP, W -> Direction.UP;
@@ -56,20 +71,21 @@ public class GameController {
             default -> null;
         };
 
-        if (newDirection != null && !newDirection.isOpposite(model.getSnake().getDirection())) {
-            model.getSnake().setDirection(newDirection);
+        if (newDirection != null && model.getSnake().canTurn(newDirection)) {
+            pendingDirection = newDirection;
         }
     }
 
     private void resetGameLoop() {
         isRunning = false;
+        currentInterval = SPEED_BASE_INTERVAL;
+
         gameLoop = new AnimationTimer() {
             private long lastUpdate = 0;
-            private final long interval = 100_000_000;
 
             @Override
             public void handle(long now) {
-                if (now - lastUpdate >= interval) {
+                if (now - lastUpdate >= currentInterval) {
                     updateGame();
                     lastUpdate = now;
                 }
@@ -90,9 +106,29 @@ public class GameController {
     }
 
     private void updateGame() {
-        model.update();
-        scoreLabel.setText(String.valueOf(model.getScore()));
+        if (pendingDirection != null) {
+            model.getSnake().setDirection(pendingDirection);
+            pendingDirection = null;
+        }
+
+        model.getSnake().move();
+        boolean foodCollision = model.checkFoodCollision();
         view.redraw(model);
+
+        if (model.checkSelfCollision()) {
+            view.showLoseStatus();
+            gameLoop.stop();
+            return;
+        }
+
+        if (foodCollision) {
+            scoreLabel.setText(model.getScore() + " / " + L_WIN_SCORE);
+            currentInterval = (long) (currentInterval * SPEED_INCREASE_FACTOR);
+            if (model.getScore() >= L_WIN_SCORE) {
+                view.showWinStatus();
+                gameLoop.stop();
+            }
+        }
     }
 
     @FXML
@@ -107,6 +143,7 @@ public class GameController {
 
         model.reset();
         view.reset();
+        pendingDirection = null;
 
         resetGameLoop();
     }

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Random;
 import javafx.scene.canvas.GraphicsContext;
 import ru.nsu.lyskov.Direction;
+import ru.nsu.lyskov.Utils;
+import ru.nsu.lyskov.models.food.AbstractFood;
 import ru.nsu.lyskov.models.snake.SnakeSegment;
 import ru.nsu.lyskov.views.rendering.PlayerSnake;
 import ru.nsu.lyskov.views.rendering.Renderable;
@@ -18,7 +20,7 @@ public class GameModel implements Renderable {
 
     private StandardMap map;
     private PlayerSnake snake;
-    private final List<StandardFood> foods = new ArrayList<>();
+    private final List<AbstractFood> foods = new ArrayList<>();
     private int score;
 
     public GameModel() {
@@ -30,16 +32,12 @@ public class GameModel implements Renderable {
         map = new StandardMap();
         snake = new PlayerSnake(RANDOM.nextInt(map.getWidth()),
                                 RANDOM.nextInt(map.getHeight()),
-                                Direction.RIGHT);
+                                Utils.randomEnum(Direction.class)
+        );
         foods.clear();
         for (int i = 0; i < T_FOOD_ELEMENTS; i++) {
-            addNewFood();
+            addStandardFood();
         }
-    }
-
-    public void update() {
-        snake.move();
-        checkFoodCollision();
     }
 
     public PlayerSnake getSnake() {
@@ -54,7 +52,7 @@ public class GameModel implements Renderable {
         score++;
     }
 
-    private void addNewFood() {
+    private void addStandardFood() {
         int x, y;
         do {
             x = RANDOM.nextInt(map.getWidth());
@@ -71,7 +69,7 @@ public class GameModel implements Renderable {
             }
         }
 
-        for (StandardFood food : foods) {
+        for (AbstractFood food : foods) {
             if (food.getX() == x && food.getY() == y) {
                 return false;
             }
@@ -80,28 +78,49 @@ public class GameModel implements Renderable {
         return true;
     }
 
-    private void checkFoodCollision() {
+    public boolean checkFoodCollision() {
         SnakeSegment head = snake.getSegments().getFirst();
+        List<AbstractFood> foodsToRemove = new ArrayList<>();
+        boolean collision = false;
+        boolean shouldAddStandardFood = false;
 
-        for (int i = 0; i < foods.size(); i++) {
-            StandardFood food = foods.get(i);
+        for (AbstractFood food : foods) {
             if (head.getX() == food.getX() && head.getY() == food.getY()) {
-                snake.grow();
-                incrementScore();
-                foods.remove(i);
-                addNewFood();
-                break;
+                collision = true;
+                if (food instanceof StandardFood) {
+                    snake.grow();
+                    incrementScore();
+                    foodsToRemove.add(food);
+                    shouldAddStandardFood = true;
+                }
             }
         }
+
+        foods.removeAll(foodsToRemove);
+        if (shouldAddStandardFood) {
+            addStandardFood();
+        }
+
+        return collision;
+    }
+
+    public boolean checkSelfCollision() {
+        SnakeSegment head = snake.getSegments().getFirst();
+        for (int i = 1; i < snake.getSegments().size(); i++) {
+            SnakeSegment segment = snake.getSegments().get(i);
+            if (head.getX() == segment.getX() && head.getY() == segment.getY()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public void render(GraphicsContext gc) {
         map.render(gc);
-        for (StandardFood food : foods) {
+        for (AbstractFood food : foods) {
             food.render(gc);
         }
         snake.render(gc);
     }
-
 }

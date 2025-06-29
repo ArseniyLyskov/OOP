@@ -1,6 +1,7 @@
 package ru.nsu.lyskov.views;
 
 import static ru.nsu.lyskov.Constants.CELL_SIDE;
+import static ru.nsu.lyskov.Constants.L_WIN_SCORE;
 import static ru.nsu.lyskov.Constants.M_COLUMNS;
 import static ru.nsu.lyskov.Constants.N_ROWS;
 
@@ -9,9 +10,9 @@ import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import ru.nsu.lyskov.models.GameModel;
+import ru.nsu.lyskov.views.rendering.StandardMap;
 
 public class GameView {
     private final int CANVAS_WIDTH;
@@ -43,13 +44,12 @@ public class GameView {
     }
 
     public void reset() {
-        scoreLabel.setText("0");
+        scoreLabel.setText("0 / " + L_WIN_SCORE);
         statusLabel.setVisible(false);
         if (blinkTimeline != null) {
             blinkTimeline.stop();
         }
-        gc.setFill(Color.BLACK);
-        gc.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        new StandardMap().render(gc);
     }
 
     public void redraw(GameModel model) {
