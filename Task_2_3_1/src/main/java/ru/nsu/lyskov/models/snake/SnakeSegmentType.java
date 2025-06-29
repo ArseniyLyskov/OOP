@@ -70,23 +70,23 @@ public enum SnakeSegmentType {
 
         return switch (from) {
             case UP -> switch (to) {
-                case LEFT -> BODY_TURN_UP_LEFT;
-                case RIGHT -> BODY_TURN_UP_RIGHT;
+                case LEFT -> BODY_TURN_DOWN_LEFT;
+                case RIGHT -> BODY_TURN_DOWN_RIGHT;
                 default -> throw new IllegalArgumentException("Invalid turn: UP -> " + to);
             };
             case DOWN -> switch (to) {
-                case LEFT -> BODY_TURN_DOWN_LEFT;
-                case RIGHT -> BODY_TURN_DOWN_RIGHT;
+                case LEFT -> BODY_TURN_UP_LEFT;
+                case RIGHT -> BODY_TURN_UP_RIGHT;
                 default -> throw new IllegalArgumentException("Invalid turn: DOWN -> " + to);
             };
             case LEFT -> switch (to) {
-                case UP -> BODY_TURN_UP_LEFT;
-                case DOWN -> BODY_TURN_DOWN_LEFT;
+                case UP -> BODY_TURN_UP_RIGHT;
+                case DOWN -> BODY_TURN_DOWN_RIGHT;
                 default -> throw new IllegalArgumentException("Invalid turn: LEFT -> " + to);
             };
             case RIGHT -> switch (to) {
-                case UP -> BODY_TURN_UP_RIGHT;
-                case DOWN -> BODY_TURN_DOWN_RIGHT;
+                case UP -> BODY_TURN_UP_LEFT;
+                case DOWN -> BODY_TURN_DOWN_LEFT;
                 default -> throw new IllegalArgumentException("Invalid turn: RIGHT -> " + to);
             };
         };
