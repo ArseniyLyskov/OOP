@@ -4,14 +4,13 @@ import ru.nsu.lyskov.Direction;
 
 public class SnakeSegment {
     private final int x, y;
-    private final Direction from, to;
+    private final Direction direction;
     private SnakeSegmentType type;
 
-    public SnakeSegment(int x, int y, Direction from, Direction to, SnakeSegmentType type) {
+    public SnakeSegment(int x, int y, Direction direction, SnakeSegmentType type) {
         this.x = x;
         this.y = y;
-        this.from = from;
-        this.to = to;
+        this.direction = direction;
         this.type = type;
     }
 
@@ -23,12 +22,8 @@ public class SnakeSegment {
         return y;
     }
 
-    public Direction getDirectionFrom() {
-        return from;
-    }
-
-    public Direction getDirectionTo() {
-        return to;
+    public Direction getDirection() {
+        return direction;
     }
 
     public SnakeSegmentType getType() {

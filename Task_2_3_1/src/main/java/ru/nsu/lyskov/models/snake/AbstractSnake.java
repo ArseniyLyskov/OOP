@@ -1,5 +1,8 @@
 package ru.nsu.lyskov.models.snake;
 
+import static ru.nsu.lyskov.Constants.M_COLUMNS;
+import static ru.nsu.lyskov.Constants.N_ROWS;
+
 import java.util.LinkedList;
 import ru.nsu.lyskov.Direction;
 import ru.nsu.lyskov.views.rendering.Renderable;
@@ -10,9 +13,8 @@ public abstract class AbstractSnake implements Renderable {
 
     public AbstractSnake(int startX, int startY, Direction initialDirection) {
         this.direction = initialDirection;
-        segments.add(new SnakeSegment(
-                startX, startY,
-                initialDirection, initialDirection,
+        addHead(new SnakeSegment(
+                startX, startY, initialDirection,
                 SnakeSegmentType.getSingleSegmentType(initialDirection)
         ));
     }
@@ -29,37 +31,39 @@ public abstract class AbstractSnake implements Renderable {
     }
 
     public void move() {
-        SnakeSegment oldHead = segments.getFirst();
+        boolean wasSingleSegment = isSingleSegment();
+        SnakeSegment oldHead = getHead();
         SnakeSegment newHead = calculateNewHead(oldHead);
+        addHead(newHead);
 
-        if (!isSingleSegment()) {
+        if (!wasSingleSegment) {
             oldHead.changeType(SnakeSegmentType.getBodyType(
-                    oldHead.getDirectionFrom(),
-                    oldHead.getDirectionTo()
+                    oldHead.getDirection(),
+                    newHead.getDirection()
             ));
 
-            SnakeSegment newTail = segments.get(segments.size() - 2);
-            newTail.changeType(SnakeSegmentType.getTailType(newTail.getDirectionTo()));
+            SnakeSegment newTail = getNextSegment(getTail());
+            SnakeSegment beforeNewTail = getNextSegment(newTail);
+            newTail.changeType(SnakeSegmentType.getTailType(beforeNewTail.getDirection()));
         }
 
-        segments.addFirst(newHead);
-        segments.removeLast();
+        removeTail();
     }
 
     public void grow() {
-        SnakeSegment oldTail = segments.getLast();
+        SnakeSegment oldTail = getTail();
+        SnakeSegment newTail = calculateGrownTail(oldTail);
 
         if (isSingleSegment()) {
-            oldTail.changeType(SnakeSegmentType.getHeadType(oldTail.getDirectionTo()));
+            oldTail.changeType(SnakeSegmentType.getHeadType(oldTail.getDirection()));
         } else {
             oldTail.changeType(SnakeSegmentType.getBodyType(
-                    oldTail.getDirectionFrom(),
-                    oldTail.getDirectionTo()
+                    oldTail.getDirection(),
+                    getNextSegment(oldTail).getDirection()
             ));
         }
 
-        SnakeSegment newTail = calculateGrownTail(oldTail);
-        segments.addLast(newTail);
+        addTail(newTail);
     }
 
     private SnakeSegment calculateNewHead(SnakeSegment oldHead) {
@@ -67,21 +71,19 @@ public abstract class AbstractSnake implements Renderable {
         int newY = oldHead.getY();
 
         switch (direction) {
-            case UP -> newY--;
-            case DOWN -> newY++;
-            case LEFT -> newX--;
-            case RIGHT -> newX++;
+            case UP -> newY = (newY - 1 + N_ROWS) % N_ROWS;
+            case DOWN -> newY = (newY + 1) % N_ROWS;
+            case LEFT -> newX = (newX - 1 + M_COLUMNS) % M_COLUMNS;
+            case RIGHT -> newX = (newX + 1) % M_COLUMNS;
         }
 
         return isSingleSegment() ?
                 new SnakeSegment(
-                        newX, newY,
-                        oldHead.getDirectionTo(), direction,
+                        newX, newY, direction,
                         SnakeSegmentType.getSingleSegmentType(direction)
                 ) :
                 new SnakeSegment(
-                        newX, newY,
-                        oldHead.getDirectionTo(), direction,
+                        newX, newY, direction,
                         SnakeSegmentType.getHeadType(direction)
                 );
     }
@@ -90,24 +92,45 @@ public abstract class AbstractSnake implements Renderable {
         int newX = oldTail.getX();
         int newY = oldTail.getY();
 
-        switch (oldTail.getDirectionFrom()) {
-            case UP -> newY++;
-            case DOWN -> newY--;
-            case LEFT -> newX++;
-            case RIGHT -> newX--;
+        switch (oldTail.getDirection()) {
+            case UP -> newY = (newY + 1) % N_ROWS;
+            case DOWN -> newY = (newY - 1 + N_ROWS) % N_ROWS;
+            case LEFT -> newX = (newX + 1) % M_COLUMNS;
+            case RIGHT -> newX = (newX - 1 + M_COLUMNS) % M_COLUMNS;
         }
 
         return new SnakeSegment(
-                newX,
-                newY,
-                oldTail.getDirectionFrom(),
-                oldTail.getDirectionFrom(),
-                SnakeSegmentType.getTailType(oldTail.getDirectionFrom())
+                newX, newY, oldTail.getDirection(),
+                SnakeSegmentType.getTailType(oldTail.getDirection())
         );
     }
 
     private boolean isSingleSegment() {
         return segments.size() == 1;
+    }
+
+    private void addHead(SnakeSegment segment) {
+        segments.addFirst(segment);
+    }
+
+    private void addTail(SnakeSegment segment) {
+        segments.addLast(segment);
+    }
+
+    private void removeTail() {
+        segments.removeLast();
+    }
+
+    private SnakeSegment getNextSegment(SnakeSegment segment) {
+        return segments.get(segments.indexOf(segment) - 1);
+    }
+
+    private SnakeSegment getHead() {
+        return segments.getFirst();
+    }
+
+    private SnakeSegment getTail() {
+        return segments.getLast();
     }
 
     public LinkedList<SnakeSegment> getSegments() {
