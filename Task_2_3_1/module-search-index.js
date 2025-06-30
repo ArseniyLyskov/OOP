@@ -1,1 +1,1 @@
-moduleSearchIndex = [{"l":"ru.nsu.lyskov"}];updateSearchResults();
+moduleSearchIndex = [];updateSearchResults();
