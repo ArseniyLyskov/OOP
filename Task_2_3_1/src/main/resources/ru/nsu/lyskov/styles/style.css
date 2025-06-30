@@ -1,0 +1,48 @@
+/* Background */
+.root {
+    -fx-background-color: #202020;
+}
+
+/* Play button */
+.button.play-button {
+    -fx-font-size: 16px;
+    -fx-background-color: #11dd66;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-padding: 2 7 2 7;
+    -fx-pref-height: 30;
+    -fx-cursor: hand;
+}
+.button.play-button:hover {
+    -fx-background-color: #22ee77;
+}
+
+.button.play-button:pressed {
+    -fx-background-color: #00cc55;
+}
+
+/* Top bar */
+BorderPane.top-bar {
+    -fx-background-color: linear-gradient(to right, #444, #222);
+    -fx-padding: 5 5 5 5;
+}
+
+/* Texts */
+.label.score-label {
+    -fx-text-fill: #11dd66;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+.label.static-label {
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 0 5 0 10;
+}
+
+/* Win/lose label */
+.label.status-label {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffcc00;
+    -fx-padding: 0 10 0 10;
+}
