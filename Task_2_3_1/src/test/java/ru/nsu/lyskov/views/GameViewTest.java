@@ -16,15 +16,23 @@ import org.testfx.framework.junit5.ApplicationTest;
 import ru.nsu.lyskov.models.GameModel;
 
 public class GameViewTest extends ApplicationTest {
+    static {
+        System.setProperty("testfx.robot", "glass");
+        System.setProperty("testfx.headless", "true");
+        System.setProperty("glass.platform", "Monocle");
+        System.setProperty("monocle.platform", "Headless");
+        System.setProperty("prism.order", "sw");
+        System.setProperty("prism.text", "t2k");
+        System.setProperty("java.awt.headless", "true");
+    }
 
     private GameView gameView;
-    private Canvas canvas;
     private Label scoreLabel;
     private Label statusLabel;
 
     @Override
     public void start(Stage stage) {
-        canvas = new Canvas();
+        Canvas canvas = new Canvas();
         scoreLabel = new Label();
         statusLabel = new Label();
         gameView = new GameView(canvas, scoreLabel, statusLabel);

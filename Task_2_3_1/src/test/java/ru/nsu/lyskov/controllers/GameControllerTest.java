@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Objects;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
@@ -13,17 +14,31 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import ru.nsu.lyskov.Direction;
 
 public class GameControllerTest extends ApplicationTest {
+    static {
+        System.setProperty("testfx.robot", "glass");
+        System.setProperty("testfx.headless", "true");
+        System.setProperty("glass.platform", "Monocle");
+        System.setProperty("monocle.platform", "Headless");
+        System.setProperty("prism.order", "sw");
+        System.setProperty("prism.text", "t2k");
+        System.setProperty("java.awt.headless", "true");
+    }
+
     private GameController controller;
-    private Stage stage;
+
+    @BeforeAll
+    public static void ensureHeadless() {
+
+    }
 
     @Override
     public void start(Stage stage) {
-        this.stage = stage;
         controller = new GameController();
 
         Button startButton = new Button("Start");
@@ -36,10 +51,8 @@ public class GameControllerTest extends ApplicationTest {
         inject(controller, "scoreLabel", scoreLabel);
         inject(controller, "statusLabel", statusLabel);
 
-        Scene scene = new Scene(
-                new javafx.scene.Group(gameCanvas, startButton, scoreLabel, statusLabel));
+        Scene scene = new Scene(new Group(gameCanvas, startButton, scoreLabel, statusLabel));
         stage.setScene(scene);
-        stage.show();
 
         controller.setScene(stage);
     }
@@ -47,52 +60,47 @@ public class GameControllerTest extends ApplicationTest {
     @Test
     public void testSetSceneInitializesGame() {
         assertNotNull(controller);
-        assertEquals("0 / " + ru.nsu.lyskov.Constants.L_WIN_SCORE,
-                     ((Label) Objects.requireNonNull(getField(controller, "scoreLabel"))).getText()
-        );
+        String expected = "0 / " + ru.nsu.lyskov.Constants.L_WIN_SCORE;
+        String actual = ((Label) Objects.requireNonNull(
+                getField(controller, "scoreLabel"))).getText();
+        assertEquals(expected, actual);
     }
 
     @Test
     public void testOnStartStartsGameLoop() {
-        interact(() -> controller.onStart());
+        interact(controller::onStart);
         assertTrue((Boolean) getField(controller, "isRunning"));
     }
 
     @Test
     public void testKeyPress() {
-        KeyEvent enterEvent =
-                new KeyEvent(KeyEvent.KEY_PRESSED, "", "", KeyCode.ENTER,
-                             false, false, false, false
-                );
-
-        interact(() -> {
-            try {
-                var method =
-                        GameController.class.getDeclaredMethod("handleKeyPress", KeyEvent.class);
-                method.setAccessible(true);
-                method.invoke(controller, enterEvent);
-            } catch (Exception ignored) {
-            }
-        });
-
-        KeyEvent wEvent =
-                new KeyEvent(KeyEvent.KEY_PRESSED, "W", "W", KeyCode.W,
-                             false, false, false, false
+        KeyEvent enterEvent = new KeyEvent(KeyEvent.KEY_PRESSED, "", "", KeyCode.ENTER,
+                                           false, false, false, false
+        );
+        KeyEvent wEvent = new KeyEvent(KeyEvent.KEY_PRESSED, "W", "W", KeyCode.W,
+                                       false, false, false, false
         );
 
         interact(() -> {
-            try {
-                var method =
-                        GameController.class.getDeclaredMethod("handleKeyPress", KeyEvent.class);
-                method.setAccessible(true);
-                method.invoke(controller, wEvent);
-            } catch (Exception ignored) {
-            }
+            invokePrivateMethod(controller, "handleKeyPress", enterEvent);
+        });
+
+        interact(() -> {
+            invokePrivateMethod(controller, "handleKeyPress", wEvent);
         });
 
         assertEquals(Direction.UP, getField(controller, "pendingDirection"));
     }
 
+    private void invokePrivateMethod(Object target, String methodName, Object arg) {
+        try {
+            var method = target.getClass().getDeclaredMethod(methodName, KeyEvent.class);
+            method.setAccessible(true);
+            method.invoke(target, arg);
+        } catch (Exception e) {
+            fail("invokePrivateMethod failed: " + e.getMessage());
+        }
+    }
 
     private void inject(Object target, String fieldName, Object value) {
         try {

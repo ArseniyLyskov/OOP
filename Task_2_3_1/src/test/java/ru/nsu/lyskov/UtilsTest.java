@@ -1,6 +1,6 @@
 package ru.nsu.lyskov;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static ru.nsu.lyskov.Utils.randomEnum;
 
 import org.junit.jupiter.api.Test;
