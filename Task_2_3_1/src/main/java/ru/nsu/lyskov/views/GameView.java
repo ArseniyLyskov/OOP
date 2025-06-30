@@ -14,35 +14,51 @@ import javafx.util.Duration;
 import ru.nsu.lyskov.models.GameModel;
 import ru.nsu.lyskov.views.rendering.StandardMap;
 
+/**
+ * Класс, отвечающий за визуальное представление игры "Змейка". Управляет отрисовкой игрового поля,
+ * отображением счёта и статуса игры.
+ */
 public class GameView {
-    private final int CANVAS_WIDTH;
-    private final int CANVAS_HEIGHT;
     private final GraphicsContext gc;
     private final Label scoreLabel;
     private final Label statusLabel;
     private Timeline blinkTimeline;
 
+    /**
+     * Конструктор класса GameView.
+     *
+     * @param canvas      холст для отрисовки игрового поля
+     * @param scoreLabel  текстовое поле для отображения счёта
+     * @param statusLabel текстовое поле для отображения статуса игры
+     */
     public GameView(Canvas canvas, Label scoreLabel, Label statusLabel) {
         this.gc = canvas.getGraphicsContext2D();
         this.scoreLabel = scoreLabel;
         this.statusLabel = statusLabel;
-        CANVAS_WIDTH = M_COLUMNS * CELL_SIDE;
-        CANVAS_HEIGHT = N_ROWS * CELL_SIDE;
 
-        canvas.setWidth(CANVAS_WIDTH);
-        canvas.setHeight(CANVAS_HEIGHT);
+        canvas.setWidth(M_COLUMNS * CELL_SIDE);
+        canvas.setHeight(N_ROWS * CELL_SIDE);
     }
 
+    /**
+     * Отображает сообщение о победе в игре.
+     */
     public void showWinStatus() {
         statusLabel.setVisible(true);
         showStatus("🎉 SIGMA 🎉", "#00ff00");
     }
 
+    /**
+     * Отображает сообщение о проигрыше в игре.
+     */
     public void showLoseStatus() {
         statusLabel.setVisible(true);
         showStatus("💀 NON SIGMA 💀", "#ff3333");
     }
 
+    /**
+     * Сбрасывает состояние представления к начальному.
+     */
     public void reset() {
         scoreLabel.setText("0 / " + L_WIN_SCORE);
         statusLabel.setVisible(false);
@@ -52,10 +68,22 @@ public class GameView {
         new StandardMap().render(gc);
     }
 
+    /**
+     * Перерисовывает игровое поле в соответствии с текущей моделью.
+     *
+     * @param model игровая модель, содержащая текущее состояние игры
+     */
     public void redraw(GameModel model) {
         model.render(gc);
     }
 
+    /**
+     * Отображает статусное сообщение с заданным текстом и цветом. Запускает анимацию мигания
+     * сообщения.
+     *
+     * @param message текст сообщения
+     * @param color   цвет текста в формате HEX
+     */
     private void showStatus(String message, String color) {
         statusLabel.setText(message);
         statusLabel.setStyle("-fx-text-fill: " + color + ";");

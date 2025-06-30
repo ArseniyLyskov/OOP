@@ -1,10 +1,19 @@
 package ru.nsu.lyskov;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Тестовый класс для проверки функциональности enum {@link Direction}.
+ */
 class DirectionTest {
+
+    /**
+     * Тестирует метод {@link Direction#isOpposite(Direction)}. Проверяет все возможные комбинации
+     * направлений.
+     */
     @Test
     void testIsOpposite() {
         for (Direction direction1 : Direction.values()) {
@@ -15,6 +24,7 @@ class DirectionTest {
                 System.out.print(" " + direction2 + "\n");
             }
         }
+
         assertTrue(Direction.UP.isOpposite(Direction.DOWN));
         assertTrue(Direction.LEFT.isOpposite(Direction.RIGHT));
         assertFalse(Direction.UP.isOpposite(Direction.LEFT));

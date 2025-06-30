@@ -7,10 +7,22 @@ import java.util.LinkedList;
 import ru.nsu.lyskov.Direction;
 import ru.nsu.lyskov.views.rendering.Renderable;
 
+/**
+ * Абстрактный класс, представляющий базовую реализацию змейки в игре. Содержит общую логику
+ * перемещения, роста и управления направлением движения.
+ */
 public abstract class AbstractSnake implements Renderable {
     private final LinkedList<SnakeSegment> segments = new LinkedList<>();
     private Direction direction;
 
+    /**
+     * Конструктор змейки.
+     *
+     * @param startX           начальная абсцисса головы змейки
+     * @param startY           начальная ордината Y головы змейки
+     * @param initialDirection начальное направление движения
+     * @throws IllegalArgumentException если начальные координаты выходят за границы игрового поля
+     */
     public AbstractSnake(int startX, int startY, Direction initialDirection) {
         this.direction = initialDirection;
         addHead(new SnakeSegment(
@@ -24,12 +36,16 @@ public abstract class AbstractSnake implements Renderable {
      * возвращает true.
      *
      * @param newDirection направление для проверки
-     * @return true если поворот допустим
+     * @return true если поворот допустим, false если направления противоположны
      */
     public boolean canTurn(Direction newDirection) {
         return isSingleSegment() || !direction.isOpposite(newDirection);
     }
 
+    /**
+     * Перемещает змейку в текущем направлении. Добавляет новый сегмент головы и удаляет хвостовой
+     * сегмент. Обновляет типы сегментов при необходимости.
+     */
     public void move() {
         boolean wasSingleSegment = isSingleSegment();
         SnakeSegment oldHead = getHead();
@@ -50,6 +66,10 @@ public abstract class AbstractSnake implements Renderable {
         removeTail();
     }
 
+    /**
+     * Увеличивает длину змейки на один сегмент. Добавляет новый хвостовой сегмент и обновляет тип
+     * предыдущего хвоста.
+     */
     public void grow() {
         SnakeSegment oldTail = getTail();
         SnakeSegment newTail = calculateGrownTail(oldTail);
@@ -66,6 +86,40 @@ public abstract class AbstractSnake implements Renderable {
         addTail(newTail);
     }
 
+    /**
+     * Возвращает список всех сегментов змейки.
+     *
+     * @return список сегментов в порядке от головы к хвосту
+     */
+    public LinkedList<SnakeSegment> getSegments() {
+        return segments;
+    }
+
+    /**
+     * Возвращает текущее направление движения змейки.
+     *
+     * @return текущее направление
+     */
+    public Direction getDirection() {
+        return direction;
+    }
+
+    /**
+     * Устанавливает новое направление движения с проверкой допустимости.
+     *
+     * @param newDirection новое направление
+     * @throws InvalidMoveDirectionException если поворот невозможен
+     */
+    public void setDirection(Direction newDirection) {
+        if (!canTurn(newDirection)) {
+            throw new InvalidMoveDirectionException(direction, newDirection);
+        }
+        this.direction = newDirection;
+    }
+
+    /**
+     * Вычисляет новую позицию и внешний вид головы при перемещении
+     */
     private SnakeSegment calculateNewHead(SnakeSegment oldHead) {
         int newX = oldHead.getX();
         int newY = oldHead.getY();
@@ -88,6 +142,9 @@ public abstract class AbstractSnake implements Renderable {
                 );
     }
 
+    /**
+     * Вычисляет позицию и внешний вид нового хвоста при росте змейки
+     */
     private SnakeSegment calculateGrownTail(SnakeSegment oldTail) {
         int newX = oldTail.getX();
         int newY = oldTail.getY();
@@ -105,53 +162,52 @@ public abstract class AbstractSnake implements Renderable {
         );
     }
 
+    /**
+     * Проверяет, состоит ли змейка из одного сегмента
+     */
     private boolean isSingleSegment() {
         return segments.size() == 1;
     }
 
+    /**
+     * Добавляет сегмент в начало списка (голова)
+     */
     private void addHead(SnakeSegment segment) {
         segments.addFirst(segment);
     }
 
+    /**
+     * Добавляет сегмент в конец списка (хвост)
+     */
     private void addTail(SnakeSegment segment) {
         segments.addLast(segment);
     }
 
+    /**
+     * Удаляет последний сегмент (хвост)
+     */
     private void removeTail() {
         segments.removeLast();
     }
 
+    /**
+     * Возвращает сегмент, следующий за указанным
+     */
     private SnakeSegment getNextSegment(SnakeSegment segment) {
         return segments.get(segments.indexOf(segment) - 1);
     }
 
+    /**
+     * Возвращает головной сегмент
+     */
     private SnakeSegment getHead() {
         return segments.getFirst();
     }
 
+    /**
+     * Возвращает хвостовой сегмент
+     */
     private SnakeSegment getTail() {
         return segments.getLast();
     }
-
-    public LinkedList<SnakeSegment> getSegments() {
-        return segments;
-    }
-
-    public Direction getDirection() {
-        return direction;
-    }
-
-    /**
-     * Устанавливает новое направление движения с проверкой допустимости.
-     *
-     * @param newDirection новое направление
-     * @throws InvalidMoveDirectionException если поворот невозможен
-     */
-    public void setDirection(Direction newDirection) {
-        if (!canTurn(newDirection)) {
-            throw new InvalidMoveDirectionException(direction, newDirection);
-        }
-        this.direction = newDirection;
-    }
-
 }

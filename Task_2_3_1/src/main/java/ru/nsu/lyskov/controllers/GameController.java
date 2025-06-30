@@ -19,6 +19,10 @@ import ru.nsu.lyskov.Direction;
 import ru.nsu.lyskov.models.GameModel;
 import ru.nsu.lyskov.views.GameView;
 
+/**
+ * Контроллер игры "Змейка", управляющий игровым процессом. Обрабатывает пользовательский ввод,
+ * обновляет игровое состояние и синхронизирует модель с представлением.
+ */
 public class GameController {
     @FXML
     private Button startButton;
@@ -37,6 +41,11 @@ public class GameController {
     private Direction pendingDirection = null;
     private long currentInterval = SPEED_BASE_INTERVAL;
 
+    /**
+     * Инициализирует игровую сцену и настраивает начальное состояние.
+     *
+     * @param stage главное окно приложения
+     */
     public void setScene(Stage stage) {
         model = new GameModel();
         view = new GameView(gameCanvas, scoreLabel, statusLabel);
@@ -55,6 +64,12 @@ public class GameController {
         reset();
     }
 
+    /**
+     * Обрабатывает нажатия клавиш для управления игрой. Принимает команды движения (WASD/стрелки)
+     * и старта игры (Enter/пробел).
+     *
+     * @param event событие нажатия клавиши
+     */
     private void handleKeyPress(KeyEvent event) {
         if (!isRunning) {
             if (event.getCode() == ENTER || event.getCode().isWhitespaceKey()) {
@@ -76,6 +91,9 @@ public class GameController {
         }
     }
 
+    /**
+     * Инициализирует игровой цикл с базовыми параметрами.
+     */
     private void resetGameLoop() {
         isRunning = false;
         currentInterval = SPEED_BASE_INTERVAL;
@@ -105,6 +123,10 @@ public class GameController {
         };
     }
 
+    /**
+     * Обновляет игровое состояние: перемещает змейку, проверяет столкновения, обновляет счет и
+     * скорость игры.
+     */
     private void updateGame() {
         if (pendingDirection != null) {
             model.getSnake().setDirection(pendingDirection);
@@ -131,12 +153,19 @@ public class GameController {
         }
     }
 
+    /**
+     * Обработчик нажатия кнопки старта. Запускает новую игру после сброса состояния.
+     */
     @FXML
     public void onStart() {
         reset();
         gameLoop.start();
     }
 
+    /**
+     * Сбрасывает игровое состояние к начальному. Останавливает текущую игру, реинициализирует
+     * модель и представление.
+     */
     private void reset() {
         if (gameLoop != null)
             gameLoop.stop();

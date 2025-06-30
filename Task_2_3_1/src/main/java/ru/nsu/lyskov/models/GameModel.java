@@ -15,6 +15,11 @@ import ru.nsu.lyskov.views.rendering.Renderable;
 import ru.nsu.lyskov.views.rendering.StandardFood;
 import ru.nsu.lyskov.views.rendering.StandardMap;
 
+/**
+ * Класс, представляющий игровую модель "Змейки". Содержит логику игры, включая змейку, еду,
+ * подсчет очков и обработку столкновений. Реализует интерфейс Renderable для отрисовки игрового
+ * состояния.
+ */
 public class GameModel implements Renderable {
     private static final Random RANDOM = new Random();
 
@@ -23,10 +28,16 @@ public class GameModel implements Renderable {
     private final List<AbstractFood> foods = new ArrayList<>();
     private int score;
 
+    /**
+     * Конструктор игровой модели.
+     */
     public GameModel() {
         reset();
     }
 
+    /**
+     * Сбрасывает состояние игры к начальному.
+     */
     public void reset() {
         score = 0;
         map = new StandardMap();
@@ -40,18 +51,34 @@ public class GameModel implements Renderable {
         }
     }
 
+    /**
+     * Возвращает объект змейки.
+     *
+     * @return текущая змейка
+     */
     public PlayerSnake getSnake() {
         return snake;
     }
 
+    /**
+     * Возвращает текущий счёт игры.
+     *
+     * @return количество очков
+     */
     public int getScore() {
         return score;
     }
 
+    /**
+     * Увеличивает счёт игры на 1.
+     */
     public void incrementScore() {
         score++;
     }
 
+    /**
+     * Добавляет стандартную еду на карту в случайную незанятую позицию.
+     */
     private void addStandardFood() {
         int x, y;
         do {
@@ -62,6 +89,13 @@ public class GameModel implements Renderable {
         foods.add(new StandardFood(x, y));
     }
 
+    /**
+     * Проверяет, является ли позиция (x, y) незанятой для размещения еды.
+     *
+     * @param x абсцисса
+     * @param y ордината
+     * @return {@code true} если позиция свободна, {@code false} если занята
+     */
     private boolean isPositionValid(int x, int y) {
         for (SnakeSegment segment : snake.getSegments()) {
             if (segment.getX() == x && segment.getY() == y) {
@@ -78,6 +112,12 @@ public class GameModel implements Renderable {
         return true;
     }
 
+    /**
+     * Проверяет столкновение головы змейки с едой. При столкновении со стандартной едой
+     * увеличивает змейку, счет и заменяет съеденную еду.
+     *
+     * @return true если произошло столкновение с едой, false в противном случае
+     */
     public boolean checkFoodCollision() {
         SnakeSegment head = snake.getSegments().getFirst();
         List<AbstractFood> foodsToRemove = new ArrayList<>();
@@ -104,6 +144,11 @@ public class GameModel implements Renderable {
         return collision;
     }
 
+    /**
+     * Проверяет столкновение головы змейки с ее телом.
+     *
+     * @return true если произошло столкновение с телом, false в противном случае
+     */
     public boolean checkSelfCollision() {
         SnakeSegment head = snake.getSegments().getFirst();
         for (int i = 1; i < snake.getSegments().size(); i++) {
@@ -115,6 +160,11 @@ public class GameModel implements Renderable {
         return false;
     }
 
+    /**
+     * Отрисовывает текущее состояние игры на графическом контексте.
+     *
+     * @param gc графический контекст для отрисовки
+     */
     @Override
     public void render(GraphicsContext gc) {
         map.render(gc);

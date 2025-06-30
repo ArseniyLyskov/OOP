@@ -1,13 +1,17 @@
 package ru.nsu.lyskov;
 
+/**
+ * Enum, представляющий возможные направления движения.
+ */
 public enum Direction {
     UP, DOWN, LEFT, RIGHT;
 
     /**
-     * Проверяет, является ли текущее направление противоположным переданному.
+     * Проверяет, является ли текущее направление противоположным переданному. Противоположными
+     * считаются пары: UP-DOWN и LEFT-RIGHT.
      *
-     * @param other направление для проверки
-     * @return true если направления противоположны (UP-DOWN, LEFT-RIGHT)
+     * @param other направление для сравнения с текущим
+     * @return {@code true} если направления противоположны, {@code false} в противном случае
      */
     public boolean isOpposite(Direction other) {
         return (this == UP && other == DOWN) ||

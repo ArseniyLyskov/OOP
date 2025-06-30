@@ -7,7 +7,19 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ru.nsu.lyskov.controllers.GameController;
 
+/**
+ * Главный класс приложения "Змейка", наследующий от {@link Application}. Отвечает за запуск JavaFX
+ * приложения и инициализацию основного окна.
+ */
 public class SnakeApp extends Application {
+
+    /**
+     * Точка входа для JavaFX приложения.
+     *
+     * @param primaryStage главное окно приложения, предоставляемое платформой JavaFX
+     * @throws Exception если произошла ошибка при загрузке FXML-файла или инициализации
+     *                   контроллера
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(
@@ -23,6 +35,11 @@ public class SnakeApp extends Application {
         controller.setScene(primaryStage);
     }
 
+    /**
+     * Основной метод приложения, запускающий JavaFX приложение.
+     *
+     * @param args аргументы командной строки (не используются)
+     */
     public static void main(String[] args) {
         launch(args);
     }

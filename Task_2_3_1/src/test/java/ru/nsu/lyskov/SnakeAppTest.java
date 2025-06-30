@@ -6,7 +6,12 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
+/**
+ * Тестовый класс для приложения SnakeApp. Проверяет базовую функциональность запуска JavaFX
+ * приложения.
+ */
 public class SnakeAppTest extends ApplicationTest {
+    // Настройка headless-режима для тестирования JavaFX
     static {
         System.setProperty("testfx.robot", "glass");
         System.setProperty("testfx.headless", "true");
@@ -19,12 +24,21 @@ public class SnakeAppTest extends ApplicationTest {
 
     private Stage primaryStage;
 
+    /**
+     * Запускает приложение SnakeApp перед выполнением каждого теста.
+     *
+     * @param stage тестовый Stage, предоставляемый TestFX
+     * @throws Exception если произошла ошибка при запуске приложения
+     */
     @Override
     public void start(Stage stage) throws Exception {
         new SnakeApp().start(stage);
         primaryStage = stage;
     }
 
+    /**
+     * Проверяет, что главное окно приложения успешно отображается после запуска.
+     */
     @Test
     public void testStageIsShowing() {
         assertTrue(primaryStage.isShowing());

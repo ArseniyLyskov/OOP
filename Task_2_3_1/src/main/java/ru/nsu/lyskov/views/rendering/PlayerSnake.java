@@ -9,15 +9,31 @@ import ru.nsu.lyskov.models.snake.AbstractSnake;
 import ru.nsu.lyskov.models.snake.SnakeSegment;
 import ru.nsu.lyskov.models.snake.SnakeSegmentType;
 
+/**
+ * Класс для отрисовки змейки игрока. Наследует функциональность AbstractSnake и реализует
+ * визуализацию сегментов змейки.
+ */
 public class PlayerSnake extends AbstractSnake {
     private static final Color COLOR_PLAYER = Color.GREEN;
     private static final Color COLOR_EYE = Color.WHITE;
     private static final Color COLOR_PUPIL = Color.BLACK;
 
+    /**
+     * Создаёт змейку игрока с указанными начальными параметрами.
+     *
+     * @param startX           начальная координата X головы змейки
+     * @param startY           начальная координата Y головы змейки
+     * @param initialDirection начальное направление движения
+     */
     public PlayerSnake(int startX, int startY, Direction initialDirection) {
         super(startX, startY, initialDirection);
     }
 
+    /**
+     * Отрисовывает всю змейку на графическом контексте.
+     *
+     * @param gc графический контекст для отрисовки
+     */
     @Override
     public void render(GraphicsContext gc) {
         for (SnakeSegment segment : getSegments()) {
@@ -25,6 +41,12 @@ public class PlayerSnake extends AbstractSnake {
         }
     }
 
+    /**
+     * Отрисовывает отдельный сегмент змейки на графическом контексте.
+     *
+     * @param gc      графический контекст для отрисовки
+     * @param segment сегмент змейки для отрисовки
+     */
     public static void renderSegment(GraphicsContext gc, SnakeSegment segment) {
         gc.setFill(COLOR_PLAYER);
         double x = segment.getX() * CELL_SIDE;
@@ -57,6 +79,14 @@ public class PlayerSnake extends AbstractSnake {
         }
     }
 
+    /**
+     * Отрисовывает голову змейки.
+     *
+     * @param gc   графический контекст
+     * @param x    координата X верхнего левого угла
+     * @param y    координата Y верхнего левого угла
+     * @param type тип типа сегмента головы
+     */
     private static void drawHead(GraphicsContext gc, double x, double y, SnakeSegmentType type) {
         int padding = CELL_SIDE / 5;
         gc.fillOval(x + padding / 2, y + padding / 2, CELL_SIDE - padding, CELL_SIDE - padding);
@@ -137,6 +167,14 @@ public class PlayerSnake extends AbstractSnake {
 
     }
 
+    /**
+     * Отрисовывает шею под головой для неодносегментной змейки.
+     *
+     * @param gc   графический контекст
+     * @param x    координата X верхнего левого угла
+     * @param y    координата Y верхнего левого угла
+     * @param type тип типа сегмента головы
+     */
     private static void drawNeck(GraphicsContext gc, double x, double y, SnakeSegmentType type) {
         int padding = CELL_SIDE / 4;
         switch (type) {
@@ -167,6 +205,14 @@ public class PlayerSnake extends AbstractSnake {
         }
     }
 
+    /**
+     * Отрисовывает хвост змейки.
+     *
+     * @param gc   графический контекст
+     * @param x    координата X верхнего левого угла
+     * @param y    координата Y верхнего левого угла
+     * @param type тип типа сегмента хвоста
+     */
     private static void drawTail(GraphicsContext gc, double x, double y, SnakeSegmentType type) {
         int padding = CELL_SIDE / 4;
         switch (type) {
@@ -201,16 +247,38 @@ public class PlayerSnake extends AbstractSnake {
         );
     }
 
+    /**
+     * Отрисовывает вертикальный сегмент тела.
+     *
+     * @param gc графический контекст
+     * @param x  координата X верхнего левого угла
+     * @param y  координата Y верхнего левого угла
+     */
     private static void drawVerticalBody(GraphicsContext gc, double x, double y) {
         int padding = CELL_SIDE / 4;
         gc.fillRect(x + padding, y, CELL_SIDE - 2 * padding, CELL_SIDE);
     }
 
+    /**
+     * Отрисовывает горизонтальный сегмент тела.
+     *
+     * @param gc графический контекст
+     * @param x  координата X верхнего левого угла
+     * @param y  координата Y верхнего левого угла
+     */
     private static void drawHorizontalBody(GraphicsContext gc, double x, double y) {
         int padding = CELL_SIDE / 4;
         gc.fillRect(x, y + padding, CELL_SIDE, CELL_SIDE - 2 * padding);
     }
 
+    /**
+     * Отрисовывает поворотный сегмент тела.
+     *
+     * @param gc   графический контекст
+     * @param x    координата X верхнего левого угла
+     * @param y    координата Y верхнего левого угла
+     * @param type тип поворотного сегмента
+     */
     private static void drawTurn(GraphicsContext gc, double x, double y, SnakeSegmentType type) {
         int padding = CELL_SIDE / 4;
         switch (type) {

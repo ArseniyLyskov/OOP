@@ -12,7 +12,7 @@
 			prefWidth="800" prefHeight="600">
 
 	<top>
-		<BorderPane fx:id="topBar" styleClass="top-bar">
+		<BorderPane styleClass="top-bar">
 			<left>
 				<HBox alignment="CENTER_LEFT">
 					<Button fx:id="startButton" text="▶ Play"

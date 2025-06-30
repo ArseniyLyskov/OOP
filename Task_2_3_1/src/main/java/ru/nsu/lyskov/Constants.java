@@ -1,7 +1,10 @@
 package ru.nsu.lyskov;
 
+/**
+ * Класс, содержащий константы, используемые в приложении.
+ */
 public class Constants {
-    // Из условия лабораторной
+    // По условию лабораторной работы
     public static final int N_ROWS = 10;
     public static final int M_COLUMNS = 15;
     public static final int T_FOOD_ELEMENTS = 3;
