@@ -86,6 +86,8 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">AbstractSnake</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="../../views/rendering/Renderable.html" title="interface in ru.nsu.lyskov.views.rendering">Renderable</a></span></div>
+<div class="block">Абстрактный класс, представляющий базовую реализацию змейки в игре. Содержит общую логику
+ перемещения, роста и управления направлением движения.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -100,7 +102,9 @@ implements <a href="../../views/rendering/Renderable.html" title="interface in r
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int,ru.nsu.lyskov.Direction)" class="member-name-link">AbstractSnake</a><wbr>(int&nbsp;startX,
  int&nbsp;startY,
  <a href="../../Direction.html" title="enum class in ru.nsu.lyskov">Direction</a>&nbsp;initialDirection)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Конструктор змейки.</div>
+</div>
 </div>
 </section>
 </li>
@@ -122,16 +126,24 @@ implements <a href="../../views/rendering/Renderable.html" title="interface in r
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../../Direction.html" title="enum class in ru.nsu.lyskov">Direction</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getDirection()" class="member-name-link">getDirection</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает текущее направление движения змейки.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/LinkedList.html" title="class or interface in java.util" class="external-link">LinkedList</a>&lt;<a href="SnakeSegment.html" title="class in ru.nsu.lyskov.models.snake">SnakeSegment</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSegments()" class="member-name-link">getSegments</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает список всех сегментов змейки.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#grow()" class="member-name-link">grow</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Увеличивает длину змейки на один сегмент.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#move()" class="member-name-link">move</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Перемещает змейку в текущем направлении.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setDirection(ru.nsu.lyskov.Direction)" class="member-name-link">setDirection</a><wbr>(<a href="../../Direction.html" title="enum class in ru.nsu.lyskov">Direction</a>&nbsp;newDirection)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -163,6 +175,15 @@ implements <a href="../../views/rendering/Renderable.html" title="interface in r
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">AbstractSnake</span><wbr><span class="parameters">(int&nbsp;startX,
  int&nbsp;startY,
  <a href="../../Direction.html" title="enum class in ru.nsu.lyskov">Direction</a>&nbsp;initialDirection)</span></div>
+<div class="block">Конструктор змейки.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>startX</code> - начальная абсцисса головы змейки</dd>
+<dd><code>startY</code> - начальная ордината Y головы змейки</dd>
+<dd><code>initialDirection</code> - начальное направление движения</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - если начальные координаты выходят за границы игрового поля</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -183,7 +204,7 @@ implements <a href="../../views/rendering/Renderable.html" title="interface in r
 <dt>Parameters:</dt>
 <dd><code>newDirection</code> - направление для проверки</dd>
 <dt>Returns:</dt>
-<dd>true если поворот допустим</dd>
+<dd>true если поворот допустим, false если направления противоположны</dd>
 </dl>
 </section>
 </li>
@@ -191,24 +212,38 @@ implements <a href="../../views/rendering/Renderable.html" title="interface in r
 <section class="detail" id="move()">
 <h3>move</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">move</span>()</div>
+<div class="block">Перемещает змейку в текущем направлении. Добавляет новый сегмент головы и удаляет хвостовой
+ сегмент. Обновляет типы сегментов при необходимости.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="grow()">
 <h3>grow</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">grow</span>()</div>
+<div class="block">Увеличивает длину змейки на один сегмент. Добавляет новый хвостовой сегмент и обновляет тип
+ предыдущего хвоста.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="getSegments()">
 <h3>getSegments</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/LinkedList.html" title="class or interface in java.util" class="external-link">LinkedList</a>&lt;<a href="SnakeSegment.html" title="class in ru.nsu.lyskov.models.snake">SnakeSegment</a>&gt;</span>&nbsp;<span class="element-name">getSegments</span>()</div>
+<div class="block">Возвращает список всех сегментов змейки.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>список сегментов в порядке от головы к хвосту</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getDirection()">
 <h3>getDirection</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../Direction.html" title="enum class in ru.nsu.lyskov">Direction</a></span>&nbsp;<span class="element-name">getDirection</span>()</div>
+<div class="block">Возвращает текущее направление движения змейки.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>текущее направление</dd>
+</dl>
 </section>
 </li>
 <li>

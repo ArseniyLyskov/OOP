@@ -83,6 +83,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public enum </span><span class="element-name type-name-label">Direction</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Enum.html" title="class or interface in java.lang" class="external-link">Enum</a>&lt;<a href="Direction.html" title="enum class in ru.nsu.lyskov">Direction</a>&gt;</span></div>
+<div class="block">Enum, представляющий возможные направления движения.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -228,12 +229,13 @@ not permitted.)</div>
 <section class="detail" id="isOpposite(ru.nsu.lyskov.Direction)">
 <h3>isOpposite</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isOpposite</span><wbr><span class="parameters">(<a href="Direction.html" title="enum class in ru.nsu.lyskov">Direction</a>&nbsp;other)</span></div>
-<div class="block">Проверяет, является ли текущее направление противоположным переданному.</div>
+<div class="block">Проверяет, является ли текущее направление противоположным переданному. Противоположными
+ считаются пары: UP-DOWN и LEFT-RIGHT.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>other</code> - направление для проверки</dd>
+<dd><code>other</code> - направление для сравнения с текущим</dd>
 <dt>Returns:</dt>
-<dd>true если направления противоположны (UP-DOWN, LEFT-RIGHT)</dd>
+<dd><code>true</code> если направления противоположны, <code>false</code> в противном случае</dd>
 </dl>
 </section>
 </li>

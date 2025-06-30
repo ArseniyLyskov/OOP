@@ -83,6 +83,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">StandardMap</span>
 <span class="extends-implements">extends <a href="../../models/map/AbstractMap.html" title="class in ru.nsu.lyskov.models.map">AbstractMap</a></span></div>
+<div class="block">Класс для отрисовки стандартной игровой карты в виде шахматной сетки. Наследует от AbstractMap и
+ реализует визуализацию клеток в шахматном порядке.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -95,7 +97,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">StandardMap</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Создает стандартную карту с размерами, указанными в Constants.</div>
+</div>
 </div>
 </section>
 </li>
@@ -113,7 +117,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(javafx.scene.canvas.GraphicsContext)" class="member-name-link">render</a><wbr>(javafx.scene.canvas.GraphicsContext&nbsp;gc)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Отрисовывает объект на указанном GraphicsContext</div>
+<div class="block">Отрисовывает игровую карту в виде шахматной сетки.</div>
 </div>
 </div>
 </div>
@@ -139,6 +143,8 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;()">
 <h3>StandardMap</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">StandardMap</span>()</div>
+<div class="block">Создает стандартную карту с размерами, указанными в Constants. Использует значения M_COLUMNS
+ (ширина) и N_ROWS (высота).</div>
 </section>
 </li>
 </ul>
@@ -153,11 +159,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="render(javafx.scene.canvas.GraphicsContext)">
 <h3>render</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">render</span><wbr><span class="parameters">(javafx.scene.canvas.GraphicsContext&nbsp;gc)</span></div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Renderable.html#render(javafx.scene.canvas.GraphicsContext)">Renderable</a></code></span></div>
-<div class="block">Отрисовывает объект на указанном GraphicsContext</div>
+<div class="block">Отрисовывает игровую карту в виде шахматной сетки. Чередует два цвета клеток (color1 и
+ color2) в шахматном порядке.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>gc</code> - контекст для отрисовки</dd>
+<dd><code>gc</code> - графический контекст для отрисовки</dd>
 </dl>
 </section>
 </li>

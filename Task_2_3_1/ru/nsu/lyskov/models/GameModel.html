@@ -82,6 +82,9 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">GameModel</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="../views/rendering/Renderable.html" title="interface in ru.nsu.lyskov.views.rendering">Renderable</a></span></div>
+<div class="block">Класс, представляющий игровую модель "Змейки". Содержит логику игры, включая змейку, еду,
+ подсчет очков и обработку столкновений. Реализует интерфейс Renderable для отрисовки игрового
+ состояния.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -94,7 +97,9 @@ implements <a href="../views/rendering/Renderable.html" title="interface in ru.n
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">GameModel</a>()</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Конструктор игровой модели.</div>
+</div>
 </div>
 </section>
 </li>
@@ -111,27 +116,39 @@ implements <a href="../views/rendering/Renderable.html" title="interface in ru.n
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#checkFoodCollision()" class="member-name-link">checkFoodCollision</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Проверяет столкновение головы змейки с едой.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#checkSelfCollision()" class="member-name-link">checkSelfCollision</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Проверяет столкновение головы змейки с ее телом.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getScore()" class="member-name-link">getScore</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает текущий счёт игры.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../views/rendering/PlayerSnake.html" title="class in ru.nsu.lyskov.views.rendering">PlayerSnake</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getSnake()" class="member-name-link">getSnake</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает объект змейки.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#incrementScore()" class="member-name-link">incrementScore</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Увеличивает счёт игры на 1.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(javafx.scene.canvas.GraphicsContext)" class="member-name-link">render</a><wbr>(javafx.scene.canvas.GraphicsContext&nbsp;gc)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Отрисовывает объект на указанном GraphicsContext</div>
+<div class="block">Отрисовывает текущее состояние игры на графическом контексте.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reset()" class="member-name-link">reset</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Сбрасывает состояние игры к начальному.</div>
+</div>
 </div>
 </div>
 </div>
@@ -153,6 +170,7 @@ implements <a href="../views/rendering/Renderable.html" title="interface in ru.n
 <section class="detail" id="&lt;init&gt;()">
 <h3>GameModel</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">GameModel</span>()</div>
+<div class="block">Конструктор игровой модели.</div>
 </section>
 </li>
 </ul>
@@ -167,49 +185,71 @@ implements <a href="../views/rendering/Renderable.html" title="interface in ru.n
 <section class="detail" id="reset()">
 <h3>reset</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">reset</span>()</div>
+<div class="block">Сбрасывает состояние игры к начальному.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="getSnake()">
 <h3>getSnake</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../views/rendering/PlayerSnake.html" title="class in ru.nsu.lyskov.views.rendering">PlayerSnake</a></span>&nbsp;<span class="element-name">getSnake</span>()</div>
+<div class="block">Возвращает объект змейки.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>текущая змейка</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getScore()">
 <h3>getScore</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getScore</span>()</div>
+<div class="block">Возвращает текущий счёт игры.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>количество очков</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="incrementScore()">
 <h3>incrementScore</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">incrementScore</span>()</div>
+<div class="block">Увеличивает счёт игры на 1.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="checkFoodCollision()">
 <h3>checkFoodCollision</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">checkFoodCollision</span>()</div>
+<div class="block">Проверяет столкновение головы змейки с едой. При столкновении со стандартной едой
+ увеличивает змейку, счет и заменяет съеденную еду.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true если произошло столкновение с едой, false в противном случае</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="checkSelfCollision()">
 <h3>checkSelfCollision</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">checkSelfCollision</span>()</div>
+<div class="block">Проверяет столкновение головы змейки с ее телом.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>true если произошло столкновение с телом, false в противном случае</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="render(javafx.scene.canvas.GraphicsContext)">
 <h3>render</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">render</span><wbr><span class="parameters">(javafx.scene.canvas.GraphicsContext&nbsp;gc)</span></div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="../views/rendering/Renderable.html#render(javafx.scene.canvas.GraphicsContext)">Renderable</a></code></span></div>
-<div class="block">Отрисовывает объект на указанном GraphicsContext</div>
+<div class="block">Отрисовывает текущее состояние игры на графическом контексте.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="../views/rendering/Renderable.html#render(javafx.scene.canvas.GraphicsContext)">render</a></code>&nbsp;in interface&nbsp;<code><a href="../views/rendering/Renderable.html" title="interface in ru.nsu.lyskov.views.rendering">Renderable</a></code></dd>
 <dt>Parameters:</dt>
-<dd><code>gc</code> - контекст для отрисовки</dd>
+<dd><code>gc</code> - графический контекст для отрисовки</dd>
 </dl>
 </section>
 </li>

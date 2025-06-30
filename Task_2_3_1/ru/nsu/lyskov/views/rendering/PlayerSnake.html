@@ -83,6 +83,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">PlayerSnake</span>
 <span class="extends-implements">extends <a href="../../models/snake/AbstractSnake.html" title="class in ru.nsu.lyskov.models.snake">AbstractSnake</a></span></div>
+<div class="block">Класс для отрисовки змейки игрока. Наследует функциональность AbstractSnake и реализует
+ визуализацию сегментов змейки.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -97,7 +99,9 @@ loadScripts(document, 'script');</script>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int,ru.nsu.lyskov.Direction)" class="member-name-link">PlayerSnake</a><wbr>(int&nbsp;startX,
  int&nbsp;startY,
  <a href="../../Direction.html" title="enum class in ru.nsu.lyskov">Direction</a>&nbsp;initialDirection)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Создаёт змейку игрока с указанными начальными параметрами.</div>
+</div>
 </div>
 </section>
 </li>
@@ -115,12 +119,14 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#render(javafx.scene.canvas.GraphicsContext)" class="member-name-link">render</a><wbr>(javafx.scene.canvas.GraphicsContext&nbsp;gc)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Отрисовывает объект на указанном GraphicsContext</div>
+<div class="block">Отрисовывает всю змейку на графическом контексте.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#renderSegment(javafx.scene.canvas.GraphicsContext,ru.nsu.lyskov.models.snake.SnakeSegment)" class="member-name-link">renderSegment</a><wbr>(javafx.scene.canvas.GraphicsContext&nbsp;gc,
  <a href="../../models/snake/SnakeSegment.html" title="class in ru.nsu.lyskov.models.snake">SnakeSegment</a>&nbsp;segment)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Отрисовывает отдельный сегмент змейки на графическом контексте.</div>
+</div>
 </div>
 </div>
 </div>
@@ -147,6 +153,13 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">PlayerSnake</span><wbr><span class="parameters">(int&nbsp;startX,
  int&nbsp;startY,
  <a href="../../Direction.html" title="enum class in ru.nsu.lyskov">Direction</a>&nbsp;initialDirection)</span></div>
+<div class="block">Создаёт змейку игрока с указанными начальными параметрами.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>startX</code> - начальная координата X головы змейки</dd>
+<dd><code>startY</code> - начальная координата Y головы змейки</dd>
+<dd><code>initialDirection</code> - начальное направление движения</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -161,11 +174,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="render(javafx.scene.canvas.GraphicsContext)">
 <h3>render</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">render</span><wbr><span class="parameters">(javafx.scene.canvas.GraphicsContext&nbsp;gc)</span></div>
-<div class="block"><span class="descfrm-type-label">Description copied from interface:&nbsp;<code><a href="Renderable.html#render(javafx.scene.canvas.GraphicsContext)">Renderable</a></code></span></div>
-<div class="block">Отрисовывает объект на указанном GraphicsContext</div>
+<div class="block">Отрисовывает всю змейку на графическом контексте.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>gc</code> - контекст для отрисовки</dd>
+<dd><code>gc</code> - графический контекст для отрисовки</dd>
 </dl>
 </section>
 </li>
@@ -174,6 +186,12 @@ loadScripts(document, 'script');</script>
 <h3>renderSegment</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">renderSegment</span><wbr><span class="parameters">(javafx.scene.canvas.GraphicsContext&nbsp;gc,
  <a href="../../models/snake/SnakeSegment.html" title="class in ru.nsu.lyskov.models.snake">SnakeSegment</a>&nbsp;segment)</span></div>
+<div class="block">Отрисовывает отдельный сегмент змейки на графическом контексте.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>gc</code> - графический контекст для отрисовки</dd>
+<dd><code>segment</code> - сегмент змейки для отрисовки</dd>
+</dl>
 </section>
 </li>
 </ul>

@@ -83,6 +83,9 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public enum </span><span class="element-name type-name-label">SnakeSegmentType</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Enum.html" title="class or interface in java.lang" class="external-link">Enum</a>&lt;<a href="SnakeSegmentType.html" title="enum class in ru.nsu.lyskov.models.snake">SnakeSegmentType</a>&gt;</span></div>
+<div class="block">Перечисление типов сегментов змейки. Определяет возможные визуальные представления сегментов и
+ их поворот: - одиночный сегмент (змея из одного элемента) - голова - хвост - тело (прямые и
+ поворотные сегменты)</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -157,17 +160,23 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getBodyType(ru.nsu.lyskov.Direction,ru.nsu.lyskov.Direction)" class="member-name-link">getBodyType</a><wbr>(<a href="../../Direction.html" title="enum class in ru.nsu.lyskov">Direction</a>&nbsp;from,
  <a href="../../Direction.html" title="enum class in ru.nsu.lyskov">Direction</a>&nbsp;to)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
-<div class="block">Определяет тип сегмента тела на основе направлений движения.</div>
+<div class="block">Определяет тип сегмента тела на основе его направления и направления следующего сегмента.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="SnakeSegmentType.html" title="enum class in ru.nsu.lyskov.models.snake">SnakeSegmentType</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getHeadType(ru.nsu.lyskov.Direction)" class="member-name-link">getHeadType</a><wbr>(<a href="../../Direction.html" title="enum class in ru.nsu.lyskov">Direction</a>&nbsp;direction)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Возвращает тип головы змейки для указанного направления.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="SnakeSegmentType.html" title="enum class in ru.nsu.lyskov.models.snake">SnakeSegmentType</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getSingleSegmentType(ru.nsu.lyskov.Direction)" class="member-name-link">getSingleSegmentType</a><wbr>(<a href="../../Direction.html" title="enum class in ru.nsu.lyskov">Direction</a>&nbsp;direction)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Возвращает тип одиночного сегмента для указанного направления.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="SnakeSegmentType.html" title="enum class in ru.nsu.lyskov.models.snake">SnakeSegmentType</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getTailType(ru.nsu.lyskov.Direction)" class="member-name-link">getTailType</a><wbr>(<a href="../../Direction.html" title="enum class in ru.nsu.lyskov">Direction</a>&nbsp;direction)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Возвращает тип хвоста змейки для указанного направления.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="SnakeSegmentType.html" title="enum class in ru.nsu.lyskov.models.snake">SnakeSegmentType</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#valueOf(java.lang.String)" class="member-name-link">valueOf</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;name)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
@@ -350,18 +359,39 @@ not permitted.)</div>
 <section class="detail" id="getSingleSegmentType(ru.nsu.lyskov.Direction)">
 <h3>getSingleSegmentType</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="SnakeSegmentType.html" title="enum class in ru.nsu.lyskov.models.snake">SnakeSegmentType</a></span>&nbsp;<span class="element-name">getSingleSegmentType</span><wbr><span class="parameters">(<a href="../../Direction.html" title="enum class in ru.nsu.lyskov">Direction</a>&nbsp;direction)</span></div>
+<div class="block">Возвращает тип одиночного сегмента для указанного направления.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>direction</code> - направление одиночного сегмента</dd>
+<dt>Returns:</dt>
+<dd>соответствующий тип одиночного сегмента</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getHeadType(ru.nsu.lyskov.Direction)">
 <h3>getHeadType</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="SnakeSegmentType.html" title="enum class in ru.nsu.lyskov.models.snake">SnakeSegmentType</a></span>&nbsp;<span class="element-name">getHeadType</span><wbr><span class="parameters">(<a href="../../Direction.html" title="enum class in ru.nsu.lyskov">Direction</a>&nbsp;direction)</span></div>
+<div class="block">Возвращает тип головы змейки для указанного направления.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>direction</code> - направление головы</dd>
+<dt>Returns:</dt>
+<dd>соответствующий тип головы</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getTailType(ru.nsu.lyskov.Direction)">
 <h3>getTailType</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="SnakeSegmentType.html" title="enum class in ru.nsu.lyskov.models.snake">SnakeSegmentType</a></span>&nbsp;<span class="element-name">getTailType</span><wbr><span class="parameters">(<a href="../../Direction.html" title="enum class in ru.nsu.lyskov">Direction</a>&nbsp;direction)</span></div>
+<div class="block">Возвращает тип хвоста змейки для указанного направления.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>direction</code> - направление хвоста</dd>
+<dt>Returns:</dt>
+<dd>соответствующий тип хвоста</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -369,15 +399,20 @@ not permitted.)</div>
 <h3>getBodyType</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="SnakeSegmentType.html" title="enum class in ru.nsu.lyskov.models.snake">SnakeSegmentType</a></span>&nbsp;<span class="element-name">getBodyType</span><wbr><span class="parameters">(<a href="../../Direction.html" title="enum class in ru.nsu.lyskov">Direction</a>&nbsp;from,
  <a href="../../Direction.html" title="enum class in ru.nsu.lyskov">Direction</a>&nbsp;to)</span></div>
-<div class="block">Определяет тип сегмента тела на основе направлений движения.</div>
+<div class="block">Определяет тип сегмента тела на основе его направления и направления следующего сегмента.
+ <p>
+ Пример: В некоторый момент времени голова змейки указывает вверх. В последующее перемещение
+ змейка повернулась вправо, её новая голова справа от предыдущей и указывает вправо. Тип
+ сегмента старой головы заменяется на поворотный "буквой Г" - поворот, связывающий сегмент
+ снизу и сегмент справа (BODY_TURN_DOWN_RIGHT).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>from</code> - Направление, откуда приходит змея (к текущему сегменту).</dd>
-<dd><code>to</code> - Направление, куда змея уходит (от текущего сегмента).</dd>
+<dd><code>from</code> - направление сегмента, тип которого определяется</dd>
+<dd><code>to</code> - направление следующего за определяемым сегментом</dd>
 <dt>Returns:</dt>
-<dd>Тип сегмента тела (прямой или поворотный).</dd>
+<dd>тип сегмента тела (прямой или поворотный)</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - Если направления противоречивы (например, UP -> DOWN).</dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalArgumentException.html" title="class or interface in java.lang" class="external-link">IllegalArgumentException</a></code> - если направления противоречивы (например, UP -> DOWN)</dd>
 </dl>
 </section>
 </li>

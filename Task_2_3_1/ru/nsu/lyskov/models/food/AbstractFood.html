@@ -86,6 +86,8 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">AbstractFood</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="../../views/rendering/Renderable.html" title="interface in ru.nsu.lyskov.views.rendering">Renderable</a></span></div>
+<div class="block">Абстрактный базовый класс для всех видов еды в игре "Змейка". Определяет общие свойства и
+ поведение для всех типов еды.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -101,7 +103,9 @@ implements <a href="../../views/rendering/Renderable.html" title="interface in r
 <div class="col-first even-row-color"><code>protected </code></div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int,int)" class="member-name-link">AbstractFood</a><wbr>(int&nbsp;x,
  int&nbsp;y)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Создает новый объект еды с указанными координатами.</div>
+</div>
 </div>
 </section>
 </li>
@@ -118,10 +122,14 @@ implements <a href="../../views/rendering/Renderable.html" title="interface in r
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getX()" class="member-name-link">getX</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает координату X расположения еды на игровом поле.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getY()" class="member-name-link">getY</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает координату Y расположения еды на игровом поле.</div>
+</div>
 </div>
 </div>
 </div>
@@ -147,6 +155,12 @@ implements <a href="../../views/rendering/Renderable.html" title="interface in r
 <h3>AbstractFood</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">AbstractFood</span><wbr><span class="parameters">(int&nbsp;x,
  int&nbsp;y)</span></div>
+<div class="block">Создает новый объект еды с указанными координатами.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>x</code> - координата X на игровом поле</dd>
+<dd><code>y</code> - координата Y на игровом поле</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -161,12 +175,22 @@ implements <a href="../../views/rendering/Renderable.html" title="interface in r
 <section class="detail" id="getX()">
 <h3>getX</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getX</span>()</div>
+<div class="block">Возвращает координату X расположения еды на игровом поле.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>координата X</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getY()">
 <h3>getY</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getY</span>()</div>
+<div class="block">Возвращает координату Y расположения еды на игровом поле.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>координата Y</dd>
+</dl>
 </section>
 </li>
 </ul>

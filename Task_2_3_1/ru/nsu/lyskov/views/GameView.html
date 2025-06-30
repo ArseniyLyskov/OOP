@@ -77,6 +77,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">GameView</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Класс, отвечающий за визуальное представление игры "Змейка". Управляет отрисовкой игрового поля,
+ отображением счёта и статуса игры.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -91,7 +93,9 @@ loadScripts(document, 'script');</script>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(javafx.scene.canvas.Canvas,javafx.scene.control.Label,javafx.scene.control.Label)" class="member-name-link">GameView</a><wbr>(javafx.scene.canvas.Canvas&nbsp;canvas,
  javafx.scene.control.Label&nbsp;scoreLabel,
  javafx.scene.control.Label&nbsp;statusLabel)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Конструктор класса GameView.</div>
+</div>
 </div>
 </section>
 </li>
@@ -108,16 +112,24 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#redraw(ru.nsu.lyskov.models.GameModel)" class="member-name-link">redraw</a><wbr>(<a href="../models/GameModel.html" title="class in ru.nsu.lyskov.models">GameModel</a>&nbsp;model)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Перерисовывает игровое поле в соответствии с текущей моделью.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#reset()" class="member-name-link">reset</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Сбрасывает состояние представления к начальному.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#showLoseStatus()" class="member-name-link">showLoseStatus</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Отображает сообщение о проигрыше в игре.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#showWinStatus()" class="member-name-link">showWinStatus</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Отображает сообщение о победе в игре.</div>
+</div>
 </div>
 </div>
 </div>
@@ -141,6 +153,13 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">GameView</span><wbr><span class="parameters">(javafx.scene.canvas.Canvas&nbsp;canvas,
  javafx.scene.control.Label&nbsp;scoreLabel,
  javafx.scene.control.Label&nbsp;statusLabel)</span></div>
+<div class="block">Конструктор класса GameView.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>canvas</code> - холст для отрисовки игрового поля</dd>
+<dd><code>scoreLabel</code> - текстовое поле для отображения счёта</dd>
+<dd><code>statusLabel</code> - текстовое поле для отображения статуса игры</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -155,24 +174,32 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="showWinStatus()">
 <h3>showWinStatus</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">showWinStatus</span>()</div>
+<div class="block">Отображает сообщение о победе в игре.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="showLoseStatus()">
 <h3>showLoseStatus</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">showLoseStatus</span>()</div>
+<div class="block">Отображает сообщение о проигрыше в игре.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="reset()">
 <h3>reset</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">reset</span>()</div>
+<div class="block">Сбрасывает состояние представления к начальному.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="redraw(ru.nsu.lyskov.models.GameModel)">
 <h3>redraw</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">redraw</span><wbr><span class="parameters">(<a href="../models/GameModel.html" title="class in ru.nsu.lyskov.models">GameModel</a>&nbsp;model)</span></div>
+<div class="block">Перерисовывает игровое поле в соответствии с текущей моделью.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>model</code> - игровая модель, содержащая текущее состояние игры</dd>
+</dl>
 </section>
 </li>
 </ul>
