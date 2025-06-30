@@ -27,26 +27,11 @@ public abstract class AbstractMap implements Renderable {
         }
     }
 
-    public MapCell getCell(int x, int y) {
-        if (x < 0 || x >= width || y < 0 || y >= height) {
-            throw new IndexOutOfBoundsException("Coordinates out of map bounds");
-        }
-        return mapCells[x][y];
-    }
-
     public int getWidth() {
         return width;
     }
 
     public int getHeight() {
         return height;
-    }
-
-    public MapCell[][] getMapCells() {
-        return mapCells;
-    }
-
-    public boolean isWithinBounds(int x, int y) {
-        return x >= 0 && x < width && y >= 0 && y < height;
     }
 }
