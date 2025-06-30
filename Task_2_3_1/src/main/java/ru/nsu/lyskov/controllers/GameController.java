@@ -167,8 +167,9 @@ public class GameController {
      * модель и представление.
      */
     private void reset() {
-        if (gameLoop != null)
+        if (gameLoop != null) {
             gameLoop.stop();
+        }
 
         model.reset();
         view.reset();

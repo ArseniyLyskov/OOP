@@ -80,7 +80,8 @@ public class GameModel implements Renderable {
      * Добавляет стандартную еду на карту в случайную незанятую позицию.
      */
     private void addStandardFood() {
-        int x, y;
+        int x;
+        int y;
         do {
             x = RANDOM.nextInt(map.getWidth());
             y = RANDOM.nextInt(map.getHeight());

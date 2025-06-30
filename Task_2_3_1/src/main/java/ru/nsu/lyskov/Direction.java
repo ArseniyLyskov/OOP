@@ -14,9 +14,9 @@ public enum Direction {
      * @return {@code true} если направления противоположны, {@code false} в противном случае
      */
     public boolean isOpposite(Direction other) {
-        return (this == UP && other == DOWN) ||
-                (this == DOWN && other == UP) ||
-                (this == LEFT && other == RIGHT) ||
-                (this == RIGHT && other == LEFT);
+        return (this == UP && other == DOWN)
+                || (this == DOWN && other == UP)
+                || (this == LEFT && other == RIGHT)
+                || (this == RIGHT && other == LEFT);
     }
 }

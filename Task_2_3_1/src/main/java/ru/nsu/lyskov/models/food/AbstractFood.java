@@ -7,7 +7,8 @@ import ru.nsu.lyskov.views.rendering.Renderable;
  * поведение для всех типов еды.
  */
 public abstract class AbstractFood implements Renderable {
-    private final int x, y;
+    private final int column;
+    private final int row;
 
     /**
      * Создает новый объект еды с указанными координатами.
@@ -16,8 +17,8 @@ public abstract class AbstractFood implements Renderable {
      * @param y координата Y на игровом поле
      */
     protected AbstractFood(int x, int y) {
-        this.x = x;
-        this.y = y;
+        column = x;
+        row = y;
     }
 
     /**
@@ -26,7 +27,7 @@ public abstract class AbstractFood implements Renderable {
      * @return координата X
      */
     public int getX() {
-        return x;
+        return column;
     }
 
     /**
@@ -35,6 +36,6 @@ public abstract class AbstractFood implements Renderable {
      * @return координата Y
      */
     public int getY() {
-        return y;
+        return row;
     }
 }

@@ -57,13 +57,15 @@ public class GameControllerTest extends ApplicationTest {
         controller = new GameController();
 
         Button startButton = new Button("Start");
-        Canvas gameCanvas = new Canvas(600, 400);
-        Label scoreLabel = new Label();
-        Label statusLabel = new Label();
-
         inject(controller, "startButton", startButton);
+
+        Canvas gameCanvas = new Canvas(600, 400);
         inject(controller, "gameCanvas", gameCanvas);
+
+        Label scoreLabel = new Label();
         inject(controller, "scoreLabel", scoreLabel);
+
+        Label statusLabel = new Label();
         inject(controller, "statusLabel", statusLabel);
 
         Scene scene = new Scene(new Group(gameCanvas, startButton, scoreLabel, statusLabel));
@@ -99,15 +101,15 @@ public class GameControllerTest extends ApplicationTest {
      */
     @Test
     public void testKeyPress() {
-        KeyEvent enterEvent = new KeyEvent(KeyEvent.KEY_PRESSED, "", "", KeyCode.ENTER,
+        KeyEvent startEvent = new KeyEvent(KeyEvent.KEY_PRESSED, "", "", KeyCode.ENTER,
                                            false, false, false, false
         );
-        KeyEvent wEvent = new KeyEvent(KeyEvent.KEY_PRESSED, "W", "W", KeyCode.W,
-                                       false, false, false, false
+        KeyEvent turnEvent = new KeyEvent(KeyEvent.KEY_PRESSED, "W", "W", KeyCode.W,
+                                          false, false, false, false
         );
 
-        interact(() -> invokePrivateMethod(controller, "handleKeyPress", enterEvent));
-        interact(() -> invokePrivateMethod(controller, "handleKeyPress", wEvent));
+        interact(() -> invokePrivateMethod(controller, "handleKeyPress", startEvent));
+        interact(() -> invokePrivateMethod(controller, "handleKeyPress", turnEvent));
 
         assertEquals(Direction.UP, getField(controller, "pendingDirection"));
     }

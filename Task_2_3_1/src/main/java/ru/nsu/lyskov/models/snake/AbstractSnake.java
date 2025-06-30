@@ -21,7 +21,6 @@ public abstract class AbstractSnake implements Renderable {
      * @param startX           начальная абсцисса головы змейки
      * @param startY           начальная ордината Y головы змейки
      * @param initialDirection начальное направление движения
-     * @throws IllegalArgumentException если начальные координаты выходят за границы игрового поля
      */
     public AbstractSnake(int startX, int startY, Direction initialDirection) {
         this.direction = initialDirection;
@@ -118,7 +117,7 @@ public abstract class AbstractSnake implements Renderable {
     }
 
     /**
-     * Вычисляет новую позицию и внешний вид головы при перемещении
+     * Вычисляет новую позицию и внешний вид головы при перемещении.
      */
     private SnakeSegment calculateNewHead(SnakeSegment oldHead) {
         int newX = oldHead.getX();
@@ -129,21 +128,21 @@ public abstract class AbstractSnake implements Renderable {
             case DOWN -> newY = (newY + 1) % N_ROWS;
             case LEFT -> newX = (newX - 1 + M_COLUMNS) % M_COLUMNS;
             case RIGHT -> newX = (newX + 1) % M_COLUMNS;
+            default -> throw new IllegalArgumentException("Illegal SnakeSegmentType");
         }
 
-        return isSingleSegment() ?
-                new SnakeSegment(
-                        newX, newY, direction,
-                        SnakeSegmentType.getSingleSegmentType(direction)
-                ) :
-                new SnakeSegment(
-                        newX, newY, direction,
-                        SnakeSegmentType.getHeadType(direction)
-                );
+        return isSingleSegment()
+                ? new SnakeSegment(
+                newX, newY, direction,
+                SnakeSegmentType.getSingleSegmentType(direction)
+        ) : new SnakeSegment(
+                newX, newY, direction,
+                SnakeSegmentType.getHeadType(direction)
+        );
     }
 
     /**
-     * Вычисляет позицию и внешний вид нового хвоста при росте змейки
+     * Вычисляет позицию и внешний вид нового хвоста при росте змейки.
      */
     private SnakeSegment calculateGrownTail(SnakeSegment oldTail) {
         int newX = oldTail.getX();
@@ -154,6 +153,7 @@ public abstract class AbstractSnake implements Renderable {
             case DOWN -> newY = (newY - 1 + N_ROWS) % N_ROWS;
             case LEFT -> newX = (newX + 1) % M_COLUMNS;
             case RIGHT -> newX = (newX - 1 + M_COLUMNS) % M_COLUMNS;
+            default -> throw new IllegalArgumentException("Illegal SnakeSegmentType");
         }
 
         return new SnakeSegment(
@@ -163,49 +163,49 @@ public abstract class AbstractSnake implements Renderable {
     }
 
     /**
-     * Проверяет, состоит ли змейка из одного сегмента
+     * Проверяет, состоит ли змейка из одного сегмента.
      */
     private boolean isSingleSegment() {
         return segments.size() == 1;
     }
 
     /**
-     * Добавляет сегмент в начало списка (голова)
+     * Добавляет сегмент в начало списка (голова).
      */
     private void addHead(SnakeSegment segment) {
         segments.addFirst(segment);
     }
 
     /**
-     * Добавляет сегмент в конец списка (хвост)
+     * Добавляет сегмент в конец списка (хвост).
      */
     private void addTail(SnakeSegment segment) {
         segments.addLast(segment);
     }
 
     /**
-     * Удаляет последний сегмент (хвост)
+     * Удаляет последний сегмент (хвост).
      */
     private void removeTail() {
         segments.removeLast();
     }
 
     /**
-     * Возвращает сегмент, следующий за указанным
+     * Возвращает сегмент, следующий за указанным.
      */
     private SnakeSegment getNextSegment(SnakeSegment segment) {
         return segments.get(segments.indexOf(segment) - 1);
     }
 
     /**
-     * Возвращает головной сегмент
+     * Возвращает головной сегмент.
      */
     private SnakeSegment getHead() {
         return segments.getFirst();
     }
 
     /**
-     * Возвращает хвостовой сегмент
+     * Возвращает хвостовой сегмент.
      */
     private SnakeSegment getTail() {
         return segments.getLast();

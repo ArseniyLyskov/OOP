@@ -46,6 +46,7 @@ public class PlayerSnake extends AbstractSnake {
      *
      * @param gc      графический контекст для отрисовки
      * @param segment сегмент змейки для отрисовки
+     * @throws IllegalArgumentException если неопознан SnakeSegmentType
      */
     public static void renderSegment(GraphicsContext gc, SnakeSegment segment) {
         gc.setFill(COLOR_PLAYER);
@@ -76,6 +77,8 @@ public class PlayerSnake extends AbstractSnake {
                  BODY_TURN_DOWN_LEFT -> {
                 drawTurn(gc, x, y, type);
             }
+
+            default -> throw new IllegalArgumentException("Illegal SnakeSegmentType");
         }
     }
 
@@ -86,6 +89,7 @@ public class PlayerSnake extends AbstractSnake {
      * @param x    координата X верхнего левого угла
      * @param y    координата Y верхнего левого угла
      * @param type тип типа сегмента головы
+     * @throws IllegalArgumentException если неопознан SnakeSegmentType
      */
     private static void drawHead(GraphicsContext gc, double x, double y, SnakeSegmentType type) {
         int padding = CELL_SIDE / 5;
@@ -162,6 +166,7 @@ public class PlayerSnake extends AbstractSnake {
                             pupilSize, pupilSize
                 );
             }
+            default -> throw new IllegalArgumentException("Illegal SnakeSegmentType");
         }
         gc.setFill(COLOR_PLAYER);
 
@@ -174,6 +179,7 @@ public class PlayerSnake extends AbstractSnake {
      * @param x    координата X верхнего левого угла
      * @param y    координата Y верхнего левого угла
      * @param type тип типа сегмента головы
+     * @throws IllegalArgumentException если неопознан SnakeSegmentType
      */
     private static void drawNeck(GraphicsContext gc, double x, double y, SnakeSegmentType type) {
         int padding = CELL_SIDE / 4;
@@ -202,6 +208,7 @@ public class PlayerSnake extends AbstractSnake {
                             CELL_SIDE - 2 * padding
                 );
             }
+            default -> throw new IllegalArgumentException("Illegal SnakeSegmentType");
         }
     }
 
@@ -212,6 +219,7 @@ public class PlayerSnake extends AbstractSnake {
      * @param x    координата X верхнего левого угла
      * @param y    координата Y верхнего левого угла
      * @param type тип типа сегмента хвоста
+     * @throws IllegalArgumentException если неопознан SnakeSegmentType
      */
     private static void drawTail(GraphicsContext gc, double x, double y, SnakeSegmentType type) {
         int padding = CELL_SIDE / 4;
@@ -240,6 +248,7 @@ public class PlayerSnake extends AbstractSnake {
                             CELL_SIDE - 2 * padding
                 );
             }
+            default -> throw new IllegalArgumentException("Illegal SnakeSegmentType");
         }
         gc.fillOval(x + padding, y + padding,
                     CELL_SIDE - 2 * padding,
@@ -278,6 +287,7 @@ public class PlayerSnake extends AbstractSnake {
      * @param x    координата X верхнего левого угла
      * @param y    координата Y верхнего левого угла
      * @param type тип поворотного сегмента
+     * @throws IllegalArgumentException если неопознан SnakeSegmentType
      */
     private static void drawTurn(GraphicsContext gc, double x, double y, SnakeSegmentType type) {
         int padding = CELL_SIDE / 4;
@@ -322,6 +332,7 @@ public class PlayerSnake extends AbstractSnake {
                             CELL_SIDE - 2 * padding
                 );
             }
+            default -> throw new IllegalArgumentException("Illegal SnakeSegmentType");
         }
         gc.fillOval(x + padding, y + padding,
                     CELL_SIDE - 2 * padding,

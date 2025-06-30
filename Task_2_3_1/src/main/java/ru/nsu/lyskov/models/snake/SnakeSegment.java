@@ -6,7 +6,8 @@ import ru.nsu.lyskov.Direction;
  * Класс, представляющий сегмент змейки.
  */
 public class SnakeSegment {
-    private final int x, y;
+    private final int column;
+    private final int row;
     private final Direction direction;
     private SnakeSegmentType type;
 
@@ -19,8 +20,8 @@ public class SnakeSegment {
      * @param type      тип сегмента (из перечисления SnakeSegmentType)
      */
     public SnakeSegment(int x, int y, Direction direction, SnakeSegmentType type) {
-        this.x = x;
-        this.y = y;
+        column = x;
+        row = y;
         this.direction = direction;
         this.type = type;
     }
@@ -31,7 +32,7 @@ public class SnakeSegment {
      * @return координата X
      */
     public int getX() {
-        return x;
+        return column;
     }
 
     /**
@@ -40,7 +41,7 @@ public class SnakeSegment {
      * @return координата Y
      */
     public int getY() {
-        return y;
+        return row;
     }
 
     /**

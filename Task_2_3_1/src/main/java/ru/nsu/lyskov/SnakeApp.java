@@ -26,12 +26,11 @@ public class SnakeApp extends Application {
                 getClass().getResource("/ru/nsu/lyskov/fxml/GameView.fxml"));
         Parent root = loader.load();
 
-        GameController controller = loader.getController();
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
+        primaryStage.setScene(new Scene(root));
         primaryStage.setTitle("Snake");
         primaryStage.show();
 
+        GameController controller = loader.getController();
         controller.setScene(primaryStage);
     }
 
