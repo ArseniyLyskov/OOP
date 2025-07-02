@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.nsu.lyskov"},{"l":"ru.nsu.lyskov.bakers"},{"l":"ru.nsu.lyskov.couriers"},{"l":"ru.nsu.lyskov.logging"},{"l":"ru.nsu.lyskov.orders"},{"l":"ru.nsu.lyskov.pizzeria"},{"l":"ru.nsu.lyskov.storage"}];updateSearchResults();
