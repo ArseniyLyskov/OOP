@@ -3,6 +3,10 @@ package ru.nsu.lyskov.orders;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Enum, описывающий возможные статусы заказа на пиццу. Включает описание статусов и допустимые
+ * переходы между ними.
+ */
 public enum OrderStatus {
     CREATED("Order created"),
     ACCEPTED("Order accepted"),
@@ -12,18 +16,6 @@ public enum OrderStatus {
     ON_DELIVERY("Pizza taken by courier"),
     DELIVERED("Pizza delivered"),
     FAILED("Order failed");
-
-    public void validateStatusTransition(OrderStatus newStatus) {
-        if (this == DELIVERED || this == FAILED) {
-            throw new IllegalStateException(
-                    "Cannot change status from terminal status " + newStatus);
-        }
-
-        if (!ALLOWED_TRANSITIONS.getOrDefault(this, Set.of()).contains(newStatus)) {
-            throw new IllegalStateException(
-                    "Invalid transition from " + this + " to " + newStatus);
-        }
-    }
 
     private static final Map<OrderStatus, Set<OrderStatus>> ALLOWED_TRANSITIONS = Map.of(
             CREATED, Set.of(ACCEPTED),
@@ -36,10 +28,39 @@ public enum OrderStatus {
 
     private final String description;
 
+    /**
+     * Конструктор перечисления.
+     *
+     * @param description текстовое описание статуса
+     */
     OrderStatus(String description) {
         this.description = description;
     }
 
+    /**
+     * Проверяет допустимость перехода от текущего статуса к новому. Выбрасывает исключение, если
+     * переход недопустим.
+     *
+     * @param newStatus новый статус, к которому предполагается переход
+     * @throws IllegalStateException если переход недопустим
+     */
+    public void validateStatusTransition(OrderStatus newStatus) {
+        if (this == DELIVERED || this == FAILED) {
+            throw new IllegalStateException(
+                    "Cannot change status from terminal status " + newStatus);
+        }
+
+        if (!ALLOWED_TRANSITIONS.getOrDefault(this, Set.of()).contains(newStatus)) {
+            throw new IllegalStateException(
+                    "Invalid transition from " + this + " to " + newStatus);
+        }
+    }
+
+    /**
+     * Возвращает строковое описание статуса.
+     *
+     * @return описание статуса
+     */
     public String getDescription() {
         return description;
     }

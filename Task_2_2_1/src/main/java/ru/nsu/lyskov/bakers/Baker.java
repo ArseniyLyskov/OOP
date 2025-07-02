@@ -6,12 +6,24 @@ import ru.nsu.lyskov.orders.OrderStatus;
 import ru.nsu.lyskov.orders.PizzaOrder;
 import ru.nsu.lyskov.storage.Storage;
 
+/**
+ * Класс, представляющий пекаря в пиццерии. Пекарь получает заказы из очереди, "готовит" пиццы и
+ * помещает их на склад.
+ */
 public class Baker implements Runnable {
     private final ConcurrentLatch completionLatch;
     private final int bakingTime;
     private final OrderQueue orderQueue;
     private final Storage storage;
 
+    /**
+     * Конструктор пекаря.
+     *
+     * @param bakingTime      время приготовления одной пиццы в миллисекундах
+     * @param orderQueue      очередь заказов
+     * @param storage         склад для готовых пицц
+     * @param completionLatch счётчик для отслеживания завершения работы
+     */
     public Baker(int bakingTime, OrderQueue orderQueue, Storage storage,
                  ConcurrentLatch completionLatch) {
         this.bakingTime = bakingTime;
@@ -20,6 +32,10 @@ public class Baker implements Runnable {
         this.completionLatch = completionLatch;
     }
 
+    /**
+     * Основной метод работы пекаря. Работает до тех пор, пока в очереди есть заказы или пока не
+     * завершён приём новых заказов.
+     */
     @Override
     public void run() {
         try {

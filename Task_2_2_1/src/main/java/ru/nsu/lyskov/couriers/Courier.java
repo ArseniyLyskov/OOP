@@ -9,17 +9,32 @@ import ru.nsu.lyskov.orders.OrderStatus;
 import ru.nsu.lyskov.orders.PizzaOrder;
 import ru.nsu.lyskov.storage.Storage;
 
+/**
+ * Класс, представляющий курьера в пиццерии. Курьер забирает готовые пиццы со склада и доставляет
+ * их клиентам.
+ */
 public class Courier implements Runnable {
     private final ConcurrentLatch completionLatch;
     private final int capacity;
     private final Storage storage;
 
+    /**
+     * Конструктор курьера.
+     *
+     * @param capacity        максимальное количество пицц за одну доставку
+     * @param storage         склад готовых пицц
+     * @param completionLatch счётчик для отслеживания завершения работы
+     */
     public Courier(int capacity, Storage storage, ConcurrentLatch completionLatch) {
         this.capacity = capacity;
         this.storage = storage;
         this.completionLatch = completionLatch;
     }
 
+    /**
+     * Основной метод работы курьера. Работает до тех пор, пока на складе есть пиццы или пока не
+     * завершено добавление новых пицц.
+     */
     @Override
     public void run() {
         try {
@@ -35,11 +50,13 @@ public class Courier implements Runnable {
     }
 
     private void deliverPizzas(List<PizzaOrder> orders) throws InterruptedException {
-        if (orders.isEmpty()) return;
+        if (orders.isEmpty()) {
+            return;
+        }
 
         orders.forEach(order -> order.setStatus(OrderStatus.ON_DELIVERY));
-        Thread.sleep(COURIER_ORDER_COLLECTION_TIME_MS +
-                             (long) orders.size() * COURIER_SINGLE_ORDER_DELIVERY_TIME_MS);
+        Thread.sleep(COURIER_ORDER_COLLECTION_TIME_MS
+                             + (long) orders.size() * COURIER_SINGLE_ORDER_DELIVERY_TIME_MS);
         orders.forEach(order -> order.setStatus(OrderStatus.DELIVERED));
     }
 }

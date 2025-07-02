@@ -24,10 +24,23 @@ import ru.nsu.lyskov.orders.PizzaOrder;
 import ru.nsu.lyskov.pizzeria.PizzeriaConfig;
 import ru.nsu.lyskov.pizzeria.PizzeriaSimulator;
 
+/**
+ * Тестовый класс для проверки корректной работы симулятора пиццерии и связанных компонентов.
+ */
 class PizzeriaSimulatorTest {
+    /**
+     * Временная директория для хранения файлов конфигурации во время теста.
+     */
     @TempDir
     Path tempDir;
 
+    /**
+     * Тест, проверяющий полное выполнение симуляции с использованием тестового конфигурационного
+     * файла. Проверяется, что все заказы успешно доставлены.
+     *
+     * @throws Exception если произошла ошибка при чтении файла конфигурации или запуске
+     *                   симулятора
+     */
     @Test
     void testSimulation() throws Exception {
         Path testFile = tempDir.resolve("test_config.json");
@@ -43,6 +56,10 @@ class PizzeriaSimulatorTest {
         assertTrue(generator.areAllOrdersDelivered());
     }
 
+    /**
+     * Тест, проверяющий выброс исключения {@link NoSuchFileException}, если файл конфигурации не
+     * найден.
+     */
     @Test
     void testNoSuchFile() {
         assertThrows(NoSuchFileException.class,
@@ -50,6 +67,10 @@ class PizzeriaSimulatorTest {
         );
     }
 
+    /**
+     * Тест, проверяющий корректность переходов между статусами заказов. Проверяется, что
+     * допустимые переходы не вызывают ошибок, а недопустимые вызывают исключения.
+     */
     @Test
     void testOrderStatusTransitions() {
         PizzeriaLogger.logOpening();
