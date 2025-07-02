@@ -1,0 +1,12 @@
+{
+  "bakers": [
+    2,
+    3
+  ],
+  "couriers": [
+    1,
+    2
+  ],
+  "storage_capacity": 5,
+  "work_time_seconds": 10
+}
