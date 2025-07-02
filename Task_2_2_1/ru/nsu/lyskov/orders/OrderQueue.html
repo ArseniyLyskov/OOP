@@ -77,6 +77,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">OrderQueue</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Класс представляет потокобезопасную очередь заказов пиццы.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -106,19 +107,29 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addOrder(ru.nsu.lyskov.orders.PizzaOrder)" class="member-name-link">addOrder</a><wbr>(<a href="PizzaOrder.html" title="class in ru.nsu.lyskov.orders">PizzaOrder</a>&nbsp;order)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Добавляет заказ в очередь.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#completeOrderAccept()" class="member-name-link">completeOrderAccept</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Завершает приём заказов.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isEmpty()" class="member-name-link">isEmpty</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Проверяет, пуста ли очередь заказов.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isOrderAcceptingCompleted()" class="member-name-link">isOrderAcceptingCompleted</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Проверяет, завершён ли приём заказов.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="PizzaOrder.html" title="class in ru.nsu.lyskov.orders">PizzaOrder</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#takeOrder()" class="member-name-link">takeOrder</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Извлекает заказ из очереди.</div>
+</div>
 </div>
 </div>
 </div>
@@ -154,6 +165,13 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="addOrder(ru.nsu.lyskov.orders.PizzaOrder)">
 <h3>addOrder</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addOrder</span><wbr><span class="parameters">(<a href="PizzaOrder.html" title="class in ru.nsu.lyskov.orders">PizzaOrder</a>&nbsp;order)</span></div>
+<div class="block">Добавляет заказ в очередь.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>order</code> - заказ на пиццу, который необходимо добавить</dd>
+<dt>Throws:</dt>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalStateException.html" title="class or interface in java.lang" class="external-link">IllegalStateException</a></code> - если приём заказов завершён</dd>
+</dl>
 </section>
 </li>
 <li>
@@ -161,9 +179,13 @@ loadScripts(document, 'script');</script>
 <h3>takeOrder</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="PizzaOrder.html" title="class in ru.nsu.lyskov.orders">PizzaOrder</a></span>&nbsp;<span class="element-name">takeOrder</span>()
                      throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></span></div>
+<div class="block">Извлекает заказ из очереди. Если очередь пуста и приём заказов ещё не завершён — поток
+ ожидает.</div>
 <dl class="notes">
+<dt>Returns:</dt>
+<dd>следующий заказ из очереди</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code> - если новых заказов больше не будет</dd>
 </dl>
 </section>
 </li>
@@ -171,18 +193,29 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="completeOrderAccept()">
 <h3>completeOrderAccept</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">completeOrderAccept</span>()</div>
+<div class="block">Завершает приём заказов. Пробуждает все потоки, ожидающие новые заказы.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="isOrderAcceptingCompleted()">
 <h3>isOrderAcceptingCompleted</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isOrderAcceptingCompleted</span>()</div>
+<div class="block">Проверяет, завершён ли приём заказов.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code>, если приём заказов завершён, иначе <code>false</code></dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isEmpty()">
 <h3>isEmpty</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isEmpty</span>()</div>
+<div class="block">Проверяет, пуста ли очередь заказов.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code>, если очередь пуста, иначе <code>false</code></dd>
+</dl>
 </section>
 </li>
 </ul>

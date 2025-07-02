@@ -77,6 +77,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">PizzeriaLogger</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Класс для логирования событий, происходящих в пиццерии. Форматирует вывод с временными метками и
+ цветами.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -106,16 +108,24 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#logClosing()" class="member-name-link">logClosing</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Логирует закрытие пиццерии.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#logOpening()" class="member-name-link">logOpening</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Логирует открытие пиццерии.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#logOrder(ru.nsu.lyskov.orders.PizzaOrder)" class="member-name-link">logOrder</a><wbr>(<a href="../orders/PizzaOrder.html" title="class in ru.nsu.lyskov.orders">PizzaOrder</a>&nbsp;order)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Логирует информацию о заказе пиццы.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#logStoppingOrderReceiving()" class="member-name-link">logStoppingOrderReceiving</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Логирует прекращение приёма заказов в пиццерии.</div>
+</div>
 </div>
 </div>
 </div>
@@ -151,24 +161,32 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="logOpening()">
 <h3>logOpening</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">logOpening</span>()</div>
+<div class="block">Логирует открытие пиццерии. Устанавливает начальное время работы.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="logOrder(ru.nsu.lyskov.orders.PizzaOrder)">
 <h3>logOrder</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">logOrder</span><wbr><span class="parameters">(<a href="../orders/PizzaOrder.html" title="class in ru.nsu.lyskov.orders">PizzaOrder</a>&nbsp;order)</span></div>
+<div class="block">Логирует информацию о заказе пиццы.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>order</code> - объект заказа <a href="../orders/PizzaOrder.html" title="class in ru.nsu.lyskov.orders"><code>PizzaOrder</code></a>, содержащий ID и статус заказа</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="logStoppingOrderReceiving()">
 <h3>logStoppingOrderReceiving</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">logStoppingOrderReceiving</span>()</div>
+<div class="block">Логирует прекращение приёма заказов в пиццерии.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="logClosing()">
 <h3>logClosing</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">logClosing</span>()</div>
+<div class="block">Логирует закрытие пиццерии.</div>
 </section>
 </li>
 </ul>

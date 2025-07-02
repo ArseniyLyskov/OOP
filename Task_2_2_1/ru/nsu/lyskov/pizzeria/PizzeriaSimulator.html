@@ -82,6 +82,8 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">PizzeriaSimulator</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a></span></div>
+<div class="block">Класс симуляции работы пиццерии. Запускает пекарей и курьеров, принимает заказы в течение
+ заданного времени и управляет завершением работы.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -95,7 +97,9 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(ru.nsu.lyskov.pizzeria.PizzeriaConfig,ru.nsu.lyskov.logging.OrderAcceptor)" class="member-name-link">PizzeriaSimulator</a><wbr>(<a href="PizzeriaConfig.html" title="class in ru.nsu.lyskov.pizzeria">PizzeriaConfig</a>&nbsp;config,
  <a href="../logging/OrderAcceptor.html" title="interface in ru.nsu.lyskov.logging">OrderAcceptor</a>&nbsp;acceptor)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Создает новый экземпляр симулятора пиццерии на основе переданной конфигурации.</div>
+</div>
 </div>
 </section>
 </li>
@@ -112,7 +116,11 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#run()" class="member-name-link">run</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Запускает симуляцию работы пиццерии: запускает потоки пекарей и курьеров; принимает заказы в
+ течение установленного времени; завершает прием заказов; ожидает завершения всех пекарей и
+ курьеров.</div>
+</div>
 </div>
 </div>
 </div>
@@ -135,6 +143,12 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <h3>PizzeriaSimulator</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">PizzeriaSimulator</span><wbr><span class="parameters">(<a href="PizzeriaConfig.html" title="class in ru.nsu.lyskov.pizzeria">PizzeriaConfig</a>&nbsp;config,
  <a href="../logging/OrderAcceptor.html" title="interface in ru.nsu.lyskov.logging">OrderAcceptor</a>&nbsp;acceptor)</span></div>
+<div class="block">Создает новый экземпляр симулятора пиццерии на основе переданной конфигурации.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>config</code> - конфигурация пиццерии</dd>
+<dd><code>acceptor</code> - механизм принятия заказов</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -149,6 +163,9 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="run()">
 <h3>run</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">run</span>()</div>
+<div class="block">Запускает симуляцию работы пиццерии: запускает потоки пекарей и курьеров; принимает заказы в
+ течение установленного времени; завершает прием заказов; ожидает завершения всех пекарей и
+ курьеров.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html#run()" title="class or interface in java.lang" class="external-link">run</a></code>&nbsp;in interface&nbsp;<code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html" title="class or interface in java.lang" class="external-link">Runnable</a></code></dd>

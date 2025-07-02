@@ -77,6 +77,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">PizzeriaConfig</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Класс представляет конфигурацию пиццерии, считываемую из JSON-файла.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -106,19 +107,29 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="PizzeriaConfig.html" title="class in ru.nsu.lyskov.pizzeria">PizzeriaConfig</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#fromFile(java.lang.String)" class="member-name-link">fromFile</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Загружает конфигурацию пиццерии из указанного JSON-файла.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getBakerBakingTime()" class="member-name-link">getBakerBakingTime</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает список времён приготовления пиццы для каждого пекаря.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getCourierCapacities()" class="member-name-link">getCourierCapacities</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает список "вместимостей" курьеров (сколько пицц каждый из них может взять за раз).</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getStorageCapacity()" class="member-name-link">getStorageCapacity</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает вместимость склада пиццерии.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWorkTimeSeconds()" class="member-name-link">getWorkTimeSeconds</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Возвращает общее время работы пиццерии в секундах.</div>
+</div>
 </div>
 </div>
 </div>
@@ -155,9 +166,14 @@ loadScripts(document, 'script');</script>
 <h3>fromFile</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="PizzeriaConfig.html" title="class in ru.nsu.lyskov.pizzeria">PizzeriaConfig</a></span>&nbsp;<span class="element-name">fromFile</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;path)</span>
                                throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
+<div class="block">Загружает конфигурацию пиццерии из указанного JSON-файла.</div>
 <dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>path</code> - путь к JSON-файлу с конфигурацией</dd>
+<dt>Returns:</dt>
+<dd>объект <code>PizzeriaConfig</code>, инициализированный данными из файла</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></code> - если файл не найден, не читается или имеет неверный формат</dd>
 </dl>
 </section>
 </li>
@@ -165,24 +181,44 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getStorageCapacity()">
 <h3>getStorageCapacity</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getStorageCapacity</span>()</div>
+<div class="block">Возвращает вместимость склада пиццерии.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>вместимость склада</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getWorkTimeSeconds()">
 <h3>getWorkTimeSeconds</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getWorkTimeSeconds</span>()</div>
+<div class="block">Возвращает общее время работы пиццерии в секундах.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>время работы в секундах</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getBakerBakingTime()">
 <h3>getBakerBakingTime</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</span>&nbsp;<span class="element-name">getBakerBakingTime</span>()</div>
+<div class="block">Возвращает список времён приготовления пиццы для каждого пекаря.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>список времён (в секундах) для пекарей</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getCourierCapacities()">
 <h3>getCourierCapacities</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt;</span>&nbsp;<span class="element-name">getCourierCapacities</span>()</div>
+<div class="block">Возвращает список "вместимостей" курьеров (сколько пицц каждый из них может взять за раз).</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>список вместимостей курьеров</dd>
+</dl>
 </section>
 </li>
 </ul>

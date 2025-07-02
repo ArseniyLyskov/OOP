@@ -77,6 +77,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ConcurrentLatch</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Класс-счетчик, позволяющий потокам ожидать, пока счетчик не достигнет нуля. Аналог
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/CountDownLatch.html" title="class or interface in java.util.concurrent" class="external-link"><code>CountDownLatch</code></a>, но реализован самостоятельно.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -89,7 +91,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int)" class="member-name-link">ConcurrentLatch</a><wbr>(int&nbsp;count)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Создаёт экземпляр счетчика с начальным значением.</div>
+</div>
 </div>
 </section>
 </li>
@@ -106,10 +110,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#await()" class="member-name-link">await</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Блокирует вызывающий поток, пока значение счетчика не станет равным нулю.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#countDown()" class="member-name-link">countDown</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Уменьшает значение счетчика на единицу.</div>
+</div>
 </div>
 </div>
 </div>
@@ -131,6 +139,12 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(int)">
 <h3>ConcurrentLatch</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ConcurrentLatch</span><wbr><span class="parameters">(int&nbsp;count)</span></div>
+<div class="block">Создаёт экземпляр счетчика с начальным значением.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>count</code> - начальное значение счетчика, определяющее, сколько вызовов <a href="#countDown()"><code>countDown()</code></a>
+              нужно, чтобы снять блокировку в <a href="#await()"><code>await()</code></a></dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -145,6 +159,8 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="countDown()">
 <h3>countDown</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">countDown</span>()</div>
+<div class="block">Уменьшает значение счетчика на единицу. Если значение достигло нуля, пробуждает все
+ ожидающие потоки.</div>
 </section>
 </li>
 <li>
@@ -152,9 +168,10 @@ loadScripts(document, 'script');</script>
 <h3>await</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">await</span>()
            throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></span></div>
+<div class="block">Блокирует вызывающий поток, пока значение счетчика не станет равным нулю.</div>
 <dl class="notes">
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code> - если поток был прерван во время ожидания</dd>
 </dl>
 </section>
 </li>

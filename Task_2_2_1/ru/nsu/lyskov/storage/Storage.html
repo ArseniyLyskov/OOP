@@ -77,6 +77,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Storage</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Класс, представляющий хранилище готовых пицц.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -89,7 +90,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(int)" class="member-name-link">Storage</a><wbr>(int&nbsp;capacity)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Создаёт хранилище с заданной вместимостью.</div>
+</div>
 </div>
 </section>
 </li>
@@ -106,19 +109,29 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addPizza(ru.nsu.lyskov.orders.PizzaOrder)" class="member-name-link">addPizza</a><wbr>(<a href="../orders/PizzaOrder.html" title="class in ru.nsu.lyskov.orders">PizzaOrder</a>&nbsp;order)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Добавляет пиццу в хранилище.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#completeAddition()" class="member-name-link">completeAddition</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Помечает, что приём пицц в хранилище завершён.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isAdditionCompleted()" class="member-name-link">isAdditionCompleted</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Проверяет, завершён ли приём пицц в хранилище.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isEmpty()" class="member-name-link">isEmpty</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Проверяет, пусто ли хранилище.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../orders/PizzaOrder.html" title="class in ru.nsu.lyskov.orders">PizzaOrder</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#takePizzas(int)" class="member-name-link">takePizzas</a><wbr>(int&nbsp;maxCount)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Забирает из хранилища пиццы в количестве до <code>maxCount</code>.</div>
+</div>
 </div>
 </div>
 </div>
@@ -140,6 +153,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(int)">
 <h3>Storage</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Storage</span><wbr><span class="parameters">(int&nbsp;capacity)</span></div>
+<div class="block">Создаёт хранилище с заданной вместимостью.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>capacity</code> - максимальное количество пицц, которое может храниться</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -155,9 +173,13 @@ loadScripts(document, 'script');</script>
 <h3>addPizza</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addPizza</span><wbr><span class="parameters">(<a href="../orders/PizzaOrder.html" title="class in ru.nsu.lyskov.orders">PizzaOrder</a>&nbsp;order)</span>
               throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></span></div>
+<div class="block">Добавляет пиццу в хранилище. Если хранилище заполнено, поток ожидает освобождения места,
+ кроме случая, когда приём пицц завершён.</div>
 <dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>order</code> - заказ пиццы для добавления</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code> - если приём пицц завершён или поток прерван</dd>
 </dl>
 </section>
 </li>
@@ -166,9 +188,15 @@ loadScripts(document, 'script');</script>
 <h3>takePizzas</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../orders/PizzaOrder.html" title="class in ru.nsu.lyskov.orders">PizzaOrder</a>&gt;</span>&nbsp;<span class="element-name">takePizzas</span><wbr><span class="parameters">(int&nbsp;maxCount)</span>
                             throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></span></div>
+<div class="block">Забирает из хранилища пиццы в количестве до <code>maxCount</code>. Если хранилище пустое, поток
+ ожидает появления пицц, если приём пицц не завершён.</div>
 <dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>maxCount</code> - максимальное количество пицц для забирания</dd>
+<dt>Returns:</dt>
+<dd>список взятых пицц</dd>
 <dt>Throws:</dt>
-<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code></dd>
+<dd><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/InterruptedException.html" title="class or interface in java.lang" class="external-link">InterruptedException</a></code> - если хранилище пусто и приём пицц завершён, или поток прерван</dd>
 </dl>
 </section>
 </li>
@@ -176,18 +204,29 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="completeAddition()">
 <h3>completeAddition</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">completeAddition</span>()</div>
+<div class="block">Помечает, что приём пицц в хранилище завершён. Пробуждает все ожидающие потоки.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="isAdditionCompleted()">
 <h3>isAdditionCompleted</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isAdditionCompleted</span>()</div>
+<div class="block">Проверяет, завершён ли приём пицц в хранилище.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code>, если приём пицц завершён, иначе <code>false</code></dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isEmpty()">
 <h3>isEmpty</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isEmpty</span>()</div>
+<div class="block">Проверяет, пусто ли хранилище.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd><code>true</code>, если в хранилище нет пицц, иначе <code>false</code></dd>
+</dl>
 </section>
 </li>
 </ul>
