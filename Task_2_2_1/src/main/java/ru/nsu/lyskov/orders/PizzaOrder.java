@@ -4,16 +4,27 @@ import ru.nsu.lyskov.logging.PizzeriaLogger;
 
 public class PizzaOrder {
     private final int id;
-    private OrderStatus status;
+    private volatile OrderStatus status;
+    private final Object statusLock = new Object();
 
     public PizzaOrder(int id) {
         this.id = id;
-        setStatus(OrderStatus.CREATED);
+        status = OrderStatus.CREATED;
+        PizzeriaLogger.logOrder(this);
     }
 
     public void setStatus(OrderStatus newStatus) {
-        this.status = newStatus;
-        PizzeriaLogger.logOrder(this);
+        synchronized (statusLock) {
+            try {
+                status.validateStatusTransition(newStatus);
+                status = newStatus;
+            } catch (IllegalStateException e) {
+                status = OrderStatus.FAILED;
+                throw e;
+            } finally {
+                PizzeriaLogger.logOrder(this);
+            }
+        }
     }
 
     public int getId() {

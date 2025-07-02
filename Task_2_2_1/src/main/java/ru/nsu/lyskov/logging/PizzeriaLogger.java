@@ -2,30 +2,28 @@ package ru.nsu.lyskov.logging;
 
 import java.time.Duration;
 import java.time.Instant;
+import ru.nsu.lyskov.orders.OrderStatus;
 import ru.nsu.lyskov.orders.PizzaOrder;
 
-public final class PizzeriaLogger {
+public class PizzeriaLogger {
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_RED = "\u001B[31m";
     private static final String ANSI_GREEN = "\u001B[32m";
     private static Instant startTime = null;
 
-    private PizzeriaLogger() {
-        throw new AssertionError("Cannot instantiate utility class");
-    }
-
     public static void logOpening() {
         startTime = Instant.now();
-        System.out.printf("%-8s | %sPIZZERIA OPENED!%s%n",
+        System.out.printf("%-8s | %sTHE PIZZERIA IS OPEN!%s%n",
                           formatDuration(), ANSI_RED, ANSI_RESET
         );
     }
 
     public static void logOrder(PizzaOrder order) {
+        String highlightColor = order.getStatus() == OrderStatus.FAILED ? ANSI_RED : ANSI_GREEN;
         System.out.printf("%-8s | ID: %s%-2d%s | STATUS: %s%s%s%n",
                           formatDuration(),
-                          ANSI_GREEN, order.getId(), ANSI_RESET,
-                          ANSI_GREEN, order.getStatus().getDescription(), ANSI_RESET
+                          highlightColor, order.getId(), ANSI_RESET,
+                          highlightColor, order.getStatus().getDescription(), ANSI_RESET
         );
     }
 
@@ -36,7 +34,7 @@ public final class PizzeriaLogger {
     }
 
     public static void logClosing() {
-        System.out.printf("%-8s | %sPIZZERIA CLOSED!%s%n",
+        System.out.printf("%-8s | %sTHE PIZZERIA IS CLOSED!%s%n",
                           formatDuration(), ANSI_RED, ANSI_RESET
         );
     }

@@ -12,6 +12,7 @@ public class OrderQueue {
             throw new IllegalStateException("Order accepting completed");
         }
         queue.add(order);
+        order.setStatus(OrderStatus.ACCEPTED);
         notifyAll();
     }
 

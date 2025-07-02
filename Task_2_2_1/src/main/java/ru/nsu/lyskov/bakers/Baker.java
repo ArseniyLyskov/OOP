@@ -37,7 +37,7 @@ public class Baker implements Runnable {
 
     private void preparePizza(PizzaOrder order) throws InterruptedException {
         order.setStatus(OrderStatus.PREPARATION_STARTED);
-        Thread.sleep(bakingTime * 1000L);
+        Thread.sleep(bakingTime);
         order.setStatus(OrderStatus.READY);
     }
 }

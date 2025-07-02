@@ -8,7 +8,6 @@ import ru.nsu.lyskov.couriers.Courier;
 import ru.nsu.lyskov.logging.OrderAcceptor;
 import ru.nsu.lyskov.logging.PizzeriaLogger;
 import ru.nsu.lyskov.orders.OrderQueue;
-import ru.nsu.lyskov.orders.OrderStatus;
 import ru.nsu.lyskov.orders.PizzaOrder;
 import ru.nsu.lyskov.storage.Storage;
 
@@ -59,7 +58,6 @@ public class PizzeriaSimulator implements Runnable {
             try {
                 PizzaOrder order = acceptor.acceptOrder(++ordersAccepted);
                 orderQueue.addOrder(order);
-                order.setStatus(OrderStatus.ACCEPTED);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 break;
